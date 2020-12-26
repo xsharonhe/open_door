@@ -4,7 +4,7 @@ import { StyledIcon } from '@styled-icons/styled-icon';
 
 export interface IconProps {
     icon: StyledIcon;
-    isCollapsed?: boolean;
+    isCollapsed: boolean;
 };
 
 /**
@@ -14,13 +14,13 @@ export interface IconProps {
  */
 export const Icon: React.FC<IconProps> = ({
     icon,
-    isCollapsed = true,
+    isCollapsed,
     ...props
 }): React.ReactElement => (
-    <SIcon icon={icon} isCollapsed={isCollapsed} {...props}/>
+    <SIcon as={icon} isCollapsed={isCollapsed} {...props}/>
 );
 
-const SIcon = styled.svg<IconProps>`
+const SIcon = styled.svg<Omit<IconProps, 'icon'>>`
     width: 35px;
     height: 35px;
     transform: rotate(${({ isCollapsed }): string =>
