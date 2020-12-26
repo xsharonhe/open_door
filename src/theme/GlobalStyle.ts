@@ -1,7 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
-import { IBaseTemplate } from './theme';
+import { createGlobalStyle, DefaultTheme } from 'styled-components';
 
-export const GlobalStyle = createGlobalStyle<{theme: IBaseTemplate}>`
+export const GlobalStyle = createGlobalStyle<{theme: DefaultTheme}>`
     ${({ theme }) => `
         *,
         *::before,
