@@ -1,24 +1,47 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon, IconProps } from './Icon';
 import { StyledIcon } from '@styled-icons/styled-icon';
 
-export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+import { Icon, IconProps } from './Icon';
+
+export interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+    isInverted?: boolean;
     icon?: StyledIcon;
-    iconProps?: IconProps;
+    iconProps?: IconProps
 };
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<IButtonProps> = ({
+    isInverted = true,
     icon,
-    iconProps,
     children,
     ...props
 }): React.ReactElement => (
-    <SButton>
-        {!!icon && <Icon icon={icon} {...iconProps} />}
+    <SButton isInverted={isInverted} {...props}> 
+        {!!icon && <Icon icon={icon} />}
         {children}
     </SButton>
 );
 
-const SButton = styled.button`
+const SButton = styled.button<IButtonProps>`
+    ${({ theme, isInverted }) => `
+        color: ${isInverted ? `${theme.colors.primary}` : `${theme.colors.text}`};
+        border: 1px solid ${theme.colors.primary};
+        border-radius: ${theme.radius.default};
+        font-size: ${theme.size.defaultLarger};
+        font-family: ${theme.font.body};
+        text-decoration: none;
+        cursor: pointer;
+        padding: 1.25rem 1.75rem;
+        transition: ${theme.transitions.cubicBezier};
+        background-color: ${isInverted ? 'none' : `${theme.colors.primary}`};
+        &:focus,
+        &:active,
+        &:hover {
+            background-color: ${theme.colors.primaryO};
+            outline: none;
+        }
+        &:after {
+            display: none !important;
+        }
+    `};
 `;

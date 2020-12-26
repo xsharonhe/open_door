@@ -4,7 +4,7 @@ import { StyledIcon } from '@styled-icons/styled-icon';
 
 export interface IconProps {
     icon: StyledIcon;
-    isCollapsed: boolean;
+    isCollapsed?: boolean;
 };
 
 /**
