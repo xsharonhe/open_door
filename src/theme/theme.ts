@@ -38,7 +38,7 @@ declare module 'styled-components' {
 export const baseTheme = {
     font: {
         header: '"itc-avant-garde-gothic-pro", sans-serif',
-        body: '"futura-pt", sans-serif',
+        body: '"franklin-gothic-atf", sans-serif',
     },
     size: {
         default: '1rem',

@@ -26,14 +26,14 @@ const SButton = styled.button<IButtonProps>`
     ${({ theme, isInverted }) => `
         color: ${isInverted ? `${theme.colors.primary}` : `${theme.colors.text}`};
         border: 1px solid ${theme.colors.primary};
-        border-radius: ${theme.radius.default};
-        font-size: ${theme.size.defaultLarger};
+        border-radius: ${theme.radius.border};
+        font-size: ${theme.size.default};
         font-family: ${theme.font.body};
         text-decoration: none;
         cursor: pointer;
-        padding: 1.25rem 1.75rem;
+        padding: 0.7rem 1.25rem;
         transition: ${theme.transitions.cubicBezier};
-        background-color: ${isInverted ? 'none' : `${theme.colors.primary}`};
+        background-color: ${isInverted ? `${theme.colors.background}` : `${theme.colors.primary}`};
         &:focus,
         &:active,
         &:hover {
