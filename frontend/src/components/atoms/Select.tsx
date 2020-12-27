@@ -23,7 +23,7 @@ export const Select: React.FC<SelectProps> = ({
 );
 
 const Wrapper = styled.div``;
-export const StyledSelect = styled.select`
+const StyledSelect = styled.select`
     ${({ theme }) => `
         width: auto;
         padding: 0.7rem 1.25rem;

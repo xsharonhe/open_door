@@ -11,8 +11,16 @@ const App = () => {
         <Button isInverted={false}>{strings.buttons.signin}</Button>
         
         <p>Select:</p>
+<<<<<<< HEAD
         <Select options={['1', '2', '3']}>
           Select
+=======
+        <Select>
+          <option value="" hidden>Select</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+>>>>>>> beb1bb8b0724b3d0eeaa2b677dccbadf5dd311ca
         </Select>
       </header>
     </div>
