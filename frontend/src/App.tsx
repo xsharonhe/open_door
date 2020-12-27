@@ -11,7 +11,9 @@ const App = () => {
         <Button isInverted={false}>{strings.buttons.signin}</Button>
 
         <p>Select:</p>
-        <Select options={['1', '2', '3']}>Select</Select>
+        <Select options={['1', '2', '3']}>
+          Select
+        </Select>
       </header>
     </div>
   );
