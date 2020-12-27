@@ -19,6 +19,8 @@ export const GlobalStyle = createGlobalStyle<{theme: DefaultTheme}>`
             overflow-y: scroll;
             -webkit-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             width: 100%;
             padding: 30px 50px;
         }
