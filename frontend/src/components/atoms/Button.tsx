@@ -24,7 +24,7 @@ export const Button: React.FC<IButtonProps> = ({
 
 const SButton = styled.button<IButtonProps>`
     ${({ theme, isInverted }) => `
-        color: ${isInverted ? `${theme.colors.primary}` : `${theme.colors.text}`};
+        color: ${isInverted ? `${theme.colors.primary}` : `${theme.colors.secondary}`};
         border: 1px solid ${theme.colors.primary};
         border-radius: ${theme.radius.border};
         font-size: ${theme.size.default};
@@ -37,7 +37,7 @@ const SButton = styled.button<IButtonProps>`
         &:focus,
         &:active,
         &:hover {
-            background-color: ${theme.colors.primaryO};
+            background-color: ${isInverted ? `${theme.colors.primaryO}` : `${theme.colors.hover}`};
             outline: none;
         }
         &:after {
