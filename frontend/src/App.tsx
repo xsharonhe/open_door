@@ -7,16 +7,11 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <p>Buttons:</p>
-        <Button isInverted={true}>{strings.buttons.signin}</Button>
+        <Button>{strings.buttons.signin}</Button>
         <Button isInverted={false}>{strings.buttons.signin}</Button>
-        
+
         <p>Select:</p>
-        <Select>
-          <option value="" hidden>Select</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </Select>
+        <Select options={['1', '2', '3']}>Select</Select>
       </header>
     </div>
   );
