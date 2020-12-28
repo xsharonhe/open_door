@@ -1,20 +1,22 @@
-import React from 'react';
-import { Button } from './components';
-import { strings } from './utils';
+import React from "react";
+import { Button, Select } from "./components";
+import { strings } from "./utils";
 
 const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Button>
-          {strings.buttons.signin}
-        </Button>
+        <p>Buttons:</p>
+        <Button>{strings.buttons.signin}</Button>
+        <Button isInverted={false}>{strings.buttons.signin}</Button>
+
+        <p>Select:</p>
+        <Select options={['1', '2', '3']}>
+          Select
+        </Select>
       </header>
     </div>
   );
-}
+};
 
 export default App;

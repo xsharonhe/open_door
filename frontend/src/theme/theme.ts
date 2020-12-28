@@ -27,6 +27,7 @@ declare module 'styled-components' {
         },
         colors: {
             primary: string;
+            secondary: string;
             background: string;
             text: string;
             hover: string;
@@ -64,11 +65,11 @@ export const baseTheme = {
         cubicBezier: 'all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1)'
     },
     colors: {
-        primary: '#79a3b1',
-        dark: '#252E56',
-        background: '#f4eeed',
-        text: '#393e46',
-        hover: '#394867',
-        primaryO: 'rgba(121, 163, 177, 0.1)'
+        primary: '#252E56',
+        secondary: '#F0F5FF',
+        background: '#FFFFFF',
+        text: '#393E46',
+        hover: '#4862CC',
+        primaryO: 'rgba(37, 46, 86, 0.1)'
     },
 };
