@@ -23,7 +23,6 @@ export const ResultCard: React.FC<ResultCardProps> = ({
     feet,
     bedrooms,
     bathrooms,
-    children,
     iconProps,
     ...props
 }): React.ReactElement => (

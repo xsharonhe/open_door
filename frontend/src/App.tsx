@@ -4,7 +4,9 @@ import {
   Button, 
   Select, 
   ResultCard, 
-  Heading 
+  Heading,
+  Input,
+  Text
 } from "./components";
 import { strings } from "./utils";
 
@@ -32,9 +34,9 @@ const App = () => {
           feet={"1200"} 
           bedrooms={"2"} 
           bathrooms={"1"}
-        >
-          Hey
-        </ResultCard>
+        />
+        <Text bold lineHeight="1.25">Input:</Text>
+        <Input placeholder="Add an email"/>
     </div>
   );
 };
