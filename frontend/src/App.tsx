@@ -1,11 +1,10 @@
 import React from "react";
-import { Button, Select } from "./components";
+import { Button, Select, ResultCard } from "./components";
 import { strings } from "./utils";
 
 const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
         <p>Buttons:</p>
         <Button>{strings.buttons.signin}</Button>
         <Button isInverted={false}>{strings.buttons.signin}</Button>
@@ -14,7 +13,9 @@ const App = () => {
         <Select options={['1', '2', '3']}>
           Select
         </Select>
-      </header>
+
+        <p>Result Card:</p>
+        <ResultCard price={"550"} city={"Waterloo"} address={"123 Alphabet Rd"} feet={"1200"} bedrooms={"2"} bathrooms={"1"}>Hey</ResultCard>
     </div>
   );
 };
