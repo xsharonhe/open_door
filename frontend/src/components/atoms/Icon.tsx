@@ -21,8 +21,11 @@ export const Icon: React.FC<IconProps> = ({
 );
 
 const SIcon = styled.svg<Omit<IconProps, 'icon'>>`
-    width: 35px;
-    height: 35px;
+    width: 20px;
+    height: 20px;
     transform: rotate(${({ isCollapsed }): string =>
         isCollapsed ? '180deg' : '0'});
+    ${({ theme }) => `
+        color: ${theme.colors.primary};
+    `};
 `;
