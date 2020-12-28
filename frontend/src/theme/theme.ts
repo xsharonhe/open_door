@@ -30,6 +30,7 @@ declare module 'styled-components' {
             secondary: string;
             background: string;
             text: string;
+            caption: string;
             hover: string;
             primaryO: string;
         }
@@ -65,11 +66,12 @@ export const baseTheme = {
         cubicBezier: 'all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1)'
     },
     colors: {
-        primary: '#252E56',
+        primary: '#14274e',
         secondary: '#F0F5FF',
         background: '#FFFFFF',
         text: '#393E46',
-        hover: '#4862CC',
+        caption: '#9ba4b4',
+        hover: '#394867',
         primaryO: 'rgba(37, 46, 86, 0.1)'
     },
 };

@@ -4,6 +4,7 @@ import { Home } from '@styled-icons/boxicons-solid/Home';
 import { Bed } from '@styled-icons/boxicons-solid/Bed';
 import { Bath } from '@styled-icons/boxicons-solid/Bath';
 import { Icon, IconProps } from './Icon';
+import { media } from '../../utils';
 
 export interface ResultCardProps extends React.HTMLAttributes<HTMLDivElement> {
     price: string;
@@ -12,6 +13,7 @@ export interface ResultCardProps extends React.HTMLAttributes<HTMLDivElement> {
     feet: string;
     bedrooms: string;
     bathrooms: string;
+    iconProps?: IconProps;
 };
 
 export const ResultCard: React.FC<ResultCardProps> = ({
@@ -22,6 +24,7 @@ export const ResultCard: React.FC<ResultCardProps> = ({
     bedrooms,
     bathrooms,
     children,
+    iconProps,
     ...props
 }): React.ReactElement => (
     <SResultCard price={price} city={city} address={address} feet={feet} bedrooms={bedrooms} bathrooms={bathrooms} {...props}>
@@ -30,9 +33,15 @@ export const ResultCard: React.FC<ResultCardProps> = ({
         <p>{address}</p>
         <hr />
         <SContainer>
-            <span><Icon icon={Home} /> {feet.concat(" ft")}</span>
-            <span><Icon icon={Bed} /> {bedrooms}</span>
-            <span><Icon icon={Bath} /> {bathrooms}</span>
+            <span>
+                <Icon icon={Home} {...iconProps} /> {feet.concat(" ft")}
+            </span>
+            <span>
+                <Icon icon={Bed} {...iconProps} /> {bedrooms}
+            </span>
+            <span>
+                <Icon icon={Bath} {...iconProps} /> {bathrooms}
+            </span>
         </SContainer>
     </SResultCard>
 );
@@ -58,11 +67,28 @@ const SResultCard = styled.div<ResultCardProps>`
             font-size: ${theme.size.default};
             margin: 0;
         }
-
     `}
+    ${media(
+        "tablet",
+        `
+        width: 50%;
+        `
+    )}
+    ${media(
+        "mobile",
+        `
+        width: 80%;
+        `
+    )}
 `;
 
 const SContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    ${media(
+        "tablet",
+        `
+        flex-direction: column;
+        `
+    )}
 `;
