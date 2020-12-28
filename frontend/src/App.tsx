@@ -4,7 +4,8 @@ import {
   Button, 
   Select, 
   ResultCard, 
-  Heading 
+  Heading,
+  SModal 
 } from "./components";
 import { strings } from "./utils";
 
@@ -35,6 +36,7 @@ const App = () => {
         >
           Hey
         </ResultCard>
+        <SModal />
     </div>
   );
 };
