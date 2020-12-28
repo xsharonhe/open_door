@@ -15,7 +15,16 @@ const App = () => {
         </Select>
 
         <p>Result Card:</p>
-        <ResultCard price={"550"} city={"Waterloo"} address={"123 Alphabet Rd"} feet={"1200"} bedrooms={"2"} bathrooms={"1"}>Hey</ResultCard>
+        <ResultCard 
+          price={"550"} 
+          city={"Waterloo"} 
+          address={"123 Alphabet Rd"} 
+          feet={"1200"} 
+          bedrooms={"2"} 
+          bathrooms={"1"}
+        >
+          Hey
+        </ResultCard>
     </div>
   );
 };
