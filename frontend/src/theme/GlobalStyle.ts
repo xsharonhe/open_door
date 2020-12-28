@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle<{theme: DefaultTheme}>`
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             width: 100%;
-            padding: 30px 50px;
+            margin: 30px;
         }
         a {
             text-decoration: none;

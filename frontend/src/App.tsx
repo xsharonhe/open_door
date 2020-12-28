@@ -1,12 +1,22 @@
 import React from "react";
-import { Button, Select, ResultCard } from "./components";
+import { Bulb } from "@styled-icons/boxicons-regular/Bulb";
+import { 
+  Button, 
+  Select, 
+  ResultCard, 
+  Heading 
+} from "./components";
 import { strings } from "./utils";
 
 const App = () => {
   return (
     <div className="App">
+        <Heading icon={Bulb} coloredText="Hello">
+            Danielle!
+        </Heading>
         <p>Buttons:</p>
-        <Button>{strings.buttons.signin}</Button>
+
+        <Button isInverted={true}>{strings.buttons.signin}</Button>
         <Button isInverted={false}>{strings.buttons.signin}</Button>
 
         <p>Select:</p>
