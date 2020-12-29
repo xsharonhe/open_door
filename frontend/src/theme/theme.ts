@@ -21,6 +21,9 @@ declare module 'styled-components' {
         },
         colors: {
             [key: string]: number | string;
+        },
+        boxShadow: {
+            shallow: string;
         }
     }
 };
@@ -62,4 +65,7 @@ export const baseTheme = {
         hover: '#394867',
         primaryO: 'rgba(37, 46, 86, 0.1)'
     },
+    boxShadow: {
+        shallow: '0 3px 2px 0 rgba(0, 0, 0, 0.15)'
+    }
 };

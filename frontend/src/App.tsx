@@ -6,11 +6,53 @@ import {
   ResultCard, 
   Heading,
   Input,
-  Text
+  Text,
+  Table
 } from "./components";
 import { strings } from "./utils";
 
 const App = () => {
+  const columns=[
+    {
+      Header: 'Category',
+      accessor: 'col_category',
+      Cell: (cell: any) => (
+        <Button key={cell.row.original.key}>
+          {cell.row.original.label}
+        </Button>
+      )
+    },
+    {
+      Header: 'Picker',
+      accessor: 'col_pick',
+      Cell: (cell: any) => (
+          <Button key={cell.row.original.key}>
+            {cell.row.original.label}
+          </Button>
+        )
+      },
+      {
+        Header: 'Happiness',
+        accessor: 'Happy',
+        Cell: (cell: any) => (
+          <Button key={cell.row.original.key}>
+            {cell.row.original.label}
+          </Button>
+        )
+      },
+  ];
+
+  const data = [
+      {
+        id: '1',
+        label: "smile"
+      },
+      {
+        id: '2',
+        label: "hello!"
+      }
+  ];
+  
   return (
     <div className="App">
         <Heading icon={Bulb} coloredText="Hello">
@@ -37,6 +79,9 @@ const App = () => {
         />
         <Text bold lineHeight="1.25">Input:</Text>
         <Input placeholder="Add an email"/>
+
+        <Text>Table:</Text>
+        <Table columns={columns} data={data} />
     </div>
   );
 };

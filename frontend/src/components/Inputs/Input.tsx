@@ -31,7 +31,7 @@ const SInput = styled.input<InputProps>`
         outline: none;
         border: none;
         padding: 20px;
-        box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.15);
+        box-shadow: ${theme.boxShadow.shallow};
         width: auto;
         &:disabled {
             cursor: not-allowed;
