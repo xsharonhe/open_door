@@ -5,22 +5,29 @@ import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 import { Button } from "./Button";
 
 export interface ModalProps {
-  childComponent?: React.ReactElement,
+  childComponent?: React.ReactElement;
+}
+
+export interface StyledModalProps {
+  opacity: number;
 }
 
 export const SModal: React.FC<ModalProps> = ({
   childComponent,
   children,
-    ...props
+  ...props
 }): React.ReactElement => (
   <ModalProvider backgroundComponent={FadingBackground} {...props}>
     <div>
-      <ModalButton childComponent={childComponent} >{children}</ModalButton>
+      <ModalButton childComponent={childComponent}>{children}</ModalButton>
     </div>
   </ModalProvider>
 );
 
-export const ModalButton: React.FC<ModalProps>= ({ childComponent, children }): React.ReactElement => {
+export const ModalButton: React.FC<ModalProps> = ({
+  childComponent,
+  children,
+}): React.ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -53,28 +60,31 @@ export const ModalButton: React.FC<ModalProps>= ({ childComponent, children }): 
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        { childComponent }
-        <Button isInverted={false} onClick={toggleModal}>Close</Button>
+        <ButtonWrapper>
+          <Button isInverted={false} onClick={toggleModal}>
+            Close
+          </Button>
+        </ButtonWrapper>
+        {childComponent}
       </StyledModal>
     </div>
   );
-}
+};
 
-interface StyledModalProps {
-  opacity: number;
-}
-
-const AModal = Modal.styled`
-  width: 20rem;
-  height: 20rem;
+const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const SubModal = Modal.styled`
+  width: 60%;
+  padding: 2%;
   background-color: white;
   transition: opacity ease 500ms;
 `;
 
-const StyledModal = styled(AModal)<StyledModalProps>`
+const StyledModal = styled(SubModal)<StyledModalProps>`
   ${({ opacity }) => `
     opacity: ${opacity}
   `}
