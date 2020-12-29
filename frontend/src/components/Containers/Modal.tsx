@@ -31,17 +31,17 @@ export const ModalButton: React.FC<ModalProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
-  function toggleModal() {
+  const toggleModal = () => {
     setIsOpen(!isOpen);
   }
 
-  function afterOpen() {
+  const afterOpen = () => {
     setTimeout(() => {
       setOpacity(1);
     }, 10);
   }
 
-  function beforeClose() {
+  const beforeClose = () => {
     return new Promise((resolve) => {
       setOpacity(0);
       setTimeout(resolve, 200);
@@ -80,19 +80,19 @@ const ButtonWrapper = styled.div`
 const SubModal = Modal.styled`
   width: 60%;
   padding: 2%;
-  background-color: white;
-  transition: opacity ease 500ms;
 `;
 
 const StyledModal = styled(SubModal)<StyledModalProps>`
-  ${({ opacity }) => `
-    opacity: ${opacity}
+  ${({ theme, opacity }) => `
+    opacity: ${opacity};
+    background-color: ${theme.colors.background};
+    transition: ${theme.transitions.opacity}
   `}
 `;
 
 const FadingBackground = styled(BaseModalBackground)<StyledModalProps>`
-  ${({ opacity }) => `
-    opacity: ${opacity}
+  ${({ theme, opacity }) => `
+    opacity: ${opacity};
+    transition: ${theme.transitions.opacity}
   `}
-  transition: opacity ease 200ms;
-`;
+`; 

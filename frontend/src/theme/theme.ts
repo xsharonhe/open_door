@@ -18,6 +18,7 @@ declare module 'styled-components' {
         },
         transitions: {
             cubicBezier: string;
+            opacity: string;
         },
         colors: {
             [key: string]: number | string;
@@ -54,7 +55,8 @@ export const baseTheme = {
         desktop: '2560'
     },
     transitions: {
-        cubicBezier: 'all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1)'
+        cubicBezier: 'all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1)',
+        opacity: 'opacity ease 500ms'
     },
     colors: {
         primary: '#14274e',
