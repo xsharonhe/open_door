@@ -7,13 +7,7 @@ declare module 'styled-components' {
             body: string;
         },
         size: {
-            default: string | number;
-            small: string | number;
-            h1: string | number;
-            h2: string | number;
-            h3: string | number;
-            defaultLarger: string | number;
-            large: string | number;
+            [key: string]: number | string;
         },
         radius: {
             default: string;
@@ -26,13 +20,10 @@ declare module 'styled-components' {
             cubicBezier: string;
         },
         colors: {
-            primary: string;
-            secondary: string;
-            background: string;
-            text: string;
-            caption: string;
-            hover: string;
-            primaryO: string;
+            [key: string]: number | string;
+        },
+        boxShadow: {
+            shallow: string;
         }
     }
 };
@@ -74,4 +65,7 @@ export const baseTheme = {
         hover: '#394867',
         primaryO: 'rgba(37, 46, 86, 0.1)'
     },
+    boxShadow: {
+        shallow: '0 3px 2px 0 rgba(0, 0, 0, 0.15)'
+    }
 };
