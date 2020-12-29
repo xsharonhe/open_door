@@ -21,7 +21,6 @@ export const GlobalStyle = createGlobalStyle<{theme: DefaultTheme}>`
             -ms-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            width: 100%;
             margin: 50px;
         }
         a {
