@@ -36,7 +36,9 @@ const App = () => {
         >
           Hey
         </ResultCard>
-        <SModal />
+
+        <p>Modal</p>
+        <SModal childComponent={<span>Hey</span>}>Open</SModal>
     </div>
   );
 };

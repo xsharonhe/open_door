@@ -4,18 +4,23 @@ import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
 import { Button } from "./Button";
 
-export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface ModalProps {
+  childComponent?: React.ReactElement,
+}
 
-export const SModal: React.FC<ModalProps> = ({}): React.ReactElement => (
-  <ModalProvider backgroundComponent={FadingBackground}>
+export const SModal: React.FC<ModalProps> = ({
+  childComponent,
+  children,
+    ...props
+}): React.ReactElement => (
+  <ModalProvider backgroundComponent={FadingBackground} {...props}>
     <div>
-      <p>Test</p>
-      <FancyModalButton />
+      <ModalButton childComponent={childComponent} >{children}</ModalButton>
     </div>
   </ModalProvider>
 );
 
-function FancyModalButton() {
+export const ModalButton: React.FC<ModalProps>= ({ childComponent, children }): React.ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -38,7 +43,7 @@ function FancyModalButton() {
 
   return (
     <div>
-      <button onClick={toggleModal}>Open modal</button>
+      <Button onClick={toggleModal}>{children}</Button>
       <StyledModal
         isOpen={isOpen}
         afterOpen={afterOpen}
@@ -48,25 +53,36 @@ function FancyModalButton() {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <span>I am a modal!</span>
-        <button onClick={toggleModal}>Close me</button>
+        { childComponent }
+        <Button isInverted={false} onClick={toggleModal}>Close</Button>
       </StyledModal>
     </div>
   );
 }
 
-const StyledModal = Modal.styled`
-	width: 20rem;
-	height: 20rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: white;
-	opacity: ${(props) => props.opacity};
-	transition: opacity ease 500ms;
-  `;
+interface StyledModalProps {
+  opacity: number;
+}
 
-const FadingBackground = styled(BaseModalBackground)`
-  opacity: ${(props) => props.opacity};
+const AModal = Modal.styled`
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  transition: opacity ease 500ms;
+`;
+
+const StyledModal = styled(AModal)<StyledModalProps>`
+  ${({ opacity }) => `
+    opacity: ${opacity}
+  `}
+`;
+
+const FadingBackground = styled(BaseModalBackground)<StyledModalProps>`
+  ${({ opacity }) => `
+    opacity: ${opacity}
+  `}
   transition: opacity ease 200ms;
 `;
