@@ -19,12 +19,14 @@ declare module 'styled-components' {
         transitions: {
             cubicBezier: string;
             opacity: string;
+            scale: string;
         },
         colors: {
             [key: string]: number | string;
         },
         boxShadow: {
             shallow: string;
+            topBottom: string;
         }
     }
 };
@@ -56,7 +58,8 @@ export const baseTheme = {
     },
     transitions: {
         cubicBezier: 'all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1)',
-        opacity: 'opacity ease 500ms'
+        opacity: 'opacity ease 500ms',
+        scale: 'scale(1.03)'
     },
     colors: {
         primary: '#14274e',
@@ -68,6 +71,7 @@ export const baseTheme = {
         primaryO: 'rgba(37, 46, 86, 0.1)'
     },
     boxShadow: {
-        shallow: '0 3px 2px 0 rgba(0, 0, 0, 0.15)'
+        shallow: '0 3px 2px 0 rgba(0, 0, 0, 0.15)',
+        topBottom: '0px 8px 5px rgba(0, 0, 0, 0.15), 0px -5px 5px rgba(0, 0, 0, 0.15)'
     }
 };

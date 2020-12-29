@@ -55,6 +55,11 @@ const SResultCard = styled.div<ResultCardProps>`
         font-family: ${theme.font.body};
         cursor: pointer;
         color: ${theme.colors.primary};
+        :hover {
+            transform: ${theme.transitions.scale};
+            transition: ${theme.transitions.cubicBezier};
+            box-shadow: ${theme.boxShadow.topBottom};
+        }
 
         h2 {
             font-size: ${theme.size.h2};
