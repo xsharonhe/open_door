@@ -135,7 +135,7 @@ const STableRow = styled(SHeadTableRow)`
         :hover {
             transform: ${theme.transitions.scale};
             transition: ${theme.transitions.cubicBezier};
-            box-shadow: ${theme.transitions.boxShadow};
+            box-shadow: ${theme.boxShadow.topBottom};
         }
     `};
 `;

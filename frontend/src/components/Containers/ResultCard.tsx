@@ -58,7 +58,7 @@ const SResultCard = styled.div<ResultCardProps>`
         :hover {
             transform: ${theme.transitions.scale};
             transition: ${theme.transitions.cubicBezier};
-            box-shadow: ${theme.transitions.boxShadow};
+            box-shadow: ${theme.boxShadow.topBottom};
         }
 
         h2 {
