@@ -65,6 +65,7 @@ export const baseTheme = {
         primary: '#14274e',
         secondary: '#F0F5FF',
         background: '#FFFFFF',
+        accent: '#FF9595',
         text: '#393E46',
         caption: '#9ba4b4',
         hover: '#394867',
