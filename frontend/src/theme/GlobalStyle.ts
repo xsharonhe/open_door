@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle<{theme: DefaultTheme}>`
         html, body {
             height: 100%;
             box-sizing: inherit;
+            margin: 0;
         }
         body {
             background-color: ${theme.colors.background};
@@ -21,7 +22,6 @@ export const GlobalStyle = createGlobalStyle<{theme: DefaultTheme}>`
             -ms-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            margin: 50px;
         }
         a {
             text-decoration: none;
