@@ -8,7 +8,7 @@ import { NavItems } from "./NavItems/NavItems";
 export interface NavbarProps {}
 
 export const Navbar: React.FC<NavbarProps> = ({ children, ...props }) => (
-  <FixedWrapper>
+  <FixedWrapper {...props}>
     <Wrapper>
       <Brand>Open Door</Brand>
       <NavItems />
@@ -34,7 +34,7 @@ const FixedWrapper = styled.nav`
   width: 100%;
 
   ${media(
-    "mobile",
+    "tablet",
     `
         display: none;
         `

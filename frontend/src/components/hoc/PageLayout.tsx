@@ -3,30 +3,39 @@ import styled from "styled-components";
 import { media } from "../../utils";
 
 export interface PageLayoutProps {
-  img?: string;
+  lgImg?: string;
+  smImg?: string;
 }
 
 export const PageLayout: React.FC<PageLayoutProps> = ({
-  img,
+  lgImg,
+  smImg,
   children,
   ...props
-}) => (
-  <SDiv img={img} {...props}>
+}) => {
+  return (
+    <SDiv lgImg={lgImg} smImg={smImg} {...props}>
     <MainWrapper>{children}</MainWrapper>
   </SDiv>
-);
+  )
+}
 
 interface IDivProps {
-  img?: string;
+  lgImg?: string;
+  smImg?: string;
 }
 
 const SDiv = styled.div<IDivProps>`
-  ${({ img }) => `
-    background-image: url(${img});
+  ${({ lgImg, smImg }) => `
+    background-image: url(${lgImg});
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     height: 100vh;
+
+    @media only screen and (max-width: 414px) {
+      background-image: url(${smImg});
+    }
     `}
 `;
 

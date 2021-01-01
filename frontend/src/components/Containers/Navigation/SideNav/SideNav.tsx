@@ -51,7 +51,7 @@ const FixedWrapper = styled.header`
   display: none;
 
   ${media(
-    "mobile",
+    "tablet",
     `
         display: flex;
         `
@@ -62,7 +62,7 @@ const SMenu = styled.div`
   ${({ theme }) => `
       transition: ${theme.transitions.cubicBezier};
       position: fixed;
-      width: 60%;
+      width: 40%;
       left: 0;
       top: 0;
       display: flex;
@@ -71,4 +71,11 @@ const SMenu = styled.div`
       height: 100vh;
       background-color: ${theme.colors.secondary};
     `}
+
+    ${media(
+      "mobile",
+      `
+        width: 60%;
+          `
+    )}
 `;

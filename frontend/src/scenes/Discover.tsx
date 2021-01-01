@@ -1,6 +1,5 @@
 import { PageLayout } from '../components/hoc/PageLayout';
 import React from "react";
-import { Bulb } from "@styled-icons/boxicons-regular/Bulb";
 import {
   Button,
   Select,

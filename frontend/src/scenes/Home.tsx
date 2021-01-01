@@ -1,8 +1,9 @@
 import { PageLayout } from '../components/hoc/PageLayout';
-import img from "../assets/bg-houses.svg";
+import lgImg from "../assets/bg-houses.svg";
+import smImg from "../assets/bg-houses-mobile.svg";
 
 const Home = () => {
-    return <PageLayout img={img}>TODO: Search bar</PageLayout>
+    return <PageLayout lgImg={lgImg} smImg={smImg}>TODO: Search bar</PageLayout>
 };
 
 export default Home;

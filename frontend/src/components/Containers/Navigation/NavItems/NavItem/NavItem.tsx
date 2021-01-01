@@ -22,7 +22,7 @@ const SLi = styled.li`
     display: flex;
 `;
 
-// Add active styles
+// TODO: Add active styles
 const SNavLink = styled(NavLink)`
     ${({theme}) => `
         display: flex;
@@ -38,7 +38,7 @@ const SNavLink = styled(NavLink)`
         }
     `}
     ${media(
-        "mobile",
+        "tablet",
         `
             margin: 0;
             `

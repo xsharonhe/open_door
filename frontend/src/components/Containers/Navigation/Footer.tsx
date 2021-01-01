@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { media } from "../../../utils/media";
 
 export interface FooterProps {}
 
@@ -20,6 +21,12 @@ const Wrapper = styled.div`
     color: ${theme.colors.background};
     padding: 0 6rem;
   `}
+  ${media(
+    "mobile",
+    `
+      padding: 0 2rem;
+        `
+  )}
 `;
 
 const FooterWrapper = styled.div`

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { media } from "../../../../utils/media";
 import { SModal } from '../../Modal';
-import {NavItem} from './NavItem/NavItem';
+import { NavItem } from './NavItem/NavItem';
 
 export interface NavItemsProps {
 }
@@ -13,12 +13,6 @@ export const NavItems: React.FC<NavItemsProps> = () => (
 
 const SNav = styled.nav`
     display: flex;
-    ${media(
-        "mobile",
-        `
-            
-            `
-      )}
 `;
 
 const SUl = styled.ul`
@@ -26,7 +20,7 @@ const SUl = styled.ul`
     align-items: center;
     flex-direction: row;
     ${media(
-        "mobile",
+        "tablet",
         `
             flex-direction: column;
             padding: 0;
