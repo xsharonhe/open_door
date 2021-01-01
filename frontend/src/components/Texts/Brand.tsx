@@ -16,6 +16,6 @@ const BrandWrapper = styled.div`
     display: flex;
     align-items: center;
     font-weight: 700;
-    font-size: ${theme.size.h1};
+    font-size: 1.2rem;
     `}
 `;

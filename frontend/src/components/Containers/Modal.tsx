@@ -5,6 +5,7 @@ import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 import { Button } from "./Button";
 
 export interface ModalProps {
+  isInverted?: boolean;
   childComponent?: React.ReactElement;
 }
 
@@ -13,18 +14,20 @@ export interface StyledModalProps {
 }
 
 export const SModal: React.FC<ModalProps> = ({
+  isInverted,
   childComponent,
   children,
   ...props
 }): React.ReactElement => (
   <ModalProvider backgroundComponent={FadingBackground} {...props}>
     <div>
-      <ModalButton childComponent={childComponent}>{children}</ModalButton>
+      <ModalButton isInverted={isInverted} childComponent={childComponent}>{children}</ModalButton>
     </div>
   </ModalProvider>
 );
 
 export const ModalButton: React.FC<ModalProps> = ({
+  isInverted,
   childComponent,
   children,
 }): React.ReactElement => {
@@ -50,7 +53,7 @@ export const ModalButton: React.FC<ModalProps> = ({
 
   return (
     <div>
-      <Button onClick={toggleModal}>{children}</Button>
+      <Button isInverted={isInverted} onClick={toggleModal}>{children}</Button>
       <StyledModal
         isOpen={isOpen}
         afterOpen={afterOpen}
@@ -93,6 +96,7 @@ const StyledModal = styled(SubModal)<StyledModalProps>`
 const FadingBackground = styled(BaseModalBackground)<StyledModalProps>`
   ${({ theme, opacity }) => `
     opacity: ${opacity};
-    transition: ${theme.transitions.opacity}
+    transition: ${theme.transitions.opacity};
+    overflow-y: scroll;
   `}
 `; 

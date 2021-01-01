@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-
+import { media } from "../../../../utils/media";
+import { SModal } from '../../Modal';
 import {NavItem} from './NavItem/NavItem';
-import {Button} from '../../Button';
 
-export interface NavItemsProps {}
+export interface NavItemsProps {
+}
 
 export const NavItems: React.FC<NavItemsProps> = () => (
     <SNav>{links}</SNav>
@@ -12,20 +13,34 @@ export const NavItems: React.FC<NavItemsProps> = () => (
 
 const SNav = styled.nav`
     display: flex;
+    ${media(
+        "mobile",
+        `
+            
+            `
+      )}
 `;
 
 const SUl = styled.ul`
     display: flex;
     align-items: center;
+    flex-direction: row;
+    ${media(
+        "mobile",
+        `
+            flex-direction: column;
+            `
+      )}
 `;
 
-// TODO: Add link to signin button
 // TODO:: Conditional navitems
 const links = (
     <SUl>
-        <NavItem link="">Home</NavItem>
-        <NavItem link="">Discover</NavItem>
-        <Button isInverted={false}>SIGN IN</Button> 
+        <NavItem link="/">Home</NavItem>
+        <NavItem link="/discover">Discover</NavItem>
+        <SModal isInverted={false} childComponent={<p>TODO: Sign In Component</p>}>
+          SIGN IN
+        </SModal>
     </SUl>
 )
 
