@@ -4,23 +4,23 @@ import { Menu } from "@styled-icons/boxicons-regular/Menu";
 
 export interface HamburgerProps {
   opened: boolean;
-  clicked?: () => void;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Hamburger: React.FC<HamburgerProps> = ({
   opened,
-  clicked,
+  setIsOpen,
   children,
   ...props
 }): React.ReactElement => {
   return (
-      <div onClick={clicked} {...props}>
-          <SHamburger as={Menu} opened={opened} />
+      <div onClick={() => setIsOpen(!opened)} {...props}>
+          <SHamburger as={Menu} />
       </div>
   );
 };
 
-const SHamburger = styled.svg<Omit<HamburgerProps, "icon">>`
+const SHamburger = styled.svg`
   ${({ theme }) => `
         color: ${theme.colors.primary};
         width: 30px;

@@ -6,7 +6,7 @@ import { Brand } from "../../../Texts/Brand";
 import { Hamburger } from "./Hamburger";
 import { NavItems } from "../NavItems/NavItems";
 
-export interface SideNavProps {}
+export interface SideNavProps {};
 
 export const SideNav: React.FC<SideNavProps> = ({
   children,
@@ -20,12 +20,14 @@ export const SideNav: React.FC<SideNavProps> = ({
       <FixedWrapper {...props}>
         <Wrapper>
           <Brand>Open Door</Brand>
-          <Hamburger opened={isOpen} clicked={() => setIsOpen(!isOpen)} />
+          <Hamburger opened={isOpen} setIsOpen={setIsOpen} />
         </Wrapper>
       </FixedWrapper>
-      <SMenu opened={isOpen}>
-        <NavItems />
-      </SMenu>
+      {!!isOpen && (
+        <SMenu>
+          <NavItems />
+        </SMenu>
+      )}
     </>
   );
 };
@@ -52,16 +54,14 @@ const FixedWrapper = styled.header`
     "mobile",
     `
         display: flex;
+        justify-content: flex-end;
         `
   )}
 `;
 
-interface SMenuProps {
-  opened: boolean;
-}
-
-const SMenu = styled.div<SMenuProps>`
-  ${({ theme, opened }) => `
+const SMenu = styled.div`
+  ${({ theme }) => `
+      transition: ${theme.transitions.cubicBezier};
       position: fixed;
       width: 100%;
       left: 0;
@@ -73,8 +73,6 @@ const SMenu = styled.div<SMenuProps>`
       height: 100vh;
       background-color: ${theme.colors.primary};
       color: ${theme.colors.background}
-      visibility: ${ opened ? 'visible' : 'hidden'}
-      display: none;
     `}
 
   ${media(
