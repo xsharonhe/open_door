@@ -29,6 +29,7 @@ const SUl = styled.ul`
         "mobile",
         `
             flex-direction: column;
+            padding: 0;
             `
       )}
 `;

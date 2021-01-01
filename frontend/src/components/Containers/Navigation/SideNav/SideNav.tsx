@@ -6,7 +6,7 @@ import { Brand } from "../../../Texts/Brand";
 import { Hamburger } from "./Hamburger";
 import { NavItems } from "../NavItems/NavItems";
 
-export interface SideNavProps {};
+export interface SideNavProps {}
 
 export const SideNav: React.FC<SideNavProps> = ({
   children,
@@ -14,7 +14,6 @@ export const SideNav: React.FC<SideNavProps> = ({
 }): React.ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
 
-  //TODO:  when navItem is clicked: onClick={() => setIsOpen(false)}
   return (
     <>
       <FixedWrapper {...props}>
@@ -25,7 +24,9 @@ export const SideNav: React.FC<SideNavProps> = ({
       </FixedWrapper>
       {!!isOpen && (
         <SMenu>
-          <NavItems />
+          <div onClick={() => setIsOpen(false)}>
+            <NavItems />
+          </div>
         </SMenu>
       )}
     </>
@@ -35,8 +36,7 @@ export const SideNav: React.FC<SideNavProps> = ({
 const Wrapper = styled.div`
   ${({ theme }) => `
         display: flex;
-        overflow: hidden;
-        height: 100%;
+        width: 100%;
         justify-content: space-between;
         background-color: ${theme.colors.secondary};
         padding: 0 2rem;
@@ -54,7 +54,6 @@ const FixedWrapper = styled.header`
     "mobile",
     `
         display: flex;
-        justify-content: flex-end;
         `
   )}
 `;
@@ -63,22 +62,13 @@ const SMenu = styled.div`
   ${({ theme }) => `
       transition: ${theme.transitions.cubicBezier};
       position: fixed;
-      width: 100%;
+      width: 60%;
       left: 0;
       top: 0;
       display: flex;
-      align-items: center;
       justify-content: center;
-      margin-top: 6rem;
+      margin-top: 3.5rem;
       height: 100vh;
-      background-color: ${theme.colors.primary};
-      color: ${theme.colors.background}
+      background-color: ${theme.colors.secondary};
     `}
-
-  ${media(
-    "mobile",
-    `
-          display: flex;
-          `
-  )}
 `;

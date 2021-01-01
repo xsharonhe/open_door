@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from 'react-router-dom';
+import { media } from "../../../../../utils/media";
 
 export interface NavItemProps {
     link: string
 }
 
-// <SNavLink exact to="{link}">
 export const NavItem: React.FC<NavItemProps> = ({ 
     link, 
     children, 
@@ -36,5 +36,11 @@ const SNavLink = styled(NavLink)`
             color: ${theme.colors.hover};
             cursor: pointer;
         }
-    `} 
+    `}
+    ${media(
+        "mobile",
+        `
+            margin: 0;
+            `
+      )}
 `;

@@ -4,11 +4,11 @@ import styled from "styled-components";
 export interface FooterProps {}
 
 export const Footer: React.FC<FooterProps> = ({ children, ...props }) => (
-  <FixedWrapper {...props}>
+  <FooterWrapper {...props}>
     <Wrapper>
       <p>TODO: Footer</p>
     </Wrapper>
-  </FixedWrapper>
+  </FooterWrapper>
 );
 
 const Wrapper = styled.div`
@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   `}
 `;
 
-const FixedWrapper = styled.nav`
+const FooterWrapper = styled.div`
   ${({ theme }) => `
     background-color: ${theme.colors.background};
     width: 100%;
