@@ -20,6 +20,7 @@ declare module 'styled-components' {
             cubicBezier: string;
             opacity: string;
             scale: string;
+            easeIn: string;
         },
         colors: {
             [key: string]: number | string;
@@ -59,7 +60,34 @@ export const baseTheme = {
     transitions: {
         cubicBezier: 'all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1)',
         opacity: 'opacity ease 500ms',
-        scale: 'scale(1.03)'
+        scale: 'scale(1.03)',
+        easeIn: `
+            animation: fadeIn ease 1s;
+            -webkit-animation: fadeIn ease 1s;
+            -moz-animation: fadeIn ease 1s;
+            -o-animation: fadeIn ease 1s;
+            -ms-animation: fadeIn ease 1s;
+            @keyframes fadeIn {
+                0% {opacity:0;}
+                100% {opacity:1;}
+            }
+            @-moz-keyframes fadeIn {
+                0% {opacity:0;}
+                100% {opacity:1;}
+            }
+            @-webkit-keyframes fadeIn {
+                0% {opacity:0;}
+                100% {opacity:1;}
+            }
+            @-o-keyframes fadeIn {
+                0% {opacity:0;}
+                100% {opacity:1;}
+            }
+            @-ms-keyframes fadeIn {
+                0% {opacity:0;}
+                100% {opacity:1;}
+            }
+        `
     },
     colors: {
         primary: '#14274e',
