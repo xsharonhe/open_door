@@ -67,7 +67,7 @@ const SMenu = styled.div`
       top: 0;
       display: flex;
       justify-content: center;
-      margin-top: 3.5rem;
+      margin-top: 3rem;
       height: 100vh;
       background-color: ${theme.colors.secondary};
     `}
