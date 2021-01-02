@@ -23,12 +23,12 @@ export const SideNav: React.FC<SideNavProps> = ({
         </Wrapper>
       </FixedWrapper>
       {!!isOpen && (
-        <SMenu>
-          <div onClick={() => setIsOpen(false)}>
-            <NavItems />
-          </div>
-        </SMenu>
-      )}
+          <SMenu opened={isOpen}>
+            <div onClick={() => setIsOpen(false)}>
+              <NavItems />
+            </div>
+          </SMenu>
+        )}
     </>
   );
 };
@@ -57,10 +57,17 @@ const FixedWrapper = styled.header`
         `
   )}
 `;
-
-const SMenu = styled.div`
-  ${({ theme }) => `
-      transition: ${theme.transitions.easeIn};
+interface SMenuProps {
+  opened?: boolean;
+}
+const SMenu = styled.div<SMenuProps>`
+  ${({ theme, opened }) => `
+      @media (min-width: ${theme.media.tablet}px) {
+          display: none;
+      }
+      display: flex;
+      transition: ${opened ? theme.transitions.easeIn : theme.transitions.easeOut};
+      display: flex;
       position: fixed;
       width: 40%;
       left: 0;
