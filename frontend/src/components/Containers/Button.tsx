@@ -2,12 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { StyledIcon } from '@styled-icons/styled-icon';
 
-import { Icon, IconProps } from './Icon';
-
 export interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     isInverted?: boolean;
     icon?: StyledIcon;
-    iconProps?: IconProps
 };
 
 export const Button: React.FC<IButtonProps> = ({
@@ -17,7 +14,7 @@ export const Button: React.FC<IButtonProps> = ({
     ...props
 }): React.ReactElement => (
     <SButton isInverted={isInverted} {...props}> 
-        {!!icon && <Icon icon={icon} />}
+        {!!icon && <Icon as={icon} />}
         {children}
     </SButton>
 );
@@ -44,4 +41,8 @@ const SButton = styled.button<IButtonProps>`
             display: none !important;
         }
     `};
+`;
+const Icon = styled.svg`
+    width: 30px;
+    height: 30px;
 `;
