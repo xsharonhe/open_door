@@ -52,6 +52,8 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:8080',
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -98,7 +100,6 @@ DATABASES = {
         'CONN_MAX_AGE': 1
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

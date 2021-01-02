@@ -20,4 +20,3 @@ class RentalSerializer(serializers.ModelSerializer):
             'lat',
             'lon'
         ]
-        # no fields so all can be called
