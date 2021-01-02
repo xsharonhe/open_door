@@ -15,22 +15,22 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
 }) => {
   return (
     <SDiv lgImg={lgImg} smImg={smImg} {...props}>
-    <MainWrapper>{children}</MainWrapper>
-  </SDiv>
-  )
-}
+      <MainWrapper>{children}</MainWrapper>
+    </SDiv>
+  );
+};
 
 interface IDivProps {
   lgImg?: string;
   smImg?: string;
-};
+}
 const SDiv = styled.div<IDivProps>`
   ${({ lgImg, smImg }) => `
     background-image: url(${lgImg});
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
 
     @media only screen and (max-width: 414px) {
       background-image: url(${smImg});
