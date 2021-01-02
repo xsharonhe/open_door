@@ -98,7 +98,7 @@ DATABASES = {
         'PASSWORD': DB_PASSWORD,
         'HOST': 'suleiman.db.elephantsql.com',
         'PORT': '5432',
-        'CONN_MAX_AGE': 2
+        'CONN_MAX_AGE': 1
     }
 }
 

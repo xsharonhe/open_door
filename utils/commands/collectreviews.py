@@ -21,4 +21,4 @@ reviews= [
     ) for row in range(0, 250)
 ]
 
-Riew.objects.bulk_create(reviews)
+Review.objects.bulk_create(reviews)
