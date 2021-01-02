@@ -60,7 +60,7 @@ const FixedWrapper = styled.header`
 
 const SMenu = styled.div`
   ${({ theme }) => `
-      transition: ${theme.transitions.cubicBezier};
+      transition: ${theme.transitions.easeIn};
       position: fixed;
       width: 40%;
       left: 0;

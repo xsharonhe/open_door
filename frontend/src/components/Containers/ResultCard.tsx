@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Home } from '@styled-icons/boxicons-solid/Home';
 import { Bed } from '@styled-icons/boxicons-solid/Bed';
 import { Bath } from '@styled-icons/boxicons-solid/Bath';
-import { Icon, IconProps } from './Icon';
 import { media } from '../../utils';
 
 export interface ResultCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -13,7 +12,6 @@ export interface ResultCardProps extends React.HTMLAttributes<HTMLDivElement> {
     feet: string;
     bedrooms: string;
     bathrooms: string;
-    iconProps?: IconProps;
 };
 
 export const ResultCard: React.FC<ResultCardProps> = ({
@@ -23,7 +21,6 @@ export const ResultCard: React.FC<ResultCardProps> = ({
     feet,
     bedrooms,
     bathrooms,
-    iconProps,
     ...props
 }): React.ReactElement => (
     <SResultCard price={price} city={city} address={address} feet={feet} bedrooms={bedrooms} bathrooms={bathrooms} {...props}>
@@ -33,13 +30,13 @@ export const ResultCard: React.FC<ResultCardProps> = ({
         <hr />
         <SContainer>
             <span>
-                <Icon icon={Home} {...iconProps} /> {feet.concat(" ft")}
+                <Icon as={Home} /> {feet.concat(" ft")}
             </span>
             <span>
-                <Icon icon={Bed} {...iconProps} /> {bedrooms}
+                <Icon as={Bed} /> {bedrooms}
             </span>
             <span>
-                <Icon icon={Bath} {...iconProps} /> {bathrooms}
+                <Icon as={Bath} /> {bathrooms}
             </span>
         </SContainer>
     </SResultCard>
@@ -94,4 +91,11 @@ const SContainer = styled.div`
         flex-direction: column;
         `
     )}
+`;
+const Icon = styled.svg`
+    width: 20px;
+    height: 20px;
+    ${({ theme }) => `
+        color: ${theme.colors.primary};
+    `};
 `;

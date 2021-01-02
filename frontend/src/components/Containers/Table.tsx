@@ -1,73 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useTable, Column, TableProps, TableHeaderProps, TableRowProps } from 'react-table';
 import { media } from '../../utils';
 
 export interface IDictOptions {
-    [key: string]: string;
+        id: string;
+        labels: string[];
 };
 
 export interface ITableProps extends React.HTMLAttributes<HTMLDivElement> {
     data: IDictOptions[];
-    columns: Column<IDictOptions>[];
-    tableHeaderProps?: TableHeaderProps;
-    tableRowProps?: TableRowProps;
-    tableProps?: TableProps;
+    columns: string[];
 };
 
 export const Table: React.FC<ITableProps> = ({
     data,
     columns,
-    tableHeaderProps,
-    tableRowProps,
-    tableProps,
     ...props
 }): React.ReactElement => {
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow
-    } = useTable({
-        columns, 
-        data
-    });
-
     return (
         <Wrapper {...props}>
-            <STable {...getTableProps()} {...tableProps}>
+            <STable>
                 <STableHead>
-                    {headerGroups.map((headerGroup, index) => (
-                        <SHeadTableRow
-                            {...headerGroup.getHeaderGroupProps()}
-                            key={headerGroup.headers[index].Header?.toString()}
-                        >
-                            {headerGroup.headers.map((column) => (
-                                <STableHeader
-                                    {...column.getHeaderProps()}
-                                    key={column.Header?.toString()}
-                                    {...tableHeaderProps}
-                                >
-                                    {column.render('Header')}
-                                </STableHeader>
-                            ))}
-                        </SHeadTableRow>
-                    ))}
+                    <SHeadTableRow>
+                        {columns.map((column) => (
+                            <STableHeader key={column}>
+                                {column}
+                            </STableHeader>
+                        ))}
+                    </SHeadTableRow>
                 </STableHead>
-                <tbody {...getTableBodyProps()}>
-                    {rows.map((row) => {
-                        prepareRow(row);
-                        return (
-                            <STableRow {...row.getRowProps()} key={row.original.id} {...tableRowProps}>
-                                {row.cells.map(cell => (
-                                    <STableData {...cell.getCellProps()}>
-                                        {cell.render('Cell')}
-                                    </STableData>
-                                ))}
-                            </STableRow>
-                        );
-                    })}
+                <tbody>
+                    {data.map((row) => (
+                        <STableRow key={row.id}>
+                            {row.labels.map(cell => (
+                                <STableData>
+                                    {cell}
+                                </STableData>
+                            ))}
+                        </STableRow>
+                    ))}
                 </tbody>
             </STable>
         </Wrapper>
@@ -91,7 +62,7 @@ const STable = styled.table`
     width: 50%;
 `;
 const STableHead = styled.thead`
-    display: block;
+    display: table;
     ${({ theme }) => `
         border-bottom: 1px solid ${theme.colors.caption};
     `};
@@ -119,8 +90,9 @@ const STableHeader = styled.th`
     `};
 `;
 const SHeadTableRow = styled.tr`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     padding: 0 10px;
     margin: 0 10px;
     ${({ theme }): string => `

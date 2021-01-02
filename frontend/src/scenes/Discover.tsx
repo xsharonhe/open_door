@@ -1,5 +1,6 @@
-import { PageLayout } from '../components/hoc/PageLayout';
 import React from "react";
+import { Android } from '@styled-icons/boxicons-logos/Android';
+import { PageLayout } from '../components/hoc/PageLayout';
 import {
   Button,
   Select,
@@ -13,38 +14,16 @@ import {
 import { strings } from "../utils";
 
 const Discover = () => {
-  const columns = [
-    {
-      Header: "Category",
-      accessor: "col_category",
-      Cell: (cell: any) => (
-        <Button key={cell.row.original.key}>{cell.row.original.label}</Button>
-      ),
-    },
-    {
-      Header: "Picker",
-      accessor: "col_pick",
-      Cell: (cell: any) => (
-        <Button key={cell.row.original.key}>{cell.row.original.label}</Button>
-      ),
-    },
-    {
-      Header: "Happiness",
-      accessor: "Happy",
-      Cell: (cell: any) => (
-        <Button key={cell.row.original.key}>{cell.row.original.label}</Button>
-      ),
-    },
-  ];
+  const columns = ['Column 1', 'Column 2', 'Column 3'];
 
   const data = [
     {
       id: "1",
-      label: "smile",
+      labels: ["smile", "friendly", "haha"]
     },
     {
       id: "2",
-      label: "hello!",
+      labels: ["hello!", "what a day!", "wow"],
     },
   ];
 
@@ -52,7 +31,7 @@ const Discover = () => {
   return (
       <PageLayout>
 
-        <Heading coloredText="Hello">
+        <Heading icon={Android} coloredText="Hello">
           Danielle!
         </Heading>
         <p>Buttons:</p>
@@ -87,8 +66,6 @@ const Discover = () => {
         </Text>
         <Input placeholder="Add an email" />
 
-        <Text>Table:</Text>
-        <Table columns={columns} data={data} />
       </PageLayout>
   );
 };
