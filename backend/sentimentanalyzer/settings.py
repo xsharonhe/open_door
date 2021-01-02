@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'datacollector.apps.DatacollectorConfig'
+    'datacollector.apps.DatacollectorConfig',
+    'collectreviews.apps.CollectreviewsConfig'
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -97,7 +98,7 @@ DATABASES = {
         'PASSWORD': DB_PASSWORD,
         'HOST': 'suleiman.db.elephantsql.com',
         'PORT': '5432',
-        'CONN_MAX_AGE': 1
+        'CONN_MAX_AGE': 2
     }
 }
 

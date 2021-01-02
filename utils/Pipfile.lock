@@ -1,0 +1,49 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "c88e4ab0a4c1ee5df2f2a3c475fb64fc7546bcd567bdd4d584006892c8bf4e86"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.7"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "contractions": {
+            "hashes": [
+                "sha256:3658383f8c230c6d9128e1949422ce65f0e7702efe360bf4a4bc612999da23a8",
+                "sha256:aa0802ed681c56c98cf16470c128c87bf1b0a97ec5a863f8f2f97c8d8fd496c5"
+            ],
+            "index": "pypi",
+            "version": "==0.0.45"
+        },
+        "pyahocorasick": {
+            "hashes": [
+                "sha256:f9431a20e47e893cadd29f367825e882dbc6fc324a3c24c41e3ff9648e5d04b2"
+            ],
+            "version": "==1.4.0"
+        },
+        "textsearch": {
+            "hashes": [
+                "sha256:6acfee08e7393109fd1643f13ab9bd4d5b5bca5ce62539569c008cb391a9149c",
+                "sha256:c9c41d40d16cd645935abfdaa1c07ce737040f6afaa735ebf2f4e196823edbbc"
+            ],
+            "version": "==0.0.17"
+        },
+        "unidecode": {
+            "hashes": [
+                "sha256:4c9d15d2f73eb0d2649a151c566901f80a030da1ccb0a2043352e1dbf647586b",
+                "sha256:a039f89014245e0cad8858976293e23501accc9ff5a7bdbc739a14a2b7b85cdc"
+            ],
+            "version": "==1.1.2"
+        }
+    },
+    "develop": {}
+}
