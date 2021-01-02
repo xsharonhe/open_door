@@ -19,6 +19,6 @@ from rest_framework import routers
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('datacollector.urls')),
-    path('api/', include('collectreviews.urls'))
+    path('api/v1/', include('datacollector.urls')),
+    path('api/v1/', include('collectreviews.urls'))
 ]
