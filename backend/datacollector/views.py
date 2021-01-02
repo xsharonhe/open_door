@@ -11,3 +11,4 @@ class RentalListView(generics.ListAPIView):
 class RentalDetailView(generics.RetrieveAPIView):
     serializer_class = RentalSerializer
     queryset = Rental.objects.all()
+    

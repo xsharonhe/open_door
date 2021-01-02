@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'datacollector.apps.DatacollectorConfig'
+    'datacollector.apps.DatacollectorConfig',
+    'collectreviews.apps.CollectreviewsConfig'
 ]
 
 CORS_ORIGIN_WHITELIST = [
