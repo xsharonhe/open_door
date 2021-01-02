@@ -7,6 +7,7 @@ import { Layout } from "./components/hoc/Layout";
 
 import Home from './scenes/Home';
 import Discover from './scenes/Discover';
+import SignIn from './scenes/SignIn';
 
 const App = () => {
 
@@ -14,6 +15,7 @@ const App = () => {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/discover" component={Discover} />
+      <Route path="/signin" component={SignIn} />
     </Switch>
   )
 

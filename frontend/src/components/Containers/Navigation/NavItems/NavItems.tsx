@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { media } from "../../../../utils/media";
-import { SModal } from '../../Modal';
 import { NavItem } from './NavItem/NavItem';
 
 export interface NavItemsProps {
@@ -33,9 +32,7 @@ const links = (
     <SUl>
         <NavItem link="/">Home</NavItem>
         <NavItem link="/discover">Discover</NavItem>
-        <SModal isInverted={false} childComponent={<p>TODO: Sign In Component</p>}>
-          SIGN IN
-        </SModal>
+        <NavItem link="/signin">Sign In</NavItem>
     </SUl>
 )
 

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { media } from "../../../../../utils/media";
 
 export interface NavItemProps {
-    link: string
+    link: string;
 }
 
 export const NavItem: React.FC<NavItemProps> = ({ 
@@ -12,7 +12,7 @@ export const NavItem: React.FC<NavItemProps> = ({
     children, 
     ...props }) => (
         <SLi {...props}>
-            <SNavLink to={link}>
+            <SNavLink to={link} exact={true} activeClassName="active">
                 {children}
             </SNavLink>
         </SLi>
@@ -35,6 +35,9 @@ const SNavLink = styled(NavLink)`
         &:hover {
             color: ${theme.colors.hover};
             cursor: pointer;
+        }
+        &.active {
+            font-weight: 700;
         }
     `}
     ${media(
