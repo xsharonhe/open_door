@@ -11,17 +11,13 @@ export const Layout: React.FC<LayoutProps> = ({
     children,
     ...props
 }) => (
-    <SDiv {...props}>
+    <div {...props}>
         <Navbar />
         <SideNav />
         <MainWrapper>{children}</MainWrapper>
         <Footer />
-    </SDiv>
+    </div>
 )
-
-const SDiv = styled.div`
-`;
-
 const MainWrapper = styled.main`
     margin: 0;
 `;

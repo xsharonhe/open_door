@@ -23,8 +23,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
 interface IDivProps {
   lgImg?: string;
   smImg?: string;
-}
-
+};
 const SDiv = styled.div<IDivProps>`
   ${({ lgImg, smImg }) => `
     background-image: url(${lgImg});
