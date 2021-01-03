@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { Input } from '../components/Inputs/';
@@ -22,14 +22,34 @@ export interface ReviewProps {
     lon: string;
 };
 
+export interface RentalProps {
+    id: string;
+    night_price: number;
+    num_of_baths: number;
+    num_of_rooms: number;
+    name: string;
+    airbnb_neighborhood: string;
+    capacity_of_people: number;
+    property_type: string;
+    reviews_count: number;
+    start_rating: number;
+    created_at: string;
+    num_of_beds: number;
+    lat: string;
+    lon: string;
+}
+
 const Home: React.FC = ({
     ...props
 }): React.ReactElement => {
     const [searchInput, setSearchInput] = useState('');
     const [error, setError] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     const [searchResults, setSearchResults] = useState<ReviewProps[]>([]);
+    const [rentalResults, setRentalResults] = useState<RentalProps[]>([]);
     useEffect(() => {
-        if(searchInput == '') {
+        setIsOpen(true);
+        if(searchInput === '') {
             setSearchResults([]);
         }
         axios
@@ -41,11 +61,43 @@ const Home: React.FC = ({
             .catch(err => {
                 setError(true);
             });
+        axios
+            .get(`http://localhost:8000/api/v1/rentals/search/?page=1&search=${searchInput}`)
+            .then(res => {
+                const data = res.data.results;
+                setRentalResults(data);
+            })
+            .catch(err => {
+                setError(true);
+            });
     }, [searchInput]);
+
+    function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event: any) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setIsOpen(false); 
+                }
+            }
+    
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
 
     return (
     <PageLayout lgImg={lgImg} smImg={smImg}>
-        <Container>
+        <Container className="searchBar">
             <SInput 
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
                             setSearchInput(e.target.value);
@@ -53,11 +105,20 @@ const Home: React.FC = ({
                         }} 
                 placeholder="Search here"
             />
-            {!!searchResults || !!error ? searchResults.map((search) => (
-                    <SearchOption key={search.name}>{search.name}</SearchOption>
-                )) :
-                <SearchOption>No results could be found</SearchOption>
-            }
+            {!!isOpen && (
+                <SearchContainer ref={wrapperRef}>
+                    {!!searchResults || !!error  ? searchResults.map((search) => (
+                            <SearchOption key={search.name}>{search.name}</SearchOption>
+                        )) :
+                        <SearchOption>No results could be found</SearchOption>
+                    }
+                    {!!rentalResults || !!error ? rentalResults.map((rental) => (
+                            <SearchOption key={rental.name}>{rental.name}</SearchOption>
+                        )) :
+                        <SearchOption>No results could be found</SearchOption>
+                    }
+                </SearchContainer>
+            )}
         </Container>
     </PageLayout>
     )
@@ -96,7 +157,6 @@ const SInput = styled(Input)`
 `;
 const SearchOption = styled.div`
     ${({ theme }) => `
-        width: 45%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -108,13 +168,18 @@ const SearchOption = styled.div`
             transform: ${theme.transitions.scale};
             box-shadow: ${theme.boxShadow.topBottom};
         }
-
-        ${media('tablet',
-            `
-            width: 65%;
-            `
-        )};
     `};
+`;
+const SearchContainer = styled.div`
+    overflow-y: scroll;
+    width: 50%;
+    height: 250px;
+
+    ${media('tablet',
+        `
+        width: 70%;
+        `
+    )};
 `;
 
 export default Home;
