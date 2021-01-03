@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import axios from 'axios';
 import { Input } from '../components/Inputs/';
@@ -72,6 +73,8 @@ const Home: React.FC = ({
             });
     }, [searchInput]);
 
+    let history = useHistory();
+
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
         useEffect(() => {
             /**
@@ -108,12 +111,16 @@ const Home: React.FC = ({
             {!!isOpen && (
                 <SearchContainer ref={wrapperRef}>
                     {!!searchResults || !!error  ? searchResults.map((search) => (
-                            <SearchOption key={search.name}>{search.name}</SearchOption>
+                            <SearchOption onClick={() => history.push(`/discover/eviews/${search.id}`)} key={search.name}>
+                                {search.name}
+                            </SearchOption>
                         )) :
                         <SearchOption>No results could be found</SearchOption>
                     }
                     {!!rentalResults || !!error ? rentalResults.map((rental) => (
-                            <SearchOption key={rental.name}>{rental.name}</SearchOption>
+                            <SearchOption onClick={() => history.push(`/discover/rentals/${rental.id}`)} key={rental.name}>
+                                {rental.name}
+                            </SearchOption>
                         )) :
                         <SearchOption>No results could be found</SearchOption>
                     }
