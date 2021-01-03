@@ -1,5 +1,7 @@
+from django.db import transaction
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 from .models import Person
 
 class PersonSerializer(serializers.ModelSerializer):
@@ -16,10 +18,12 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {"write_only": True, 'required': True}}
 
     # Overwriting create method
+    @transaction.atomic
     def create(self, validated_data):
         person_data = validated_data.pop('person')
         user = User.objects.create_user(**validated_data)
         user.person = Person.objects.create(user=user, **person_data)
         user.save()
+        Token.objects.create(user=user)
 
         return user
