@@ -1,5 +1,9 @@
 from django.shortcuts import render
-from rest_framework import generics, filters, pagination
+from django.http import Http404
+from django.db.models import Avg
+from rest_framework import generics, filters, pagination, status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from .serializers import RentalSerializer
 from .models import Rental
 
@@ -21,7 +25,16 @@ class RentalSearchView(generics.ListAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['property_type', 'name', 'airbnb_neighborhood']
     
-class RentalDetailView(generics.RetrieveAPIView):
-    serializer_class = RentalSerializer
-    queryset = Rental.objects.all()
-    
+@api_view(['GET'])
+def rental_stats(request, pk):
+    if request.method == 'GET':
+        try:
+            rental = Rental.objects.get(pk=pk)
+            serializer = RentalSerializer(rental)
+            night_price_avg = Rental.objects.all().aggregate(Avg('night_price'))
+            return Response({
+                'query': serializer.data,
+                'night_price_avg': night_price_avg['night_price__avg']
+            })
+        except Rental.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)

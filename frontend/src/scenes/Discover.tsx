@@ -10,7 +10,7 @@ import {
   Heading,
   ReviewCard
 } from "../components";
-import { strings, ReviewProps, RentalProps } from "../utils";
+import { ReviewProps, RentalProps } from "../utils";
 
 const options = [
   { value: 'food reviews', label: 'Food reviews'},
@@ -108,8 +108,8 @@ const Discover = () => {
               ) : (
                 <CardWrapper>
                   {loadRentals}
-                  {maxRange <= 50 && (
-                      <SButton onClick={loadMore} isInverted={false}>
+                  {maxRangeRentals <= 50 && (
+                      <SButton onClick={loadMoreRentals} isInverted={false}>
                         Load More
                       </SButton>
                   )}
@@ -140,6 +140,7 @@ const HeadingWrapper = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    z-index: -5;
 `;
 const SHeading = styled(Heading)`
     text-align: center;
@@ -161,6 +162,5 @@ const SResultCard = styled(ResultCard)`
 `;
 const StyledSelect = styled(Select)`
     width: 200px;
-    z-index: -50;
 `;
 export default Discover;

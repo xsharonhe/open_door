@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { RouteComponentProps } from "react-router-dom";
 import { PageLayout } from '../components/hoc/PageLayout';
@@ -24,7 +24,7 @@ export const Rental = ({
         axios
             .get(`http://localhost:8000/api/v1/reviews/${match.params.id}`)
             .then(res => {
-                const data = res.data;
+                const data = res.data.query;
                 setReviewResult(data);
             })
             .catch(err => {
