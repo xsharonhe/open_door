@@ -6,7 +6,6 @@ from .views import UserViewSet, GetAuthToken
 
 router = routers.DefaultRouter()
 router.register('users', UserViewSet)
-router.register('auth', GetAuthToken)
 
 urlpatterns = [
     path('', include(router.urls)),
