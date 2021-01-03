@@ -44,8 +44,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'django_filters',
-    'datacollector.apps.DatacollectorConfig',
-    'collectreviews.apps.CollectreviewsConfig'
 ]
 
 CORS_ORIGIN_WHITELIST = [
