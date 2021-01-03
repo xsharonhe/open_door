@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import { Android } from '@styled-icons/boxicons-logos/Android';
+import Select from 'react-select';
 import { PageLayout } from '../components/hoc/PageLayout';
 import {
   Button,
-  Select,
   ResultCard,
   Heading,
   SModal,
@@ -55,6 +54,7 @@ const Discover = () => {
         <Container>
           <HeadingWrapper>
             <SHeading> Discover</SHeading>
+            
           </HeadingWrapper>
           <Wrapper>
             <CardWrapper>
@@ -84,6 +84,10 @@ const SButton = styled(Button)`
 const HeadingWrapper = styled.div`
     width: 100%;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 `;
 const SHeading = styled(Heading)`
     text-align: center;

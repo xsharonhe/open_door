@@ -27,7 +27,6 @@ const Home: React.FC = ({
                 .then(res => {
                     const data = res.data.results;
                     setSearchResults(data);
-                    console.log(res)
                 })
                 .catch(err => {
                     setError(true);
@@ -37,7 +36,6 @@ const Home: React.FC = ({
                 .then(res => {
                     const data = res.data.results;
                     setRentalResults(data);
-                    setError(false);
                 })
                 .catch(err => {
                     setError(true);
@@ -51,8 +49,11 @@ const Home: React.FC = ({
             firstUpdate.current = false;
             return;
         } else {
+            setError(false);
             if(rentalResults.length === 0 && searchResults.length === 0) {
                 setError(true);
+                setRentalResults([]);
+                setSearchResults([]);
             }
         } 
     },[searchInput]); 

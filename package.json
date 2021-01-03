@@ -1,0 +1,6 @@
+{
+  "devDependencies": {},
+  "dependencies": {
+    "@types/react-select": "^3.1.2"
+  }
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { media } from "../../../utils";
 
@@ -10,7 +11,7 @@ export interface NavbarProps {}
 export const Navbar: React.FC<NavbarProps> = ({ children, ...props }) => (
   <FixedWrapper {...props}>
     <Wrapper>
-      <Brand>Open Door</Brand>
+      <Brand><Link to="/">Open Door</Link></Brand>
       <NavItems />
     </Wrapper>
   </FixedWrapper>
