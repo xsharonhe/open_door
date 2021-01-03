@@ -52,8 +52,8 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
 
 const Status = styled.p<Pick<ReviewCardProps, "status">>`
     ${({ theme, status }) => `
-        color: ${status === 'Positive' ? theme.colors.success : theme.colors.primary};
-        colors: ${status === 'Negative' ? theme.colors.error : theme.colors.primary};
+        color: ${status === 'Positive' && theme.colors.success};
+        color: ${status === 'Negative' && theme.colors.error};
         }
     `};
 `;
@@ -71,6 +71,7 @@ const SReviewCard = styled.div`
         :hover {
             transition: ${theme.transitions.cubicBezier};
             box-shadow: ${theme.boxShadow.topBottom};
+            transform: ${theme.transitions.scale};
         }
 
         h2 {

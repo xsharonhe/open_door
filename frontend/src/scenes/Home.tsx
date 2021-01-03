@@ -21,26 +21,28 @@ const Home: React.FC = ({
         if(searchInput === '') {
             setSearchResults([]);
         }
-        if(searchInput.length >= 1) {
-            axios
-                .get(`http://localhost:8000/api/v1/reviews_search/?page=1&search=${searchInput}`)
-                .then(res => {
-                    const data = res.data.results;
-                    setSearchResults(data);
-                })
-                .catch(err => {
-                    setError(true);
-                });
-            axios
-                .get(`http://localhost:8000/api/v1/rentals_search/?page=1&search=${searchInput}`)
-                .then(res => {
-                    const data = res.data.results;
-                    setRentalResults(data);
-                })
-                .catch(err => {
-                    setError(true);
-                });
-        }
+        axios
+            .get(`http://localhost:8000/api/v1/reviews_search/?page=1&search=${searchInput}`)
+            .then(res => {
+                const data = res.data.results;
+                setSearchResults(data);
+            })
+            .catch(err => {
+                setRentalResults([]);
+                setSearchResults([]);
+                setError(true);
+            });
+        axios
+            .get(`http://localhost:8000/api/v1/rentals_search/?page=1&search=${searchInput}`)
+            .then(res => {
+                const data = res.data.results;
+                setRentalResults(data);
+            })
+            .catch(err => {
+                setRentalResults([]);
+                setSearchResults([]);
+                setError(true);
+            });
     }, [searchInput]);
 
     const firstUpdate = useRef(true);
@@ -49,11 +51,12 @@ const Home: React.FC = ({
             firstUpdate.current = false;
             return;
         } else {
-            setError(false);
             if(rentalResults.length === 0 && searchResults.length === 0) {
-                setError(true);
                 setRentalResults([]);
                 setSearchResults([]);
+                setError(true);
+            } else { 
+                setError(false);
             }
         } 
     },[searchInput]); 

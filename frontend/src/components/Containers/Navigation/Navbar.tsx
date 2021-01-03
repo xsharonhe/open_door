@@ -19,13 +19,14 @@ export const Navbar: React.FC<NavbarProps> = ({ children, ...props }) => (
 
 const Wrapper = styled.div`
   ${({theme}) =>`
-    z-index: 999;
+    z-index: 9999;
     display: flex;
     overflow: hidden;
     height: 100%;
     justify-content: space-between;
     background-color: ${theme.colors.secondary};
     padding: 0 6rem;
+    overflow-x: hidden;
   `}
 `;
 

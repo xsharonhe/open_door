@@ -1,36 +1,36 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Home } from '@styled-icons/boxicons-solid/Home';
+import { PeopleOutline } from '@styled-icons/evaicons-outline/PeopleOutline';
 import { Bed } from '@styled-icons/boxicons-solid/Bed';
 import { Bath } from '@styled-icons/boxicons-solid/Bath';
 import { media } from '../../utils';
 
 export interface ResultCardProps extends React.HTMLAttributes<HTMLDivElement> {
-    price: string;
+    price: string | number;
     city: string;
     address: string;
-    feet: string;
-    bedrooms: string;
-    bathrooms: string;
+    bedrooms: string | number;
+    bathrooms: string | number;
+    people: string | number;
 };
 
 export const ResultCard: React.FC<ResultCardProps> = ({
     price,
     city,
     address,
-    feet,
     bedrooms,
     bathrooms,
+    people,
     ...props
 }): React.ReactElement => (
-    <SResultCard price={price} city={city} address={address} feet={feet} bedrooms={bedrooms} bathrooms={bathrooms} {...props}>
+    <SResultCard price={price} city={city} people={people} address={address} bedrooms={bedrooms} bathrooms={bathrooms} {...props}>
         <h2>${price}</h2>
         <p>{city.toUpperCase()}</p>
         <p>{address}</p>
         <hr />
         <SContainer>
             <span>
-                <Icon as={Home} /> {feet.concat(" ft")}
+                <Icon as={PeopleOutline} /> {people}
             </span>
             <span>
                 <Icon as={Bed} /> {bedrooms}
@@ -55,6 +55,7 @@ const SResultCard = styled.div<ResultCardProps>`
         :hover {
             transition: ${theme.transitions.cubicBezier};
             box-shadow: ${theme.boxShadow.topBottom};
+            transform: ${theme.transitions.scale};
         }
 
         h2 {

@@ -33,9 +33,9 @@ const Discover = () => {
           price={"550"}
           city={"Waterloo"}
           address={"123 Alphabet Rd"}
-          feet={"1200"}
           bedrooms={"2"}
           bathrooms={"1"}
+          people={"6"}
         >
           Hey
         </ResultCard>
