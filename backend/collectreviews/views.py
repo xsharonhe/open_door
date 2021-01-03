@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics, filters
+from rest_framework import generics, filters, pagination
 from .serializers import ReviewSerializer
 from .models import Review
 
@@ -7,17 +7,13 @@ from .models import Review
 class ReviewListView(generics.ListAPIView):
     serializer_class = ReviewSerializer
     queryset = Review.objects.all()
-    filter_backends = [filters.SearchFilter]
-    filterset_fields = ['name']
     
 class ReviewSearchView(generics.ListAPIView):
+    queryset = Review.objects.all().order_by('price')
     serializer_class = ReviewSerializer
-    
-    def get_queryset(self):
-        queryset = Review.objects.all()
-        search_fields = ['name', 'summary', 'address']
-        filter_backends = (filters.SearchFilter,)
-        return queryset[:3]
+    pagination_class = pagination.PageNumberPagination
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'summary', 'address']
     
 class ReviewDetailView(generics.RetrieveAPIView):
     serializer_class = ReviewSerializer

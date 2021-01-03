@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'django_filters',
     'datacollector.apps.DatacollectorConfig',
     'collectreviews.apps.CollectreviewsConfig'
 ]
@@ -84,11 +85,13 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'sentimentanalyzer.wsgi.application'
-
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 3
 }
+
+WSGI_APPLICATION = 'sentimentanalyzer.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

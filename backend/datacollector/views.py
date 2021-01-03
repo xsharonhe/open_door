@@ -12,9 +12,9 @@ class RentalSearchView(generics.ListAPIView):
     serializer_class = RentalSerializer
     
     def get_queryset(self):
-        queryset = Rental.objects.all()
-        search_fields = ['name', 'airbnb_neighborhood']
-        filter_backends = (filters.SearchFilter,)
+        queryset = Rental.objects.all().order_by('night_price')
+        filter_backends = [filters.SearchFilter]
+        search_fields = ['property_type', 'name', 'airbnb_neighborhood']
         return queryset[:3]
     
 class RentalDetailView(generics.RetrieveAPIView):

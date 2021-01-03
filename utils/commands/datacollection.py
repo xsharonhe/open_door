@@ -20,7 +20,7 @@ rentals = [
         num_of_beds = df.at[row, 'num_of_beds'],
         lat = df.at[row, 'lat'],
         lon = df.at[row, 'lon']
-    ) for row in range(0, 250)
+    ) for row in range(0, 50)
 ]
 
 Rental.objects.bulk_create(rentals)
