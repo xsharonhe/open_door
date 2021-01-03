@@ -1,4 +1,5 @@
 # python3 manage.py shell to load data to django
+# must place raw data in right folder
 import pandas as pd
 from collectreviews.models import Review
 

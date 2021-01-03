@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'django_filters',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'datacollector.apps.DatacollectorConfig',
+    'collectreviews.apps.CollectreviewsConfig'
 ]
 
 PASSWORD_HASHERS = [
