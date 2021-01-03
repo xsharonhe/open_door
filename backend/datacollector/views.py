@@ -4,8 +4,14 @@ from .serializers import RentalSerializer
 from .models import Rental
 
 # Create your views here.
+class StandardResultsSetPagination(pagination.PageNumberPagination):
+    page_size = 100
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+    
 class RentalListView(generics.ListAPIView):
     serializer_class = RentalSerializer
+    pagination_class = StandardResultsSetPagination
     queryset = Rental.objects.all()
     
 class RentalSearchView(generics.ListAPIView):

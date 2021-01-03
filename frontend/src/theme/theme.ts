@@ -125,7 +125,9 @@ export const baseTheme = {
         text: '#393E46',
         caption: '#9ba4b4',
         hover: '#394867',
-        primaryO: 'rgba(37, 46, 86, 0.1)'
+        primaryO: 'rgba(37, 46, 86, 0.1)',
+        success: '#61b15a',
+        error: '#ff4646'
     },
     boxShadow: {
         shallow: '0 3px 2px 0 rgba(0, 0, 0, 0.15)',

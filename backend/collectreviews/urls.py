@@ -8,7 +8,7 @@ urlpatterns = [
          views.ReviewListView.as_view(),
          name='review_list'),
     
-    path('reviews/search/',
+    path('reviews_search/',
         views.ReviewSearchView.as_view(),
         name='review_search'),
     

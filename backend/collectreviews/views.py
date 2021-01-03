@@ -4,8 +4,14 @@ from .serializers import ReviewSerializer
 from .models import Review
 
 # Create your views here.
+class StandardResultsSetPagination(pagination.PageNumberPagination):
+    page_size = 100
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+    
 class ReviewListView(generics.ListAPIView):
     serializer_class = ReviewSerializer
+    pagination_class =StandardResultsSetPagination
     queryset = Review.objects.all().order_by('price')
     
 class ReviewSearchView(generics.ListAPIView):
