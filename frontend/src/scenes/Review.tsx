@@ -30,7 +30,7 @@ export const Rental = ({
             .catch(err => {
                 setError(true);
             });
-  }, [error]);
+  }, []);
   return (
       <PageLayout>
         {!!reviewResult && <div>{reviewResult.name}</div>}

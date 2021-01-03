@@ -21,7 +21,6 @@ export const Rental = ({
   const [error, setError] = useState(false);
   const [rentalResult, setRentalResult] = useState<RentalProps>();
   useEffect(() => {
-    console.log(match.params.id);
         axios
             .get(`http://localhost:8000/api/v1/rentals/${match.params.id}`)
             .then(res => {
@@ -31,7 +30,7 @@ export const Rental = ({
             .catch(err => {
                 setError(true);
             });
-  }, [error]);
+  }, []);
   return (
       <PageLayout>
         {!!rentalResult && <div>{rentalResult.name}</div>}

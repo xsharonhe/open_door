@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import axios from 'axios';
@@ -23,7 +23,7 @@ const Home: React.FC = ({
         }
         if(searchInput.length >= 1) {
             axios
-                .get(`http://localhost:8000/api/v1/reviews/search/?page=1&search=${searchInput}`)
+                .get(`http://localhost:8000/api/v1/reviews_search/?page=1&search=${searchInput}`)
                 .then(res => {
                     const data = res.data.results;
                     setSearchResults(data);
@@ -32,16 +32,28 @@ const Home: React.FC = ({
                     setError(true);
                 });
             axios
-                .get(`http://localhost:8000/api/v1/rentals/search/?page=1&search=${searchInput}`)
+                .get(`http://localhost:8000/api/v1/rentals_search/?page=1&search=${searchInput}`)
                 .then(res => {
                     const data = res.data.results;
                     setRentalResults(data);
+                    setError(false);
                 })
                 .catch(err => {
                     setError(true);
                 });
         }
     }, [searchInput]);
+
+    const firstUpdate = useRef(true);
+    useLayoutEffect(() => {
+        if (firstUpdate.current) {
+            firstUpdate.current = false;
+            return;
+        }
+        if(rentalResults.length === 0 || searchResults.length === 0) {
+            setError(true);
+        }
+    }, [searchInput]); 
 
     let history = useHistory();
 
@@ -77,20 +89,18 @@ const Home: React.FC = ({
             />
             {!!isOpen && (
                 <SearchContainer ref={wrapperRef}>
-                    {!!searchResults || !!error  ? searchResults.map((search) => (
+                    {!!searchResults && !error  ? searchResults.map((search) => (
                             <SearchOption onClick={() => history.push(`/discover/reviews/${search.id}`)} key={search.name}>
                                 {search.name}
                             </SearchOption>
                         )) :
                         <SearchOption>No results could be found</SearchOption>
                     }
-                    {!!rentalResults || !!error ? rentalResults.map((rental) => (
+                    {!!rentalResults && ( rentalResults.map((rental) => (
                             <SearchOption onClick={() => history.push(`/discover/rentals/${rental.id}`)} key={rental.name}>
                                 {rental.name}
                             </SearchOption>
-                        )) :
-                        <SearchOption>No results could be found</SearchOption>
-                    }
+                    )))}
                 </SearchContainer>
             )}
         </Container>

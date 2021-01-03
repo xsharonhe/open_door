@@ -8,7 +8,7 @@ urlpatterns = [
          views.RentalListView.as_view(),
          name='rentals_list'),
     
-    path('rentals/search/',
+    path('rentals_search/',
          views.RentalSearchView.as_view(),
          name='rental_search'),
     
