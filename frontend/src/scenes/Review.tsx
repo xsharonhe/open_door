@@ -30,6 +30,7 @@ export const Rental = ({
             .catch(err => {
                 setError(true);
             });
+            console.log(match.params.id)
   }, []);
   return (
       <PageLayout>

@@ -27,6 +27,7 @@ const Home: React.FC = ({
                 .then(res => {
                     const data = res.data.results;
                     setSearchResults(data);
+                    console.log(res)
                 })
                 .catch(err => {
                     setError(true);
@@ -49,19 +50,17 @@ const Home: React.FC = ({
         if (firstUpdate.current) {
             firstUpdate.current = false;
             return;
-        }
-        if(rentalResults.length === 0 || searchResults.length === 0) {
-            setError(true);
-        }
-    }, [searchInput]); 
+        } else {
+            if(rentalResults.length === 0 && searchResults.length === 0) {
+                setError(true);
+            }
+        } 
+    },[searchInput]); 
 
     let history = useHistory();
 
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
         useEffect(() => {
-            /**
-             * Alert if clicked on outside of element
-             */
             function handleClickOutside(event: any) {
                 if (ref.current && !ref.current.contains(event.target)) {
                     setIsOpen(false); 
@@ -80,7 +79,7 @@ const Home: React.FC = ({
 
     return (
     <PageLayout lgImg={lgImg} smImg={smImg}>
-        <Container className="searchBar">
+        <Container>
             <SInput 
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
                             setSearchInput(e.target.value);
@@ -89,18 +88,20 @@ const Home: React.FC = ({
             />
             {!!isOpen && (
                 <SearchContainer ref={wrapperRef}>
-                    {!!searchResults && !error  ? searchResults.map((search) => (
+                    {!!searchResults && searchResults.map((search) => (
                             <SearchOption onClick={() => history.push(`/discover/reviews/${search.id}`)} key={search.name}>
                                 {search.name}
                             </SearchOption>
-                        )) :
-                        <SearchOption>No results could be found</SearchOption>
+                        ))
                     }
                     {!!rentalResults && ( rentalResults.map((rental) => (
                             <SearchOption onClick={() => history.push(`/discover/rentals/${rental.id}`)} key={rental.name}>
                                 {rental.name}
                             </SearchOption>
                     )))}
+                    {!!error && (
+                        <SearchOption>No results could be found</SearchOption>
+                    )}
                 </SearchContainer>
             )}
         </Container>
@@ -145,7 +146,7 @@ const SearchOption = styled.div`
         justify-content: center;
         align-items: center;
         background-color: ${theme.colors.background};
-        box-shadow: ${theme.boxShadow.shallow};
+        box-shadow: 0 6px 2px 0 rgba(0,0,0,0.2);
         padding: 20px;
 
         :hover {

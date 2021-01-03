@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 import axios from "axios";
 import { Android } from '@styled-icons/boxicons-logos/Android';
 import { PageLayout } from '../components/hoc/PageLayout';
@@ -16,7 +18,7 @@ import { strings, ReviewProps } from "../utils";
 
 const Discover = () => {
     const [error, setError] = useState(false);
-    const [isOpen, setIsOpen] = useState(true);
+    const [maxRange, setMaxRange] = useState(4);
     const [reviewResults, setReviewResults] = useState<ReviewProps[]>([]);
     useEffect(() => {
       axios
@@ -31,55 +33,45 @@ const Discover = () => {
           });
     }, [error]);
 
+    const loadMore = useCallback(() => {
+      setMaxRange(prevRange => prevRange + 3);
+    },[]);
+
+    let history = useHistory();
+
+    const loadCards = reviewResults.slice(0, maxRange).map((review) => (
+        <ReviewCard 
+          onClick={() => history.push(`/discover/reviews/${review.id}`)}
+          name={review.name}
+          status={review.status}
+          address={review.address}
+          dollarSigns={review.price}
+          score={review.score}
+        />
+    ))
+
   return (
       <PageLayout>
-
-
-        <Heading icon={Android} coloredText="Hello">
-          Danielle!
-        </Heading>
-        <p>Buttons:</p>
-
-        <Button isInverted={true}>{strings.buttons.signin}</Button>
-        <Button isInverted={false}>{strings.buttons.signin}</Button>
-
-        <p>Select:</p>
-        <Select options={["1", "2", "3"]}>Select</Select>
-
-        <p>Result Card:</p>
-        <ResultCard
-          price={"550"}
-          city={"Waterloo"}
-          address={"123 Alphabet Rd"}
-          feet={"1200"}
-          bedrooms={"2"}
-          bathrooms={"1"}
-        >
-          Hey
-        </ResultCard>
-        <p> ReviewCard: </p>
-        <ReviewCard 
-          name="Thai Villa"
-          status="Positive"
-          address="5 E 19th St"
-          dollarSigns={2}
-          score="78.7"
-        />
-
-        <p>Modal</p>
-        <SModal
-          childComponent={<Heading coloredText="Hey">Non-Friend!</Heading>}
-        >
-          Open Meee!
-        </SModal>
-
-        <Text bold lineHeight="1.25">
-          Input:
-        </Text>
-        <Input placeholder="Add an email" />
-
+        <Container>
+            <SHeading> Discover</SHeading>
+          <Wrapper>
+            {loadCards}
+            {maxRange <= 50 && (<Button onClick={loadMore} isInverted={true}>
+              Load More
+            </Button>)}
+          </Wrapper>
+        </Container>
       </PageLayout>
   );
 };
 
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+const Wrapper = styled.div`
+`;
+const SHeading = styled(Heading)`
+    text-align: center;
+`;
 export default Discover;
