@@ -64,7 +64,7 @@ const SReviewCard = styled.div`
         border: 1px solid ${theme.colors.primary};
         border-radius: ${theme.radius.border};
         padding: 0.7rem 1.25rem;
-        width: 18%;
+        width: 70%;
         font-family: ${theme.font.body};
         cursor: pointer;
         color: ${theme.colors.primary};
