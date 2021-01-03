@@ -9,6 +9,7 @@ import {
   SModal,
   Input,
   Text,
+  ReviewCard
 } from "../components";
 import { strings } from "../utils";
 
@@ -38,6 +39,14 @@ const Discover = () => {
         >
           Hey
         </ResultCard>
+        <p> ReviewCard: </p>
+        <ReviewCard 
+          name="Thai Villa"
+          status="Positive"
+          address="5 E 19th St"
+          dollarSigns={2}
+          score="78.7"
+        />
 
         <p>Modal</p>
         <SModal

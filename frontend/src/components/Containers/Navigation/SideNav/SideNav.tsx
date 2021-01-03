@@ -6,7 +6,7 @@ import { Brand } from "../../../Texts/Brand";
 import { Hamburger } from "./Hamburger";
 import { NavItems } from "../NavItems/NavItems";
 
-export interface SideNavProps {}
+export interface SideNavProps {};
 
 export const SideNav: React.FC<SideNavProps> = ({
   children,
