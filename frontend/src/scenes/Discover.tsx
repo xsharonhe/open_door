@@ -9,25 +9,10 @@ import {
   SModal,
   Input,
   Text,
-  // Table,
 } from "../components";
 import { strings } from "../utils";
 
 const Discover = () => {
-  // const columns = ['Column 1', 'Column 2', 'Column 3'];
-
-  // const data = [
-  //   {
-  //     id: "1",
-  //     labels: ["smile", "friendly", "haha"]
-  //   },
-  //   {
-  //     id: "2",
-  //     labels: ["hello!", "what a day!", "wow"],
-  //   },
-  // ];
-
-
   return (
       <PageLayout>
 

@@ -8,6 +8,10 @@ urlpatterns = [
          views.ReviewListView.as_view(),
          name='review_list'),
     
+    path('reviews/search/',
+        views.ReviewSearchView.as_view(),
+        name='review_search'),
+    
     path('reviews/<pk>/',
          views.ReviewDetailView.as_view(),
          name='review_detail')

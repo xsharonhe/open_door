@@ -21,6 +21,7 @@ declare module 'styled-components' {
             opacity: string;
             scale: string;
             easeIn: string;
+            easeOut: string;
         },
         colors: {
             [key: string]: number | string;
@@ -62,11 +63,11 @@ export const baseTheme = {
         opacity: 'opacity ease 500ms',
         scale: 'scale(1.03)',
         easeIn: `
-            animation: fadeIn ease 1s;
-            -webkit-animation: fadeIn ease 1s;
-            -moz-animation: fadeIn ease 1s;
-            -o-animation: fadeIn ease 1s;
-            -ms-animation: fadeIn ease 1s;
+            animation: fadeIn ease 0.5s;
+            -webkit-animation: fadeIn ease 0.5s;
+            -moz-animation: fadeIn ease 0.5s;
+            -o-animation: fadeIn ease 0.5s;
+            -ms-animation: fadeIn ease 0.5s;
             @keyframes fadeIn {
                 0% {opacity:0;}
                 100% {opacity:1;}
@@ -87,7 +88,34 @@ export const baseTheme = {
                 0% {opacity:0;}
                 100% {opacity:1;}
             }
-        `
+        `,
+        easeOut: `
+            animation: fadeOut 1.5s ease-out;
+            -webkit-animation: fadeOut ease-out 1.5s;
+            -moz-animation: fadeOut ease-out 1.5s;
+            -o-animation: fadeOut ease-out 1.5s;
+            -ms-animation: fadeOut ease-out 1.5s;
+            @keyframes fadeOut {
+                0% {opacity:1;}
+                100% {opacity:0;}
+            }
+            @-moz-keyframes fadeOut {
+                0% {opacity:1;}
+                100% {opacity:0;}
+            }
+            @-webkit-keyframes fadeOut {
+                0% {opacity:1;}
+                100% {opacity:0;}
+            }
+            @-o-keyframes fadeOut {
+                0% {opacity:1;}
+                100% {opacity:0;}
+            }
+            @-ms-keyframes fadeOut {
+                0% {opacity:1;}
+                100% {opacity:0;}
+            }
+        `   
     },
     colors: {
         primary: '#14274e',

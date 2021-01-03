@@ -18,7 +18,7 @@ reviews= [
         score = df.at[row, 'score'],
         lat = df.at[row, 'lat'],
         lon = df.at[row, 'lon']
-    ) for row in range(0, 250)
+    ) for row in range(0, 50)
 ]
 
 Review.objects.bulk_create(reviews)
