@@ -11,7 +11,7 @@ import {
   Input,
   Text,
 } from "../components";
-import { strings, RentalProps } from "../utils";
+import { strings, ReviewProps } from "../utils";
 
 type TParams = { id: string};
 
@@ -19,14 +19,13 @@ export const Rental = ({
   match
 }: RouteComponentProps<TParams>) => {
   const [error, setError] = useState(false);
-  const [rentalResult, setRentalResult] = useState<RentalProps>();
+  const [reviewResult, setReviewResult] = useState<ReviewProps>();
   useEffect(() => {
-    console.log(match.params.id);
         axios
-            .get(`http://localhost:8000/api/v1/rentals/${match.params.id}`)
+            .get(`http://localhost:8000/api/v1/reviews/${match.params.id}`)
             .then(res => {
                 const data = res.data;
-                setRentalResult(data);
+                setReviewResult(data);
             })
             .catch(err => {
                 setError(true);
@@ -34,7 +33,7 @@ export const Rental = ({
   }, [error]);
   return (
       <PageLayout>
-        {!!rentalResult && <div>{rentalResult.name}</div>}
+        {!!reviewResult && <div>{reviewResult.name}</div>}
       </PageLayout>
   );
 };

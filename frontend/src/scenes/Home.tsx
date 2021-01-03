@@ -6,39 +6,7 @@ import { Input } from '../components/Inputs/';
 import { PageLayout } from '../components/hoc/PageLayout';
 import lgImg from "../assets/bg-houses.svg";
 import smImg from "../assets/bg-houses-mobile.svg";
-import { media } from "../utils";
-
-export interface ReviewProps {
-    id: string;
-    name: string;
-    review_count: number;
-    rating: string;
-    status: string;
-    price: number;
-    display_phone: string;
-    address: string;
-    summary: string;
-    score: string;
-    lat: string;
-    lon: string;
-};
-
-export interface RentalProps {
-    id: string;
-    night_price: number;
-    num_of_baths: number;
-    num_of_rooms: number;
-    name: string;
-    airbnb_neighborhood: string;
-    capacity_of_people: number;
-    property_type: string;
-    reviews_count: number;
-    start_rating: number;
-    created_at: string;
-    num_of_beds: number;
-    lat: string;
-    lon: string;
-}
+import { media, ReviewProps, RentalProps } from "../utils";
 
 const Home: React.FC = ({
     ...props
@@ -53,24 +21,26 @@ const Home: React.FC = ({
         if(searchInput === '') {
             setSearchResults([]);
         }
-        axios
-            .get(`http://localhost:8000/api/v1/reviews/search/?page=1&search=${searchInput}`)
-            .then(res => {
-                const data = res.data.results;
-                setSearchResults(data);
-            })
-            .catch(err => {
-                setError(true);
-            });
-        axios
-            .get(`http://localhost:8000/api/v1/rentals/search/?page=1&search=${searchInput}`)
-            .then(res => {
-                const data = res.data.results;
-                setRentalResults(data);
-            })
-            .catch(err => {
-                setError(true);
-            });
+        if(searchInput.length >= 1) {
+            axios
+                .get(`http://localhost:8000/api/v1/reviews/search/?page=1&search=${searchInput}`)
+                .then(res => {
+                    const data = res.data.results;
+                    setSearchResults(data);
+                })
+                .catch(err => {
+                    setError(true);
+                });
+            axios
+                .get(`http://localhost:8000/api/v1/rentals/search/?page=1&search=${searchInput}`)
+                .then(res => {
+                    const data = res.data.results;
+                    setRentalResults(data);
+                })
+                .catch(err => {
+                    setError(true);
+                });
+        }
     }, [searchInput]);
 
     let history = useHistory();
@@ -86,10 +56,8 @@ const Home: React.FC = ({
                 }
             }
     
-            // Bind the event listener
             document.addEventListener("mousedown", handleClickOutside);
             return () => {
-                // Unbind the event listener on clean up
                 document.removeEventListener("mousedown", handleClickOutside);
             };
         }, [ref]);
@@ -104,14 +72,13 @@ const Home: React.FC = ({
             <SInput 
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
                             setSearchInput(e.target.value);
-                            console.log(searchResults);
                         }} 
                 placeholder="Search here"
             />
             {!!isOpen && (
                 <SearchContainer ref={wrapperRef}>
                     {!!searchResults || !!error  ? searchResults.map((search) => (
-                            <SearchOption onClick={() => history.push(`/discover/eviews/${search.id}`)} key={search.name}>
+                            <SearchOption onClick={() => history.push(`/discover/reviews/${search.id}`)} key={search.name}>
                                 {search.name}
                             </SearchOption>
                         )) :
