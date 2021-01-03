@@ -65,17 +65,17 @@ const SMenu = styled.div<SMenuProps>`
       @media (min-width: ${theme.media.tablet}px) {
           display: none;
       }
+      z-index: 999;
       display: flex;
       transition: ${opened ? theme.transitions.easeIn : theme.transitions.easeOut};
-      display: flex;
       position: fixed;
       width: 40%;
-      left: 0;
+      right: 0;
       top: 0;
-      display: flex;
       justify-content: center;
+      box-shadow: ${theme.boxShadow.shallow};
       margin-top: 3rem;
-      height: 100vh;
+      height: 200px;
       background-color: ${theme.colors.secondary};
     `}
 
