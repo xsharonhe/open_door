@@ -30,9 +30,6 @@ const Home: React.FC = ({
                     setSearchResults(data);
                 })
                 .catch(err => {
-                    setRentalResults([]);
-                    setSearchResults([]);
-                    setError(true);
                 });
             axios
                 .get(`http://localhost:8000/api/v1/rentals_search/?page=1&search=${searchInput}`)
@@ -41,9 +38,7 @@ const Home: React.FC = ({
                     setRentalResults(data);
                 })
                 .catch(err => {
-                    setRentalResults([]);
-                    setSearchResults([]);
-                    setError(true);
+                    
                 });
         }
     }, [searchInput]);
