@@ -5,14 +5,14 @@ app_name = 'reviews'
 
 urlpatterns = [
     path('reviews/',
-         views.ReviewListView.as_view(),
+         views.reviews_view,
          name='review_list'),
     
     path('reviews_search/',
         views.ReviewSearchView.as_view(),
         name='review_search'),
     
-    path('reviews/<pk>/',
-         views.ReviewDetailView.as_view(),
+    path('reviews_stats/<pk>/',
+         views.reviews_stats,
          name='review_detail')
 ]

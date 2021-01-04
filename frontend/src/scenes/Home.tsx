@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import axios from 'axios';
@@ -20,47 +20,29 @@ const Home: React.FC = ({
         setIsOpen(true);
         if(searchInput === '') {
             setSearchResults([]);
+            setRentalResults([]);
         }
-        axios
-            .get(`http://localhost:8000/api/v1/reviews_search/?page=1&search=${searchInput}`)
-            .then(res => {
-                const data = res.data.results;
-                setSearchResults(data);
-            })
-            .catch(err => {
-                setRentalResults([]);
-                setSearchResults([]);
-                setError(true);
-            });
-        axios
-            .get(`http://localhost:8000/api/v1/rentals_search/?page=1&search=${searchInput}`)
-            .then(res => {
-                const data = res.data.results;
-                setRentalResults(data);
-            })
-            .catch(err => {
-                setRentalResults([]);
-                setSearchResults([]);
-                setError(true);
-            });
+        if (searchInput.length >= 1) {
+            axios
+                .get(`http://localhost:8000/api/v1/reviews_search/?page=1&search=${searchInput}`)
+                .then(res => {
+                    const data = res.data.results;
+                    setSearchResults(data);
+                })
+                .catch(err => {
+                });
+            axios
+                .get(`http://localhost:8000/api/v1/rentals_search/?page=1&search=${searchInput}`)
+                .then(res => {
+                    const data = res.data.results;
+                    setRentalResults(data);
+                })
+                .catch(err => {
+                    
+                });
+        }
     }, [searchInput]);
-
-    const firstUpdate = useRef(true);
-    useLayoutEffect(() => {
-        if (firstUpdate.current) {
-            firstUpdate.current = false;
-            return;
-        } else {
-            if(rentalResults.length === 0 && searchResults.length === 0) {
-                setRentalResults([]);
-                setSearchResults([]);
-                setError(true);
-            } else { 
-                setError(false);
-            }
-        } 
-    },[searchInput]); 
-
+    
     let history = useHistory();
 
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
@@ -152,6 +134,7 @@ const SearchOption = styled.div`
         background-color: ${theme.colors.background};
         box-shadow: 0 6px 2px 0 rgba(0,0,0,0.2);
         padding: 20px;
+        overflow-x: hidden;
 
         :hover {
             transform: ${theme.transitions.scale};
@@ -163,6 +146,7 @@ const SearchContainer = styled.div`
     overflow-y: scroll;
     width: 50%;
     height: 250px;
+    overflow-x: hidden;
 
     ${media('tablet',
         `

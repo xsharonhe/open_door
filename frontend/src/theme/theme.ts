@@ -4,6 +4,7 @@ declare module 'styled-components' {
     export interface DefaultTheme {
         font: {
             header: string;
+            caption: string;
             body: string;
         },
         size: {
@@ -35,7 +36,8 @@ declare module 'styled-components' {
 
 export const baseTheme = {
     font: {
-        header: '"itc-avant-garde-gothic-pro", sans-serif',
+        header: '"aktiv-grotesk-condensed", sans-serif',
+        caption: '"soleil", sans-serif',
         body: '"franklin-gothic-atf", sans-serif',
     },
     size: {

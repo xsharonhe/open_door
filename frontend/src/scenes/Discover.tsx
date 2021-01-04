@@ -10,7 +10,7 @@ import {
   Heading,
   ReviewCard
 } from "../components";
-import { strings, ReviewProps, RentalProps } from "../utils";
+import { ReviewProps, RentalProps } from "../utils";
 
 const options = [
   { value: 'food reviews', label: 'Food reviews'},
@@ -30,7 +30,7 @@ const Discover = () => {
       axios
           .get(`http://localhost:8000/api/v1/reviews`)
           .then(res => {
-              const data = res.data.results;
+              const data = res.data;
               setReviewResults(data);
           })
           .catch(err => {
@@ -39,7 +39,7 @@ const Discover = () => {
       axios
         .get(`http://localhost:8000/api/v1/rentals`)
         .then(res => {
-            const data = res.data.results;
+            const data = res.data;
             setRentalResults(data);
         })
         .catch(err => {
@@ -69,9 +69,9 @@ const Discover = () => {
         />
     ));
 
-    const loadRentals = rentalResults.slice(0, maxRange).map((rental) => (
+    const loadRentals = rentalResults.slice(0, maxRangeRentals).map((rental) => (
       <SResultCard 
-        onClick={() => history.push(`/discover/reviews/${rental.id}`)}
+        onClick={() => history.push(`/discover/rentals/${rental.id}`)}
         key={rental.name}
         price={rental.night_price}
         city={rental.airbnb_neighborhood}
@@ -93,6 +93,7 @@ const Discover = () => {
               }}
               placeholder={options[FIRST_VALUE].label} 
               options={options}
+              menuPortalTarget={document.body}
             />
           </HeadingWrapper>
           <Wrapper>
@@ -108,8 +109,8 @@ const Discover = () => {
               ) : (
                 <CardWrapper>
                   {loadRentals}
-                  {maxRange <= 50 && (
-                      <SButton onClick={loadMore} isInverted={false}>
+                  {maxRangeRentals <= 50 && (
+                      <SButton onClick={loadMoreRentals} isInverted={false}>
                         Load More
                       </SButton>
                   )}
@@ -161,6 +162,5 @@ const SResultCard = styled(ResultCard)`
 `;
 const StyledSelect = styled(Select)`
     width: 200px;
-    z-index: -50;
 `;
 export default Discover;

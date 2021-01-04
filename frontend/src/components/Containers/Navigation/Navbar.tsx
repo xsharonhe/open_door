@@ -19,7 +19,7 @@ export const Navbar: React.FC<NavbarProps> = ({ children, ...props }) => (
 
 const Wrapper = styled.div`
   ${({theme}) =>`
-    z-index: 9999;
+    z-index: 9999 !important;
     display: flex;
     overflow: hidden;
     height: 100%;

@@ -18,7 +18,7 @@ class Rental(models.Model):
     lon = models.DecimalField(max_digits=10, decimal_places=4)
     
     class Meta:
-        ordering = ("-night_price",)
+        ordering = ("night_price",)
         
     def __str__(self):
         return self.name
