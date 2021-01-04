@@ -114,6 +114,10 @@ export const Rental = ({
               </SText>
               <TextWrapper>
                 <StyledText>
+                    Nightly price:
+                    <span>${rentalResult.night_price}</span>
+                </StyledText>
+                <StyledText>
                     Airbnb neighbourhood:
                     <span> {rentalResult.airbnb_neighborhood.concat(", New York, USA")}</span> 
                 </StyledText>

@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import Http404
 from django.db.models import Avg, Sum, Count, Q
 from rest_framework import generics, filters, pagination, status
 from rest_framework.response import Response
@@ -18,7 +17,7 @@ def rentals_view(request):
     if request.method == 'GET':
         try:
             params = request.query_params
-            rental = Rental.objects.all()
+            rental = Rental.objects.all().order_by('night_price')
             serializer = RentalSerializer(rental, many=True)
             return Response(serializer.data)
         except Rental.DoesNotExist:

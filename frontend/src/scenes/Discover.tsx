@@ -30,7 +30,7 @@ const Discover = () => {
       axios
           .get(`http://localhost:8000/api/v1/reviews`)
           .then(res => {
-              const data = res.data.results;
+              const data = res.data;
               setReviewResults(data);
           })
           .catch(err => {

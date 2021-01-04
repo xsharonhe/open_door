@@ -48,3 +48,15 @@ export interface BarData {
     capacity: number;
     capacity_color: string;
 }
+
+export interface BarDataReview {
+    level: string;
+    score: number;
+    score_color: string;
+    rating: number;
+    rating_color: string;
+    count: number;
+    count_color: string;
+    price: number;
+    price_color: string;
+}
