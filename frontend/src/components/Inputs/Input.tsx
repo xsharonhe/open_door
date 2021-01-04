@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     disabled?: boolean;
     placeholder?: string;
+    type?: string;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
     value?: string | number | string[];
     error?: boolean | string;

@@ -32,6 +32,7 @@ const links = (
     <SUl>
         <NavItem link="/">Home</NavItem>
         <NavItem link="/discover">Discover</NavItem>
+        <NavItem link="/signup">Sign Up</NavItem>
         <NavItem link="/signin">Sign In</NavItem>
     </SUl>
 )
