@@ -8,8 +8,11 @@ import { Layout } from "./components/hoc/Layout";
 import Home from './scenes/Home';
 import Discover from './scenes/Discover';
 import SignIn from './scenes/SignIn';
+import SignUp from './scenes/SignUp';
 import Rental from './scenes/Rental';
 import Review from './scenes/Review';
+import Dashboard from './scenes/Dashboard';
+import Faqs from './scenes/Faqs';
 
 const App = () => {
 
@@ -19,7 +22,10 @@ const App = () => {
       <Route exact path="/discover" component={Discover} />
       <Route path="/discover/rentals/:id" component={Rental} />
       <Route path="/discover/reviews/:id" component={Review} />
+      <Route path="/signup" component={SignUp} />
       <Route path="/signin" component={SignIn} />
+      <Route path="/dashboard/:id" component={Dashboard} />
+      <Route path="/faqs" component={Faqs} />
     </Switch>
   )
 

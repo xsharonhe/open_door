@@ -2,12 +2,13 @@ from django.db import transaction
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
 from .models import Person
 
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
-        fields = ("budget", "rental_budget", "food_budget", "gym_budget", "transportation_budget", "other_budget", "fav_rental_id")
+        fields = ("budget", "rental_budget", "food_budget", "gym_budget", "transportation_budget", "other_budget", "fav_rental_id", "fav_food_id")
 
 class UserSerializer(serializers.ModelSerializer):
     person = PersonSerializer()

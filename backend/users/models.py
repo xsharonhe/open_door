@@ -10,4 +10,5 @@ class Person(models.Model):
     gym_budget = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     transportation_budget = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     other_budget = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    fav_rental_id = models.CharField(max_length=50)
+    fav_rental_id = models.CharField(max_length=50, default='')
+    fav_food_id = models.CharField(max_length=50, default='')

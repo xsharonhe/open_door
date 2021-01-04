@@ -8,7 +8,7 @@ export interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 };
 
 export const Button: React.FC<IButtonProps> = ({
-    isInverted = true,
+    isInverted = false,
     icon,
     children,
     ...props
