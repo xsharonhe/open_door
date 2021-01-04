@@ -39,7 +39,7 @@ const Discover = () => {
       axios
         .get(`http://localhost:8000/api/v1/rentals`)
         .then(res => {
-            const data = res.data.results;
+            const data = res.data;
             setRentalResults(data);
         })
         .catch(err => {
@@ -69,9 +69,9 @@ const Discover = () => {
         />
     ));
 
-    const loadRentals = rentalResults.slice(0, maxRange).map((rental) => (
+    const loadRentals = rentalResults.slice(0, maxRangeRentals).map((rental) => (
       <SResultCard 
-        onClick={() => history.push(`/discover/reviews/${rental.id}`)}
+        onClick={() => history.push(`/discover/rentals/${rental.id}`)}
         key={rental.name}
         price={rental.night_price}
         city={rental.airbnb_neighborhood}
@@ -93,6 +93,7 @@ const Discover = () => {
               }}
               placeholder={options[FIRST_VALUE].label} 
               options={options}
+              menuPortalTarget={document.body}
             />
           </HeadingWrapper>
           <Wrapper>
@@ -140,7 +141,6 @@ const HeadingWrapper = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    z-index: -5;
 `;
 const SHeading = styled(Heading)`
     text-align: center;

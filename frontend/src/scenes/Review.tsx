@@ -21,16 +21,15 @@ export const Rental = ({
   const [error, setError] = useState(false);
   const [reviewResult, setReviewResult] = useState<ReviewProps>();
   useEffect(() => {
-        axios
-            .get(`http://localhost:8000/api/v1/reviews/${match.params.id}`)
-            .then(res => {
-                const data = res.data.query;
-                setReviewResult(data);
-            })
-            .catch(err => {
-                setError(true);
-            });
-            console.log(match.params.id)
+        // axios
+        //     .get(`http://localhost:8000/api/v1/reviews/${match.params.id}`)
+        //     .then(res => {
+        //         const data = res.data.query;
+        //         setReviewResult(data);
+        //     })
+        //     .catch(err => {
+        //         setError(true);
+        //     });
   }, []);
   return (
       <PageLayout>

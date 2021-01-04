@@ -29,3 +29,8 @@ export interface RentalProps {
     lat: string;
     lon: string;
 }
+
+export interface RadarData {
+    category: string;
+    percentile: number;
+};

@@ -47,9 +47,7 @@ const Home: React.FC = ({
                 });
         }
     }, [searchInput]);
-
-    const firstUpdate = useRef(true);
-
+    
     let history = useHistory();
 
     function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {

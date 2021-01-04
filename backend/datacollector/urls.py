@@ -6,7 +6,7 @@ app_name = 'rentals'
 
 urlpatterns = [
     path('rentals/',
-         views.RentalListView.as_view(),
+         views.rentals_view,
          name='rentals_list'),
     
     path('rentals_search/',
