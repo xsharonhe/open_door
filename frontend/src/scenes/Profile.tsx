@@ -147,13 +147,13 @@ const Profile: React.FC<IProfile> = ({
 
           if(calculatedTotal > budget_global) {
             return (
-              <Text size="h4" align="center"> You are over budget by <Text size="h4" align="center" color="error">
+              <Text size="h4" align="center"> You are over budget by: <Text size="h4" align="center" color="error">
                 ${calculatedTotal - budget_global}
               </Text></Text>
             );
           } else if (calculatedTotal < budget_global) {
             return (
-              <Text size="h4" align="center"> You are under budget by <Text size="h4" align="center" color="success">
+              <Text size="h4" align="center"> You are under budget by: <Text size="h4" align="center" color="success">
                 ${budget_global - calculatedTotal}
               </Text></Text>
             );

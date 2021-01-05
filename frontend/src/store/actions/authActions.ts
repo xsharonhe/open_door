@@ -8,7 +8,7 @@ import {
   SIGNOUT_ERR,
   AUTH_SUCCESS,
   AUTH_ERR,
-} from "../actions/actionTypes";
+} from "./actionTypes";
 import { loadProfile } from './profileActions';
 import { Dispatch } from "redux";
 

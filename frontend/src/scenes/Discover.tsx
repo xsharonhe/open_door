@@ -32,7 +32,6 @@ const Discover = () => {
           .then(res => {
               const data = res.data;
               setReviewResults(data);
-              // console.log(data);
           })
           .catch(err => {
               setError(true);
