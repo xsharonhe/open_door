@@ -36,6 +36,7 @@ const Home: React.FC = ({
                 .then(res => {
                     const data = res.data.results;
                     setRentalResults(data);
+                    console.log(data);
                 })
                 .catch(err => {
                     

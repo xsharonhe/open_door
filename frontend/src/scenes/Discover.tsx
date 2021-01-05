@@ -32,6 +32,7 @@ const Discover = () => {
           .then(res => {
               const data = res.data;
               setReviewResults(data);
+              // console.log(data);
           })
           .catch(err => {
               setError(true);
@@ -100,7 +101,7 @@ const Discover = () => {
               {selectedValue === 'Food reviews' ? (
                   <CardWrapper>
                     {reviewResults.length >= 3 && loadCards}
-                    {maxRange <= 50 && (
+                    {maxRange <= reviewResults.length && (
                       <SButton onClick={loadMore} isInverted={false}>
                         Load More
                       </SButton>
@@ -109,7 +110,7 @@ const Discover = () => {
               ) : (
                 <CardWrapper>
                   {rentalResults.length >= 3 && loadRentals}
-                  {maxRangeRentals <= 50 && (
+                  {maxRangeRentals <= rentalResults.length && (
                       <SButton onClick={loadMoreRentals} isInverted={false}>
                         Load More
                       </SButton>

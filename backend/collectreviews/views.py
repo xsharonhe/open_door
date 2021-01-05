@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.db.models import Avg, Sum, Count, Q
+from rest_framework.views import APIView
 from rest_framework import generics, filters, pagination, status, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import AllowAny
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from .serializers import ReviewSerializer
 from .models import Review
 
@@ -16,11 +17,11 @@ class StandardResultsSetPagination(pagination.PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 1000
     
-@api_view(['GET'])
-@csrf_exempt
-@permission_classes([AllowAny])
-def reviews_view(request):
-    if request.method == 'GET':
+@method_decorator(csrf_protect, name='dispatch')
+class ReviewView(APIView):
+    permission_classes = (permissions.AllowAny, )
+    
+    def get(self, request, format=None):
         try:
             params = request.query_params
             review = Review.objects.all().order_by('-score')
@@ -39,11 +40,11 @@ class ReviewSearchView(generics.ListAPIView):
     search_fields = ['name', 'summary', 'address']
     
 
-@api_view(['GET'])
-@csrf_exempt
-@permission_classes([AllowAny])
-def reviews_stats(request, pk):
-    if request.method == 'GET':
+@method_decorator(csrf_protect, name='dispatch')
+class ReviewStats(APIView):
+    permission_classes = (permissions.AllowAny, )
+    
+    def get(self, request, pk, format=None):
         try:
             rental = Review.objects.get(pk=pk)
             serializer = ReviewSerializer(rental)

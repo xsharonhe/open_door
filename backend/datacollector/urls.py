@@ -5,17 +5,14 @@ from . import views
 app_name = 'rentals'
 
 urlpatterns = [
-    path('rentals/',
-         views.rentals_view,
-         name='rentals_list'),
+    path('rentals',
+         views.RentalView.as_view()),
     
-    path('rentals_search/',
-         views.RentalSearchView.as_view(),
-         name='rental_search'),
+    path('rentals_search',
+         views.RentalSearchView.as_view()),
     
-    path('rentals_stats/<pk>/',
-         views.rental_stats,
-         name='rental_detail')
+    path('rentals_stats/<pk>',
+         views.RentalStats.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
