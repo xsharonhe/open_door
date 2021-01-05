@@ -8,6 +8,8 @@ import {
   SIGNOUT_ERR,
   AUTH_SUCCESS,
   AUTH_ERR,
+  DELETE_SUCCESS,
+  DELETE_ERR
 } from "../actions/actionTypes";
 import { loadProfile } from './profileActions';
 import { Dispatch } from "redux";
@@ -166,6 +168,40 @@ export const signout = (token: any) => async (dispatch: Dispatch<any>) => {
   } catch (err) {
     dispatch({
       type: SIGNOUT_ERR,
+    });
+  }
+};
+
+export const deleteAccount = (
+  token: any
+) => async (dispatch: Dispatch<any>) => {
+
+  const config = {
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "X-CSRFToken": token,
+    },
+  };
+
+  try {
+    const res = await axios.delete(
+      `${process.env.REACT_APP_API_URL}/api/v1/accounts/delete`,
+      config
+    );
+
+    if (res.data.success) {
+      dispatch({
+        type: DELETE_SUCCESS
+      });
+    } else {
+      dispatch({
+        type: DELETE_ERR
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: DELETE_ERR
     });
   }
 };

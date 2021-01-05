@@ -7,6 +7,8 @@ import {
   SIGNOUT_ERR,
   AUTH_SUCCESS,
   AUTH_ERR,
+  DELETE_SUCCESS,
+  DELETE_ERR
 } from "../actions/actionTypes";
 
 const initState = {
@@ -39,6 +41,7 @@ const authReducer = (state = initState, action: any) => {
       };
 
     case SIGNOUT_SUCCESS:
+    case DELETE_SUCCESS:
       return {
         ...state,
         isAuthenticated: false
@@ -47,6 +50,7 @@ const authReducer = (state = initState, action: any) => {
     case SIGNUP_ERR:
     case SIGNIN_ERR:
     case SIGNOUT_ERR:
+    case DELETE_ERR:
       return state;
 
     default:

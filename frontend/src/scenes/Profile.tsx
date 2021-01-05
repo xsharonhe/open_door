@@ -6,12 +6,14 @@ import { Text } from "../components/Texts";
 import { Input } from "../components/Inputs";
 import { Button } from "../components/Containers";
 import { Container, IconDiv, Icon, Form } from "../components/Containers/Form";
+import { deleteAccount } from "../store/actions/authActions";
 import { updateProfile } from "../store/actions/profileActions";
 import { connect } from "react-redux";
 import Cookies from "js-cookie";
 
 interface IProfile {
   updateProfile: Function;
+  deleteAccount: Function;
   budget: Number;
   rental_budget: Number;
   food_budget: Number;
@@ -28,6 +30,7 @@ interface IProfile {
 
 const Profile: React.FC<IProfile> = ({
   updateProfile,
+  deleteAccount,
   budget_global,
   rental_budget_global,
   food_budget_global,
@@ -36,8 +39,6 @@ const Profile: React.FC<IProfile> = ({
   other_budget_global,
   ...props
 }): React.ReactElement => {
-
-  const [profileUpdated, setProfileUpdated] = useState(false);
 
   const [formData, setFormData] = useState<
     Partial<Omit<IProfile, "updateProfile">>
@@ -75,20 +76,24 @@ const Profile: React.FC<IProfile> = ({
 
     const token = Cookies.get("csrftoken");
 
-    const updateUserProfile = async () => {
-      await updateProfile(
-        budget,
-        rental_budget,
-        food_budget,
-        gym_budget,
-        transportation_budget,
-        other_budget,
-        token
-      );
-      setProfileUpdated(!profileUpdated);
-    }
+    updateProfile(
+      budget,
+      rental_budget,
+      food_budget,
+      gym_budget,
+      transportation_budget,
+      other_budget,
+      token
+    );
 
-    updateUserProfile();
+  };
+
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const token = Cookies.get("csrftoken");
+
+    deleteAccount(token);
 
   };
 
@@ -187,6 +192,8 @@ const Profile: React.FC<IProfile> = ({
           />
           <Button onClick={handleUpdate}>Update Profile</Button>
         </Form>
+        <Text color="primary"><strong>Danger!</strong> Click the button below to delete your account <i>forever</i>.</Text>
+        <Button isInverted onClick={handleDelete}>Delete Account</Button>
       </Container>
     </PageLayout>
   );
@@ -202,4 +209,4 @@ const mapStateToProps = (state: any) => ({
   other_budget_global: state.profile.other_budget,
 });
 
-export default connect(mapStateToProps, { updateProfile })(Profile);
+export default connect(mapStateToProps, { updateProfile, deleteAccount })(Profile);
