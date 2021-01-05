@@ -17,7 +17,8 @@ _pycache_
 /coverage
 
 # production
-/build
+backend/build
+frontent/build
 
 # misc
 .DS_Store
