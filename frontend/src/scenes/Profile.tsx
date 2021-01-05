@@ -130,6 +130,40 @@ const Profile: React.FC<IProfile> = ({
 
   };
 
+  const getTotalBudget = (): number => {
+    if(rental_budget && food_budget && gym_budget && transportation_budget && other_budget) {
+        return parseFloat(rental_budget?.toString()) + parseFloat(food_budget?.toString()) +
+          parseFloat(gym_budget?.toString()) + parseFloat(transportation_budget?.toString()) + 
+          parseFloat(other_budget?.toString());
+    }
+    return 0;
+  }
+
+  const getBudgetLogic = () => {
+      if(rental_budget && food_budget && gym_budget && transportation_budget && other_budget) {
+          const calculatedTotal = parseFloat(rental_budget?.toString()) + parseFloat(food_budget?.toString()) +
+            parseFloat(gym_budget?.toString()) + parseFloat(transportation_budget?.toString()) + 
+            parseFloat(other_budget?.toString());
+
+          if(calculatedTotal > budget_global) {
+            return (
+              <Text size="h4" align="center"> You are over budget by <Text size="h4" align="center" color="error">
+                ${calculatedTotal - budget_global}
+              </Text></Text>
+            );
+          } else if (calculatedTotal < budget_global) {
+            return (
+              <Text size="h4" align="center"> You are under budget by <Text size="h4" align="center" color="success">
+                ${budget_global - calculatedTotal}
+              </Text></Text>
+            );
+          } 
+          return (
+            <Text size="h4" align="center" color="success"> You are on budget! </Text>
+          )
+      }
+  }
+
   // if (isAuthenticated) {
   //   return <Redirect to="/profile" />;
   // } else {
@@ -139,9 +173,18 @@ const Profile: React.FC<IProfile> = ({
         <IconDiv>
           <Icon as={Key} />
         </IconDiv>
-        <Text size="h3" color="primary" align="center" bold>
+        <Text size="h2" color="primary" align="center" bold>
           User Profile
         </Text>
+        <Text size="h3" color="primary" align="center" bold>
+          Your total budget is:
+          {` $${getTotalBudget()}`}
+        </Text>
+        <Text size="h4" color="primary" align="center" bold>
+          You've indicated your budget is:
+          {` $${budget_global}`}
+        </Text>
+        {getBudgetLogic()}
         <PieWrapper>
         <ResponsivePie
           data={pieData}
@@ -337,6 +380,7 @@ const Profile: React.FC<IProfile> = ({
 
 const ModalContainer = styled.div`
     text-align: center;
+    padding-bottom: 5%;
 `;
 const SHeading = styled(Heading)`
     ${({ theme }) => `
@@ -347,14 +391,15 @@ const SHeading = styled(Heading)`
 `;
 
 const PieWrapper = styled.div`
-    height: 500px;
-    width: 400px;
+    height: 450px;
+    width: 300px;
     align-items: center;
     justify-content: center;
-    margin: 10px;
-    ${media("1364",
+    margin: auto;
+    margin-top: -100px;
+    ${media("1034",
     `
-        height: 500px;
+        height: 450px;
         width: 300px;
         margin-bottom: 40px;
     `)};

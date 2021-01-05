@@ -64,6 +64,6 @@ export interface BarDataReview {
 export interface PieData {
     id: string;
     label: string;
-    value: number;
+    value: number | string;
     color: string;
 }
