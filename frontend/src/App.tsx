@@ -8,8 +8,6 @@ import Layout from "./components/hoc/Layout";
 import { Provider } from "react-redux";
 import store from "./store/store";
 
-import PrivateUrl from './components/hoc/PrivateUrl';
-
 import Home from "./scenes/Home";
 import Discover from "./scenes/Discover";
 import SignIn from "./scenes/SignIn";
@@ -28,7 +26,7 @@ const App = () => {
       <Route path="/discover/reviews/:id" component={Review} />
       <Route path="/signup" component={SignUp} />
       <Route path="/signin" component={SignIn} />
-      {/* <PrivateUrl /> */}
+      <Route path="/profile" component={Profile} />
       <Route path="/faqs" component={Faqs} />
     </Switch>
   );

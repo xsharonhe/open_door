@@ -208,227 +208,250 @@ const Profile: React.FC<IProfile> = ({
     }
   };
 
-  if (isAuthenticated) {
+  if (!isAuthenticated) {
     return <Redirect to="/signin" />;
   } else {
-  return (
-    <PageLayout {...props}>
-      <Container>
-        <IconDiv>
-          <Icon as={Key} />
-        </IconDiv>
-        <Text size="h2" color="primary" align="center" bold>
-          User Profile
-        </Text>
-        <Text size="h3" color="primary" align="center" bold>
-          Your total budget is:
-          {` $${getTotalBudget()}`}
-        </Text>
-        <Text size="h4" color="primary" align="center" bold>
-          You've indicated your budget is:
-          {` $${budget_global}`}
-        </Text>
-        {getBudgetLogic()}
-        <PieWrapper>
-          <ResponsivePie
-            data={pieData}
-            margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-            innerRadius={0.5}
-            padAngle={0.7}
-            cornerRadius={3}
-            colors={{ scheme: "nivo" }}
-            borderWidth={1}
-            borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
-            radialLabelsSkipAngle={10}
-            radialLabelsTextColor="#333333"
-            radialLabelsLinkColor={{ from: "color" }}
-            sliceLabelsSkipAngle={10}
-            sliceLabelsTextColor="#333333"
-            defs={[
-              {
-                id: "dots",
-                type: "patternDots",
-                background: "inherit",
-                color: "rgba(255, 255, 255, 0.3)",
-                size: 4,
-                padding: 1,
-                stagger: true,
-              },
-              {
-                id: "lines",
-                type: "patternLines",
-                background: "inherit",
-                color: "rgba(255, 255, 255, 0.3)",
-                rotation: -45,
-                lineWidth: 6,
-                spacing: 10,
-              },
-            ]}
-            fill={[
-              {
-                match: {
-                  id: "Rental",
+    return (
+      <PageLayout {...props}>
+        <Container>
+          <IconDiv>
+            <Icon as={Key} />
+          </IconDiv>
+          <Text size="h2" color="primary" align="center" bold>
+            User Profile
+          </Text>
+          <Text size="h3" color="primary" align="center" bold>
+            Your total budget is:
+            {` $${getTotalBudget()}`}
+          </Text>
+          <Text size="h4" color="primary" align="center" bold>
+            You've indicated your budget is:
+            {` $${budget_global}`}
+          </Text>
+          {getBudgetLogic()}
+          <PieWrapper>
+            <ResponsivePie
+              data={pieData}
+              margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+              innerRadius={0.5}
+              padAngle={0.7}
+              cornerRadius={3}
+              colors={{ scheme: "nivo" }}
+              borderWidth={1}
+              borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
+              radialLabelsSkipAngle={10}
+              radialLabelsTextColor="#333333"
+              radialLabelsLinkColor={{ from: "color" }}
+              sliceLabelsSkipAngle={10}
+              sliceLabelsTextColor="#333333"
+              defs={[
+                {
+                  id: "dots",
+                  type: "patternDots",
+                  background: "inherit",
+                  color: "rgba(255, 255, 255, 0.3)",
+                  size: 4,
+                  padding: 1,
+                  stagger: true,
                 },
-                id: "dots",
-              },
-              {
-                match: {
-                  id: "Transportation",
+                {
+                  id: "lines",
+                  type: "patternLines",
+                  background: "inherit",
+                  color: "rgba(255, 255, 255, 0.3)",
+                  rotation: -45,
+                  lineWidth: 6,
+                  spacing: 10,
                 },
-                id: "dots",
-              },
-              {
-                match: {
-                  id: "Food",
-                },
-                id: "dots",
-              },
-              {
-                match: {
-                  id: "Gym",
-                },
-                id: "lines",
-              },
-              {
-                match: {
-                  id: "Other",
-                },
-                id: "lines",
-              },
-            ]}
-            legends={[
-              {
-                anchor: "bottom",
-                direction: "column",
-                justify: false,
-                translateX: 0,
-                translateY: 56,
-                itemsSpacing: 5,
-                itemWidth: 100,
-                itemHeight: 18,
-                itemTextColor: "#999",
-                itemDirection: "left-to-right",
-                itemOpacity: 1,
-                symbolSize: 18,
-                symbolShape: "circle",
-                effects: [
-                  {
-                    on: "hover",
-                    style: {
-                      itemTextColor: "#000",
-                    },
+              ]}
+              fill={[
+                {
+                  match: {
+                    id: "Rental",
                   },
-                ],
-              },
-            ]}
-          />
-        </PieWrapper>
-        <ModalContainer>
-          <SModal
-            childComponent={
-              <Form>
-                {/* <Text color="primary">Your Budget Plan:</Text> */}
-                <SHeading color="primary">Update Your Budget Plan:</SHeading>
-                <Text color="primary">Overall Budget</Text>
-                <Input
-                  placeholder={budget_global?.toString()}
-                  type="number"
-                  min="0.00"
-                  value={budget?.toString()}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                    setFormData({
-                      ...formData,
-                      budget: parseFloat(e.target.value.trim()),
-                    });
-                  }}
-                />
-                <Text color="primary">Rent Budget</Text>
-                <Input
-                  placeholder={rental_budget_global?.toString()}
-                  type="number"
-                  min="0"
-                  value={rental_budget?.toString()}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                    setFormData({
-                      ...formData,
-                      rental_budget: parseFloat(e.target.value.trim()),
-                    });
-                  }}
-                />
-                <Text color="primary">Gym Budget</Text>
-                <Input
-                  placeholder={gym_budget_global?.toString()}
-                  type="number"
-                  min="0"
-                  value={gym_budget?.toString()}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                    setFormData({
-                      ...formData,
-                      gym_budget: parseFloat(e.target.value.trim()),
-                    });
-                  }}
-                />
-                <Text color="primary">Food Budget</Text>
-                <Input
-                  placeholder={food_budget_global?.toString()}
-                  type="number"
-                  min="0"
-                  value={food_budget?.toString()}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                    setFormData({
-                      ...formData,
-                      food_budget: parseFloat(e.target.value.trim()),
-                    });
-                  }}
-                />
-                <Text color="primary">Transportation Budget</Text>
-                <Input
-                  placeholder={transportation_budget_global?.toString()}
-                  type="number"
-                  min="0"
-                  value={transportation_budget?.toString()}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                    setFormData({
-                      ...formData,
-                      transportation_budget: parseFloat(e.target.value.trim()),
-                    });
-                  }}
-                />
-                <Text color="primary">Other Budget</Text>
-                <Input
-                  placeholder={other_budget_global?.toString()}
-                  type="number"
-                  min="0"
-                  value={other_budget?.toString()}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                    setFormData({
-                      ...formData,
-                      other_budget: parseFloat(e.target.value.trim()),
-                    });
-                  }}
-                />
-                <Button style={{ marginTop: "30px" }} onClick={handleUpdate}>
-                  Update Profile
-                </Button>
-              </Form>
-            }
-          >
-            Update budget
-          </SModal>
-        </ModalContainer>
-        {/* <SModal isInverted
-            childComponent={
-              <div>
-                <Text>This action cannot be undone. </Text>
-                <Button style={{ marginTop: "30px" }}>
-                  Delete Account
-                </Button>
-              </div>
-            }
-          >Delete Account</SModal> */}
-      </Container>
-    </PageLayout>
-  );
+                  id: "dots",
+                },
+                {
+                  match: {
+                    id: "Transportation",
+                  },
+                  id: "dots",
+                },
+                {
+                  match: {
+                    id: "Food",
+                  },
+                  id: "dots",
+                },
+                {
+                  match: {
+                    id: "Gym",
+                  },
+                  id: "lines",
+                },
+                {
+                  match: {
+                    id: "Other",
+                  },
+                  id: "lines",
+                },
+              ]}
+              legends={[
+                {
+                  anchor: "bottom",
+                  direction: "column",
+                  justify: false,
+                  translateX: 0,
+                  translateY: 56,
+                  itemsSpacing: 5,
+                  itemWidth: 100,
+                  itemHeight: 18,
+                  itemTextColor: "#999",
+                  itemDirection: "left-to-right",
+                  itemOpacity: 1,
+                  symbolSize: 18,
+                  symbolShape: "circle",
+                  effects: [
+                    {
+                      on: "hover",
+                      style: {
+                        itemTextColor: "#000",
+                      },
+                    },
+                  ],
+                },
+              ]}
+            />
+          </PieWrapper>
+          <ModalContainer>
+            <SModal
+              marginTop
+              childComponent={
+                <Form>
+                  {/* <Text color="primary">Your Budget Plan:</Text> */}
+                  <SHeading color="primary">Update Your Budget Plan:</SHeading>
+                  <Text color="primary">Overall Budget</Text>
+                  <Input
+                    placeholder={budget_global?.toString()}
+                    type="number"
+                    min="0.00"
+                    value={budget?.toString()}
+                    onChange={(
+                      e: React.ChangeEvent<HTMLInputElement>
+                    ): void => {
+                      setFormData({
+                        ...formData,
+                        budget: parseFloat(e.target.value.trim()),
+                      });
+                    }}
+                  />
+                  <Text color="primary">Rent Budget</Text>
+                  <Input
+                    placeholder={rental_budget_global?.toString()}
+                    type="number"
+                    min="0"
+                    value={rental_budget?.toString()}
+                    onChange={(
+                      e: React.ChangeEvent<HTMLInputElement>
+                    ): void => {
+                      setFormData({
+                        ...formData,
+                        rental_budget: parseFloat(e.target.value.trim()),
+                      });
+                    }}
+                  />
+                  <Text color="primary">Gym Budget</Text>
+                  <Input
+                    placeholder={gym_budget_global?.toString()}
+                    type="number"
+                    min="0"
+                    value={gym_budget?.toString()}
+                    onChange={(
+                      e: React.ChangeEvent<HTMLInputElement>
+                    ): void => {
+                      setFormData({
+                        ...formData,
+                        gym_budget: parseFloat(e.target.value.trim()),
+                      });
+                    }}
+                  />
+                  <Text color="primary">Food Budget</Text>
+                  <Input
+                    placeholder={food_budget_global?.toString()}
+                    type="number"
+                    min="0"
+                    value={food_budget?.toString()}
+                    onChange={(
+                      e: React.ChangeEvent<HTMLInputElement>
+                    ): void => {
+                      setFormData({
+                        ...formData,
+                        food_budget: parseFloat(e.target.value.trim()),
+                      });
+                    }}
+                  />
+                  <Text color="primary">Transportation Budget</Text>
+                  <Input
+                    placeholder={transportation_budget_global?.toString()}
+                    type="number"
+                    min="0"
+                    value={transportation_budget?.toString()}
+                    onChange={(
+                      e: React.ChangeEvent<HTMLInputElement>
+                    ): void => {
+                      setFormData({
+                        ...formData,
+                        transportation_budget: parseFloat(
+                          e.target.value.trim()
+                        ),
+                      });
+                    }}
+                  />
+                  <Text color="primary">Other Budget</Text>
+                  <Input
+                    placeholder={other_budget_global?.toString()}
+                    type="number"
+                    min="0"
+                    value={other_budget?.toString()}
+                    onChange={(
+                      e: React.ChangeEvent<HTMLInputElement>
+                    ): void => {
+                      setFormData({
+                        ...formData,
+                        other_budget: parseFloat(e.target.value.trim()),
+                      });
+                    }}
+                  />
+                  <Button style={{ marginTop: "30px" }} onClick={handleUpdate}>
+                    Update Profile
+                  </Button>
+                </Form>
+              }
+            >
+              Update budget
+            </SModal>
+          </ModalContainer>
+          <DeleteContainer>
+            <SModal
+              isInverted
+              childComponent={
+                <div>
+                  <SHeading color="primary">Warning:</SHeading>
+                  <Text align="center">You are about delete your account. This action cannot be undone.</Text>
+                  <DeleteWrapper>
+                    <Button style={{ marginTop: "30px" }}>
+                      Delete Account
+                    </Button>
+                  </DeleteWrapper>
+                </div>
+              }
+            >
+              Delete Account
+            </SModal>
+          </DeleteContainer>
+        </Container>
+      </PageLayout>
+    );
   }
 };
 
@@ -459,6 +482,31 @@ const PieWrapper = styled.div`
         margin-bottom: 40px;
     `
   )};
+`;
+
+const DeleteContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const DeleteWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > Button {
+    ${({ theme }) => `
+        color: ${theme.colors.background};
+        background-color: #E58686;
+        border: 1px solid ${theme.colors.accent};
+        &:focus,
+        &:active,
+        &:hover {
+            background-color: #B26868;
+            outline: none;
+        }
+      `}
+  }
 `;
 
 const mapStateToProps = (state: any) => ({
