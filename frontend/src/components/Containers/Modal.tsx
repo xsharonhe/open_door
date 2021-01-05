@@ -7,28 +7,32 @@ import { media } from "../../utils";
 
 export interface ModalProps {
   isInverted?: boolean;
+  marginTop?: boolean;
   childComponent?: React.ReactElement;
 }
 
 export interface StyledModalProps {
   opacity: number;
+  marginTop?: boolean;
 }
 
 export const SModal: React.FC<ModalProps> = ({
   isInverted,
+  marginTop,
   childComponent,
   children,
   ...props
 }): React.ReactElement => (
   <ModalProvider backgroundComponent={FadingBackground} {...props}>
     <div>
-      <ModalButton isInverted={isInverted} childComponent={childComponent}>{children}</ModalButton>
+      <ModalButton isInverted={isInverted} marginTop={marginTop} childComponent={childComponent}>{children}</ModalButton>
     </div>
   </ModalProvider>
 );
 
 export const ModalButton: React.FC<ModalProps> = ({
   isInverted,
+  marginTop,
   childComponent,
   children,
 }): React.ReactElement => {
@@ -63,9 +67,10 @@ export const ModalButton: React.FC<ModalProps> = ({
         onEscapeKeydown={toggleModal}
         opacity={opacity}
         backgroundProps={{ opacity }}
+        marginTop={marginTop}
       >
         <IconWrapper>
-          <Icon as={CloseOutline}/>
+          <Icon onClick={toggleModal} as={CloseOutline}/>
         </IconWrapper>
         {childComponent}
       </StyledModal>
@@ -90,11 +95,11 @@ const SubModal = Modal.styled`
 `;
 
 const StyledModal = styled(SubModal)<StyledModalProps>`
-  margin-top: 200px;
-  ${({ theme, opacity }) => `
+  ${({ theme, opacity, marginTop }) => `
     opacity: ${opacity};
     background-color: ${theme.colors.background};
-    transition: ${theme.transitions.opacity}
+    transition: ${theme.transitions.opacity};
+    margin-top: ${marginTop ? '50%' : null };
   `}
   overflow-y: scroll;
 `;
