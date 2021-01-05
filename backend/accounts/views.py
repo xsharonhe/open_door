@@ -10,13 +10,14 @@ from django.utils.decorators import method_decorator
 @method_decorator(csrf_protect, name='dispatch')
 class CheckAuthenticated(APIView):
     def get(self, request, format=None):
+        user = self.request.user
         try:
-            isAuthenticated = user.isAuthenticated
+            isAuthenticated = user.is_authenticated
 
             if isAuthenticated:
-                return Response({'success': "User is authenticated"})
+                return Response({'isAuthenticated': "success"})
             else:
-                return Response({'error': 'Error authenticating'})
+                return Response({'isAuthenticated': 'error'})
         except:
             return Response({'error': 'Error checking authentication status'})
 
@@ -40,11 +41,9 @@ class SignUpView(APIView):
                         return Response({'error': 'Password must be at least 8 characters'})
                     else:
                         user = User.objects.create_user(username=username, password=password)
-                        user.save()
                         
-                        user = User.objects.get(id=user.id) # get instance
-                        user_profile = Person(user=user, budget=0, rental_budget=0, food_budget=0, gym_budget=0, transportation_budget=0, other_budget=0, fav_rental_id='', fav_food_id='')
-                        user_profile.save()
+                        user = User.objects.get(id=user.id)
+                        user_profile = Person.objects.create(user=user, budget=0, rental_budget=0, food_budget=0, gym_budget=0, transportation_budget=0, other_budget=0, fav_rental_id='', fav_food_id='')
 
                         return Response({ 'success': 'User account created'})
             else:
@@ -67,7 +66,7 @@ class SignInView(APIView):
 
             if user is not None:
                 auth.login(request, user)
-                return Response({'success': 'User authenticated', 'username': username })
+                return Response({'success': 'User authenticated'})
             else:
                 return Response({'error': 'Error authenticating'})
         except:
