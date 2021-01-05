@@ -4,7 +4,7 @@ import { media } from "../../../../utils";
 
 import { Brand } from "../../../Texts/Brand";
 import { Hamburger } from "./Hamburger";
-import { NavItems } from "../NavItems/NavItems";
+import NavItems from "../NavItems/NavItems";
 
 export interface SideNavProps {};
 

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { media } from "../../../utils";
 
 import { Brand } from "../../Texts";
-import { NavItems } from "./NavItems/NavItems";
+import NavItems from "./NavItems/NavItems";
 
 export interface NavbarProps {}
 

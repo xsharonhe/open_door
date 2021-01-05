@@ -3,7 +3,7 @@ from .views import SignUpView, GetCSRFToken, SignInView, SignOutView, CheckAuthe
 
 urlpatterns = [
     path('auth', CheckAuthenticated.as_view()),
-    path('register', SignUpView.as_view()),
+    path('signup', SignUpView.as_view()),
     path('signin', SignInView.as_view()),
     path('signout', SignOutView.as_view()),
     path('delete', DeleteAccountView.as_view()),
