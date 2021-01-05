@@ -1,7 +1,0 @@
-{
-  "devDependencies": {},
-  "dependencies": {
-    "@types/js-cookie": "^2.2.6",
-    "@types/react-select": "^3.1.2"
-  }
-}

@@ -4,7 +4,7 @@ import {
   LOAD_PROFILE_ERR,
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_ERR,
-} from "../actions/actionTypes";
+} from "./actionTypes";
 import { Dispatch } from "redux";
 
 export const loadProfile = () => async (dispatch: Dispatch<any>) => {

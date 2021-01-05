@@ -10,7 +10,7 @@ import {
   AUTH_ERR,
   DELETE_SUCCESS,
   DELETE_ERR
-} from "../actions/actionTypes";
+} from "./actionTypes";
 import { loadProfile } from './profileActions';
 import { Dispatch } from "redux";
 

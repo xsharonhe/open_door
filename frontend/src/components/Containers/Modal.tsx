@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { CloseOutline } from "@styled-icons/evaicons-outline/CloseOutline";
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
-
 import { Button } from "./Button";
+import { media } from "../../utils";
 
 export interface ModalProps {
   isInverted?: boolean;
@@ -63,34 +64,44 @@ export const ModalButton: React.FC<ModalProps> = ({
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <ButtonWrapper>
-          <Button isInverted={false} onClick={toggleModal}>
-            Close
-          </Button>
-        </ButtonWrapper>
+        <IconWrapper>
+          <Icon as={CloseOutline}/>
+        </IconWrapper>
         {childComponent}
       </StyledModal>
     </div>
   );
 };
 
-const ButtonWrapper = styled.div`
+const IconWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
 const SubModal = Modal.styled`
-  width: 60%;
-  padding: 2%;
+  width: 40%;
+  padding: 2%; 
+  ${media("tablet",
+  `
+      width: 60%;
+      padding: 2% 4%;
+  `)}
 `;
 
 const StyledModal = styled(SubModal)<StyledModalProps>`
+  margin-top: 200px;
   ${({ theme, opacity }) => `
     opacity: ${opacity};
     background-color: ${theme.colors.background};
     transition: ${theme.transitions.opacity}
   `}
+  overflow-y: scroll;
+`;
+
+const Icon = styled.svg`
+    width: 20px;
+    height: 20px;
 `;
 
 const FadingBackground = styled(BaseModalBackground)<StyledModalProps>`
