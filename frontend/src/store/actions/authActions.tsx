@@ -9,6 +9,7 @@ import {
   AUTH_SUCCESS,
   AUTH_ERR,
 } from "../actions/actionTypes";
+import { loadProfile } from './profileActions';
 import { Dispatch } from "redux";
 
 // FIXME: dispatch type, interface
@@ -58,7 +59,8 @@ export const checkAuth = () => async (dispatch: Dispatch<any>) => {
 export const signin = (
   username: string,
   password: string,
-  token: any
+  token: any,
+  // loadProfile: Function,
 ) => async (dispatch: Dispatch<any>) => {
   const body = JSON.stringify({ username, password });
 
@@ -79,11 +81,11 @@ export const signin = (
 
     if (res.data.success) {
       dispatch({
-        type: SIGNIN_SUCCESS,
-        payload: res.data.username,
+        type: SIGNIN_SUCCESS
       });
 
-      //TODO: Load user
+      dispatch(loadProfile());
+
     } else {
       dispatch({
         type: SIGNIN_ERR,

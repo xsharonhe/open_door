@@ -10,16 +10,7 @@ import {
 } from "../actions/actionTypes";
 
 const initState = {
-  isAuthenticated: null,
-  username: 0,
-  budget: 0,
-  rental_budget: 0,
-  food_budget: 0,
-  gym_budget: 0,
-  transportation_budget: 0,
-  other_budget: 0,
-  fav_rental_id: "",
-  fav_food_id: "",
+  isAuthenticated: null
 };
 
 // FIXME: type action
@@ -44,15 +35,13 @@ const authReducer = (state = initState, action: any) => {
     case SIGNIN_SUCCESS:
       return {
         ...state,
-        isAuthenticated: true,
-        username: payload,
+        isAuthenticated: true
       };
 
     case SIGNOUT_SUCCESS:
       return {
         ...state,
-        isAuthenticated: false,
-        username: "",
+        isAuthenticated: false
       };
 
     case SIGNUP_ERR:
