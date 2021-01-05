@@ -13,7 +13,7 @@ urlpatterns = [
          views.RentalSearchView.as_view(),
          name='rental_search'),
     
-    path('rentals_stats/<int:pk>/',
+    path('rentals_stats/<pk>/',
          views.rental_stats,
          name='rental_detail')
 ]

@@ -28,7 +28,7 @@ const Discover = () => {
     const [rentalResults, setRentalResults] = useState<RentalProps[]>([]);
     useEffect(() => {
       axios
-          .get(`http://localhost:8000/api/v1/reviews`)
+          .get(`${process.env.REACT_APP_API_URL}/api/v1/reviews`)
           .then(res => {
               const data = res.data;
               setReviewResults(data);
@@ -37,7 +37,7 @@ const Discover = () => {
               setError(true);
           });
       axios
-        .get(`http://localhost:8000/api/v1/rentals`)
+        .get(`${process.env.REACT_APP_API_URL}/api/v1/rentals`)
         .then(res => {
             const data = res.data;
             setRentalResults(data);
@@ -99,7 +99,7 @@ const Discover = () => {
           <Wrapper>
               {selectedValue === 'Food reviews' ? (
                   <CardWrapper>
-                    {loadCards}
+                    {reviewResults.length >= 3 && loadCards}
                     {maxRange <= 50 && (
                       <SButton onClick={loadMore} isInverted={false}>
                         Load More
@@ -108,7 +108,7 @@ const Discover = () => {
                     </CardWrapper>
               ) : (
                 <CardWrapper>
-                  {loadRentals}
+                  {rentalResults.length >= 3 && loadRentals}
                   {maxRangeRentals <= 50 && (
                       <SButton onClick={loadMoreRentals} isInverted={false}>
                         Load More

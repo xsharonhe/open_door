@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.db.models import Avg, Sum, Count, Q
-from rest_framework import generics, filters, pagination, status
+from rest_framework import generics, filters, pagination, status, permissions
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.permissions import AllowAny
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
+from django.utils.decorators import method_decorator
 from .serializers import ReviewSerializer
 from .models import Review
 
@@ -13,6 +17,8 @@ class StandardResultsSetPagination(pagination.PageNumberPagination):
     max_page_size = 1000
     
 @api_view(['GET'])
+@csrf_exempt
+@permission_classes([AllowAny])
 def reviews_view(request):
     if request.method == 'GET':
         try:
@@ -23,7 +29,9 @@ def reviews_view(request):
         except Review.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
     
+@method_decorator(csrf_protect, name='dispatch')
 class ReviewSearchView(generics.ListAPIView):
+    permission_classes = (permissions.AllowAny, )
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     pagination_class = pagination.PageNumberPagination
@@ -32,6 +40,8 @@ class ReviewSearchView(generics.ListAPIView):
     
 
 @api_view(['GET'])
+@csrf_exempt
+@permission_classes([AllowAny])
 def reviews_stats(request, pk):
     if request.method == 'GET':
         try:

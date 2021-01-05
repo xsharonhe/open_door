@@ -30,7 +30,7 @@ export const Review = ({
   const [barData, setBarData] = useState<BarDataReview[]>([]);
   useEffect(() => {
         axios
-            .get(`http://localhost:8000/api/v1/reviews_stats/${match.params.id}`)
+            .get(`${process.env.REACT_APP_API_URL}/api/v1/reviews_stats/${match.params.id}`)
             .then(res => {
                 const query = res.data.query;
                 setReviewResult(query);

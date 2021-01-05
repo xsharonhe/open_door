@@ -24,7 +24,7 @@ const Home: React.FC = ({
         }
         if (searchInput.length >= 1) {
             axios
-                .get(`http://localhost:8000/api/v1/reviews_search/?page=1&search=${searchInput}`)
+                .get(`${process.env.REACT_APP_API_URL}/api/v1/reviews_search/?page=1&search=${searchInput}`)
                 .then(res => {
                     const data = res.data.results;
                     setSearchResults(data);
@@ -32,7 +32,7 @@ const Home: React.FC = ({
                 .catch(err => {
                 });
             axios
-                .get(`http://localhost:8000/api/v1/rentals_search/?page=1&search=${searchInput}`)
+                .get(`${process.env.REACT_APP_API_URL}/api/v1/rentals_search/?page=1&search=${searchInput}`)
                 .then(res => {
                     const data = res.data.results;
                     setRentalResults(data);
