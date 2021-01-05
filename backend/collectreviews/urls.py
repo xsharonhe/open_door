@@ -4,15 +4,12 @@ from . import views
 app_name = 'reviews'
 
 urlpatterns = [
-    path('reviews/',
-         views.reviews_view,
-         name='review_list'),
+    path('reviews',
+         views.ReviewView.as_view()),
     
-    path('reviews_search/',
-        views.ReviewSearchView.as_view(),
-        name='review_search'),
+    path('reviews_search',
+        views.ReviewSearchView.as_view()),
     
-    path('reviews_stats/<pk>/',
-         views.reviews_stats,
-         name='review_detail')
+    path('reviews_stats/<pk>',
+         views.ReviewStats.as_view())
 ]

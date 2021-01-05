@@ -29,7 +29,7 @@ export const Rental = ({
   const [barData, setBarData] = useState<BarData[]>([]);
   useEffect(() => {
         axios
-            .get(`http://localhost:8000/api/v1/rentals_stats/${match.params.id}`)
+            .get(`${process.env.REACT_APP_API_URL}/api/v1/rentals_stats/${match.params.id}`)
             .then(res => {
                 const query = res.data.query;
                 setRentalResult(query);

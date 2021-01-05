@@ -1,28 +1,34 @@
 from django.shortcuts import render
 from django.db.models import Avg, Sum, Count, Q
-from rest_framework import generics, filters, pagination, status
+from rest_framework.views import APIView
+from rest_framework import generics, filters, pagination, status, permissions
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.permissions import AllowAny
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from .serializers import RentalSerializer
 from .models import Rental
 
+@method_decorator(csrf_protect, name='dispatch')
+class RentalView(APIView):
+    permission_classes = (permissions.AllowAny, )
+    
+    def get(self, request, format=None):
+        try:
+            rental = Rental.objects.all().order_by('night_price')
+            serializer = RentalSerializer(rental, many=True)
+            return Response(serializer.data)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 # Create your views here.
 class StandardResultsSetPagination(pagination.PageNumberPagination):
     page_size = 100
     page_size_query_param = 'page_size'
     max_page_size = 1000
     
-@api_view(['GET'])
-def rentals_view(request):
-    if request.method == 'GET':
-        try:
-            params = request.query_params
-            rental = Rental.objects.all().order_by('night_price')
-            serializer = RentalSerializer(rental, many=True)
-            return Response(serializer.data)
-        except Rental.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-    
+@method_decorator(csrf_protect, name='dispatch')
 class RentalSearchView(generics.ListAPIView):
     serializer_class = RentalSerializer
     queryset = Rental.objects.all()
@@ -30,9 +36,12 @@ class RentalSearchView(generics.ListAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['property_type', 'name', 'airbnb_neighborhood']
     
-@api_view(['GET'])
-def rental_stats(request, pk):
-    if request.method == 'GET':
+@method_decorator(csrf_protect, name='dispatch')
+class RentalStats(APIView):
+    permission_classes = (permissions.AllowAny, )
+    
+    def get(self, request, pk, format=None):
+        
         try:
             rental = Rental.objects.get(pk=pk)
             serializer = RentalSerializer(rental)

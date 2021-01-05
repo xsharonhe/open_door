@@ -16,6 +16,7 @@ class GetUserProfileView(APIView):
         except:
             return Response({'error': 'Error getting user profile'})
 
+
 class UpdateUserProfileView(APIView):
     def put(self, request, format=None):
         try: 
