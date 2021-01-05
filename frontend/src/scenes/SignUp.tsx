@@ -38,8 +38,6 @@ const SignUp: React.FC<ISignUp> = ({
 
   const [newAccount, setNewAccount] = useState(false);
 
-  const [error, setError] = useState(false);
-
   const { username, password, verifyPassword } = creds;
 
   const handleSignUp = (e: React.MouseEvent<HTMLButtonElement>) => {

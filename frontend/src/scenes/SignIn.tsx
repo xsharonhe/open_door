@@ -35,8 +35,6 @@ const SignIn: React.FC<ISignIn> = ({
     password: ""
   });
 
-  const [error, setError] = useState(false);
-
   const { username, password } = creds;
 
   const handleSignIn = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -64,7 +62,7 @@ const SignIn: React.FC<ISignIn> = ({
           <Form>
             <Input
               placeholder="Username *"
-              value={creds.username || ""}
+              value={creds.username}
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
                 setCreds({ ...creds, username: e.target.value.trim() });
               }}
@@ -72,7 +70,7 @@ const SignIn: React.FC<ISignIn> = ({
             <Input
               placeholder="Password *"
               type="password"
-              value={creds.password || ""}
+              value={creds.password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
                 setCreds({ ...creds, password: e.target.value.trim() });
               }}

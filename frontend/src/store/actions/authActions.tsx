@@ -60,7 +60,6 @@ export const signin = (
   username: string,
   password: string,
   token: any,
-  // loadProfile: Function,
 ) => async (dispatch: Dispatch<any>) => {
   const body = JSON.stringify({ username, password });
 

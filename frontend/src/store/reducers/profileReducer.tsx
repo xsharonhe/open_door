@@ -1,4 +1,9 @@
-import { LOAD_PROFILE_SUCCESS, LOAD_PROFILE_ERR } from "../actions/actionTypes";
+import {
+  LOAD_PROFILE_SUCCESS,
+  LOAD_PROFILE_ERR,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_ERR,
+} from "../actions/actionTypes";
 
 const initState = {
   username: "",
@@ -8,8 +13,6 @@ const initState = {
   gym_budget: 0,
   transportation_budget: 0,
   other_budget: 0,
-  //   fav_rental_id: "",
-  //   fav_food_id: "",
 };
 
 // FIXME: type action
@@ -18,6 +21,7 @@ const profileReducer = (state = initState, action: any) => {
 
   switch (type) {
     case LOAD_PROFILE_SUCCESS:
+    case UPDATE_PROFILE_SUCCESS:
       return {
         ...state,
         username: payload.username,
@@ -40,6 +44,11 @@ const profileReducer = (state = initState, action: any) => {
         transportation_budget: 0,
         other_budget: 0,
       };
+
+    case UPDATE_PROFILE_ERR:
+      return {
+        ...state
+      }
 
     default:
       return state;

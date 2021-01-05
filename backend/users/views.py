@@ -24,8 +24,8 @@ class UpdateUserProfileView(APIView):
 
             data = self.request.data
             budget = data['budget']
-            rental_budget = data['budget']
-            food_budget = data['rental_budget']
+            rental_budget = data['rental_budget']
+            food_budget = data['food_budget']
             gym_budget = data['gym_budget']
             transportation_budget = data['transportation_budget']
             other_budget = data['other_budget']
