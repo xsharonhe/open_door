@@ -60,3 +60,10 @@ export interface BarDataReview {
     price: number;
     price_color: string;
 }
+
+export interface PieData {
+    id: string;
+    label: string;
+    value: number;
+    color: string;
+}
