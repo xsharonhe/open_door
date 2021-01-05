@@ -8,7 +8,7 @@ import { media } from '../../utils';
 export interface ResultCardProps extends React.HTMLAttributes<HTMLDivElement> {
     price: string | number;
     city: string;
-    address: string;
+    name: string;
     bedrooms: string | number;
     bathrooms: string | number;
     people: string | number;
@@ -17,16 +17,16 @@ export interface ResultCardProps extends React.HTMLAttributes<HTMLDivElement> {
 export const ResultCard: React.FC<ResultCardProps> = ({
     price,
     city,
-    address,
+    name,
     bedrooms,
     bathrooms,
     people,
     ...props
 }): React.ReactElement => (
-    <SResultCard price={price} city={city} people={people} address={address} bedrooms={bedrooms} bathrooms={bathrooms} {...props}>
+    <SResultCard {...props}>
         <h2>${price}</h2>
         <p>{city.toUpperCase()}</p>
-        <p>{address}</p>
+        <p>{name}</p>
         <hr />
         <SContainer>
             <span>
@@ -42,7 +42,7 @@ export const ResultCard: React.FC<ResultCardProps> = ({
     </SResultCard>
 );
 
-const SResultCard = styled.div<ResultCardProps>`
+const SResultCard = styled.div`
     ${({ theme }) => `
         background-color: ${theme.colors.background};
         border: 1px solid ${theme.colors.primary};
