@@ -29,6 +29,7 @@ interface IProfile {
   gym_budget_global: number;
   transportation_budget_global: number;
   other_budget_global: number;
+  isAuthenticated: boolean;
 }
 
 const Profile: React.FC<IProfile> = ({
@@ -40,9 +41,9 @@ const Profile: React.FC<IProfile> = ({
   gym_budget_global,
   transportation_budget_global,
   other_budget_global,
+  isAuthenticated,
   ...props
 }): React.ReactElement => {
-
   const [formData, setFormData] = useState<
     Partial<Omit<IProfile, "updateProfile">>
   >({
@@ -71,43 +72,53 @@ const Profile: React.FC<IProfile> = ({
       rental_budget: rental_budget_global !== null ? rental_budget_global : 0,
       food_budget: food_budget_global !== null ? food_budget_global : 0,
       gym_budget: gym_budget_global !== null ? gym_budget_global : 0,
-      transportation_budget: transportation_budget_global !== null ? transportation_budget_global : 0,
-      other_budget: other_budget_global !== null ? other_budget_global : 0
+      transportation_budget:
+        transportation_budget_global !== null
+          ? transportation_budget_global
+          : 0,
+      other_budget: other_budget_global !== null ? other_budget_global : 0,
     });
 
     setPieData([
       {
-        "id": "Rental",
-        "label": "Rental",
-        "value": rental_budget_global,
-        "color": "hsl(160, 70%, 50%)"
+        id: "Rental",
+        label: "Rental",
+        value: rental_budget_global,
+        color: "hsl(160, 70%, 50%)",
       },
       {
-        "id": "Food",
-        "label": "Food",
-        "value": food_budget_global,
-        "color": "hsl(333, 70%, 50%)"
+        id: "Food",
+        label: "Food",
+        value: food_budget_global,
+        color: "hsl(333, 70%, 50%)",
       },
       {
-        "id": "Gym",
-        "label": "Gym",
-        "value": gym_budget_global,
-        "color": "hsl(127, 70%, 50%)"
+        id: "Gym",
+        label: "Gym",
+        value: gym_budget_global,
+        color: "hsl(127, 70%, 50%)",
       },
       {
-        "id": "Transportation",
-        "label": "Transportation",
-        "value": transportation_budget_global,
-        "color": "hsl(297, 70%, 50%)"
+        id: "Transportation",
+        label: "Transportation",
+        value: transportation_budget_global,
+        color: "hsl(297, 70%, 50%)",
       },
       {
-        "id": "Other",
-        "label": "Other",
-        "value": other_budget_global,
-        "color": "hsl(297, 70%, 50%)"
-      }
-    ])
-  }, [budget_global, rental_budget_global, food_budget_global, gym_budget_global, transportation_budget_global, other_budget_global]);
+        id: "Other",
+        label: "Other",
+        value: other_budget_global,
+        color: "hsl(297, 70%, 50%)",
+      },
+    ]);
+  }, [
+    budget_global,
+    rental_budget_global,
+    food_budget_global,
+    gym_budget_global,
+    transportation_budget_global,
+    other_budget_global,
+  ]);
 
   const handleUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -123,7 +134,6 @@ const Profile: React.FC<IProfile> = ({
       other_budget,
       token
     );
-
   };
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -132,46 +142,75 @@ const Profile: React.FC<IProfile> = ({
     const token = Cookies.get("csrftoken");
 
     deleteAccount(token);
-
   };
 
   const getTotalBudget = (): number => {
-    if(rental_budget && food_budget && gym_budget && transportation_budget && other_budget) {
-        return parseFloat(rental_budget?.toString()) + parseFloat(food_budget?.toString()) +
-          parseFloat(gym_budget?.toString()) + parseFloat(transportation_budget?.toString()) + 
-          parseFloat(other_budget?.toString());
+    if (
+      rental_budget &&
+      food_budget &&
+      gym_budget &&
+      transportation_budget &&
+      other_budget
+    ) {
+      return (
+        parseFloat(rental_budget?.toString()) +
+        parseFloat(food_budget?.toString()) +
+        parseFloat(gym_budget?.toString()) +
+        parseFloat(transportation_budget?.toString()) +
+        parseFloat(other_budget?.toString())
+      );
     }
     return 0;
-  }
+  };
 
   const getBudgetLogic = () => {
-      if(rental_budget && food_budget && gym_budget && transportation_budget && other_budget) {
-          const calculatedTotal = parseFloat(rental_budget?.toString()) + parseFloat(food_budget?.toString()) +
-            parseFloat(gym_budget?.toString()) + parseFloat(transportation_budget?.toString()) + 
-            parseFloat(other_budget?.toString());
+    if (
+      rental_budget &&
+      food_budget &&
+      gym_budget &&
+      transportation_budget &&
+      other_budget
+    ) {
+      const calculatedTotal =
+        parseFloat(rental_budget?.toString()) +
+        parseFloat(food_budget?.toString()) +
+        parseFloat(gym_budget?.toString()) +
+        parseFloat(transportation_budget?.toString()) +
+        parseFloat(other_budget?.toString());
 
-          if(calculatedTotal > budget_global) {
-            return (
-              <Text size="h4" align="center"> You are over budget by: <Text size="h4" align="center" color="error">
-                ${calculatedTotal - budget_global}
-              </Text></Text>
-            );
-          } else if (calculatedTotal < budget_global) {
-            return (
-              <Text size="h4" align="center"> You are under budget by: <Text size="h4" align="center" color="success">
-                ${budget_global - calculatedTotal}
-              </Text></Text>
-            );
-          } 
-          return (
-            <Text size="h4" align="center" color="success"> You are on budget! </Text>
-          )
+      if (calculatedTotal > budget_global) {
+        return (
+          <Text size="h4" align="center">
+            {" "}
+            You are over budget by:{" "}
+            <Text size="h4" align="center" color="error">
+              ${calculatedTotal - budget_global}
+            </Text>
+          </Text>
+        );
+      } else if (calculatedTotal < budget_global) {
+        return (
+          <Text size="h4" align="center">
+            {" "}
+            You are under budget by:{" "}
+            <Text size="h4" align="center" color="success">
+              ${budget_global - calculatedTotal}
+            </Text>
+          </Text>
+        );
       }
-  }
+      return (
+        <Text size="h4" align="center" color="success">
+          {" "}
+          You are on budget!{" "}
+        </Text>
+      );
+    }
+  };
 
-  // if (isAuthenticated) {
-  //   return <Redirect to="/profile" />;
-  // } else {
+  if (isAuthenticated) {
+    return <Redirect to="/signin" />;
+  } else {
   return (
     <PageLayout {...props}>
       <Container>
@@ -191,102 +230,102 @@ const Profile: React.FC<IProfile> = ({
         </Text>
         {getBudgetLogic()}
         <PieWrapper>
-        <ResponsivePie
-          data={pieData}
-          margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-          innerRadius={0.5}
-          padAngle={0.7}
-          cornerRadius={3}
-          colors={{ scheme: 'nivo' }}
-          borderWidth={1}
-          borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
-          radialLabelsSkipAngle={10}
-          radialLabelsTextColor="#333333"
-          radialLabelsLinkColor={{ from: 'color' }}
-          sliceLabelsSkipAngle={10}
-          sliceLabelsTextColor="#333333"
-          defs={[
+          <ResponsivePie
+            data={pieData}
+            margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+            innerRadius={0.5}
+            padAngle={0.7}
+            cornerRadius={3}
+            colors={{ scheme: "nivo" }}
+            borderWidth={1}
+            borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
+            radialLabelsSkipAngle={10}
+            radialLabelsTextColor="#333333"
+            radialLabelsLinkColor={{ from: "color" }}
+            sliceLabelsSkipAngle={10}
+            sliceLabelsTextColor="#333333"
+            defs={[
               {
-                  id: 'dots',
-                  type: 'patternDots',
-                  background: 'inherit',
-                  color: 'rgba(255, 255, 255, 0.3)',
-                  size: 4,
-                  padding: 1,
-                  stagger: true
+                id: "dots",
+                type: "patternDots",
+                background: "inherit",
+                color: "rgba(255, 255, 255, 0.3)",
+                size: 4,
+                padding: 1,
+                stagger: true,
               },
               {
-                  id: 'lines',
-                  type: 'patternLines',
-                  background: 'inherit',
-                  color: 'rgba(255, 255, 255, 0.3)',
-                  rotation: -45,
-                  lineWidth: 6,
-                  spacing: 10
-              }
-          ]}
-          fill={[
+                id: "lines",
+                type: "patternLines",
+                background: "inherit",
+                color: "rgba(255, 255, 255, 0.3)",
+                rotation: -45,
+                lineWidth: 6,
+                spacing: 10,
+              },
+            ]}
+            fill={[
               {
-                  match: {
-                      id: 'Rental'
-                  },
-                  id: 'dots'
+                match: {
+                  id: "Rental",
+                },
+                id: "dots",
               },
               {
-                  match: {
-                      id: 'Transportation'
-                  },
-                  id: 'dots'
+                match: {
+                  id: "Transportation",
+                },
+                id: "dots",
               },
               {
-                  match: {
-                      id: 'Food'
-                  },
-                  id: 'dots'
+                match: {
+                  id: "Food",
+                },
+                id: "dots",
               },
               {
-                  match: {
-                      id: 'Gym'
-                  },
-                  id: 'lines'
+                match: {
+                  id: "Gym",
+                },
+                id: "lines",
               },
               {
-                  match: {
-                      id: 'Other'
-                  },
-                  id: 'lines'
-              }
-          ]}
-          legends={[
+                match: {
+                  id: "Other",
+                },
+                id: "lines",
+              },
+            ]}
+            legends={[
               {
-                  anchor: 'bottom',
-                  direction: 'column',
-                  justify: false,
-                  translateX: 0,
-                  translateY: 56,
-                  itemsSpacing: 5,
-                  itemWidth: 100,
-                  itemHeight: 18,
-                  itemTextColor: '#999',
-                  itemDirection: 'left-to-right',
-                  itemOpacity: 1,
-                  symbolSize: 18,
-                  symbolShape: 'circle',
-                  effects: [
-                      {
-                          on: 'hover',
-                          style: {
-                              itemTextColor: '#000'
-                          }
-                      }
-                  ]
-              }
-          ]}
-      />
+                anchor: "bottom",
+                direction: "column",
+                justify: false,
+                translateX: 0,
+                translateY: 56,
+                itemsSpacing: 5,
+                itemWidth: 100,
+                itemHeight: 18,
+                itemTextColor: "#999",
+                itemDirection: "left-to-right",
+                itemOpacity: 1,
+                symbolSize: 18,
+                symbolShape: "circle",
+                effects: [
+                  {
+                    on: "hover",
+                    style: {
+                      itemTextColor: "#000",
+                    },
+                  },
+                ],
+              },
+            ]}
+          />
         </PieWrapper>
         <ModalContainer>
           <SModal
-            childComponent={(
+            childComponent={
               <Form>
                 {/* <Text color="primary">Your Budget Plan:</Text> */}
                 <SHeading color="primary">Update Your Budget Plan:</SHeading>
@@ -368,27 +407,37 @@ const Profile: React.FC<IProfile> = ({
                     });
                   }}
                 />
-                <Button style={{ marginTop: '30px' }} onClick={handleUpdate}>
+                <Button style={{ marginTop: "30px" }} onClick={handleUpdate}>
                   Update Profile
                 </Button>
               </Form>
-            )}
+            }
           >
-            Update budget 
+            Update budget
           </SModal>
         </ModalContainer>
+        {/* <SModal isInverted
+            childComponent={
+              <div>
+                <Text>This action cannot be undone. </Text>
+                <Button style={{ marginTop: "30px" }}>
+                  Delete Account
+                </Button>
+              </div>
+            }
+          >Delete Account</SModal> */}
       </Container>
     </PageLayout>
   );
-  // }
+  }
 };
 
 const ModalContainer = styled.div`
-    text-align: center;
-    padding-bottom: 5%;
+  text-align: center;
+  padding-bottom: 5%;
 `;
 const SHeading = styled(Heading)`
-    ${({ theme }) => `
+  ${({ theme }) => `
         h1 {
           font-size: ${theme.size.h1};
         }
@@ -396,18 +445,20 @@ const SHeading = styled(Heading)`
 `;
 
 const PieWrapper = styled.div`
-    height: 450px;
-    width: 300px;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    margin-top: -100px;
-    ${media("1034",
+  height: 450px;
+  width: 300px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: -100px;
+  ${media(
+    "1034",
     `
         height: 450px;
         width: 300px;
         margin-bottom: 40px;
-    `)};
+    `
+  )};
 `;
 
 const mapStateToProps = (state: any) => ({
@@ -417,6 +468,9 @@ const mapStateToProps = (state: any) => ({
   gym_budget_global: state.profile.gym_budget,
   transportation_budget_global: state.profile.transportation_budget,
   other_budget_global: state.profile.other_budget,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { updateProfile, deleteAccount })(Profile);
+export default connect(mapStateToProps, { updateProfile, deleteAccount })(
+  Profile
+);
