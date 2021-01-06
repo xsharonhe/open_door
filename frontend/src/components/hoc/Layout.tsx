@@ -22,6 +22,7 @@ const Layout: React.FC<LayoutProps> = ({
     useEffect(() => {
         checkAuth();
         loadProfile();
+        window.scrollTo(0,0);
     }, []);
 
 
