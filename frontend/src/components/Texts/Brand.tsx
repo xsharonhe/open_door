@@ -1,18 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
-export interface IBrandProps {};
+export interface IBrandProps {
+  color?: string;
+};
 
 export const Brand: React.FC<IBrandProps> = ({
+  color,
   children,
   ...props
 }): React.ReactElement => {
-    return <BrandWrapper {...props}>{children}</BrandWrapper>;
+    return <BrandWrapper color={color} {...props}>{children}</BrandWrapper>;
 };
 
-const BrandWrapper = styled.div`
-  ${({ theme }) => `
-    color: ${theme.colors.primary};
+const BrandWrapper = styled.div<IBrandProps>`
+  ${({ theme, color = 'primary' }) => `
+    color: ${theme.colors[color] || color};
     display: flex;
     align-items: center;
     font-weight: 700;

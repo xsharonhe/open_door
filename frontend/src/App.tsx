@@ -15,7 +15,7 @@ import SignUp from "./scenes/SignUp";
 import Rental from "./scenes/Rental";
 import Review from "./scenes/Review";
 import Profile from "./scenes/Profile";
-import Faqs from "./scenes/Faqs";
+import Faq from "./scenes/Faqs";
 
 const App = () => {
   const routes = (
@@ -27,7 +27,7 @@ const App = () => {
       <Route path="/signup" component={SignUp} />
       <Route path="/signin" component={SignIn} />
       <Route path="/profile" component={Profile} />
-      <Route path="/faq" component={Faqs} />
+      <Route path="/faq" component={Faq} />
     </Switch>
   );
 

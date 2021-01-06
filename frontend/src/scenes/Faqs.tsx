@@ -1,9 +1,9 @@
 import React from "react";
 import { PageLayout } from '../components/hoc/PageLayout';
 
-interface IFaqs {};
+interface IFaq {};
 
-const Faqs: React.FC<IFaqs> = (): React.ReactElement => {
+const Faq: React.FC<IFaq> = (): React.ReactElement => {
 
   return (
       <PageLayout>
@@ -12,4 +12,4 @@ const Faqs: React.FC<IFaqs> = (): React.ReactElement => {
   );
 };
 
-export default Faqs;
+export default Faq;
