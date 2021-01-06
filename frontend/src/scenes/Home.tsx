@@ -65,7 +65,7 @@ const Home: React.FC = ({
     useOutsideAlerter(wrapperRef);
 
     return (
-    <PageLayout lgImg={lgImg} smImg={smImg}>
+    <PageLayout lgImg={lgImg} smImg={smImg} {...props}>
         <Container>
             <SInput 
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
