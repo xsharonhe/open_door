@@ -33,12 +33,15 @@ class ReviewView(APIView):
 @method_decorator(csrf_protect, name='dispatch')
 class ReviewSearchView(generics.ListAPIView):
     permission_classes = (permissions.AllowAny, )
-    queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    pagination_class = pagination.PageNumberPagination
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['name', 'summary', 'address']
     
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            queryset = Review.objects.all()
+            pagionation_class = pagination.PageNumberPagination
+            filter_backends = [filters.SearchFilter]
+            search_fields = ['name', 'summary', 'address']
+            return queryset
 
 @method_decorator(csrf_protect, name='dispatch')
 class ReviewStats(APIView):
