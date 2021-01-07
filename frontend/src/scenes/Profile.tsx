@@ -163,50 +163,50 @@ const Profile: React.FC<IProfile> = ({
     return 0;
   };
 
-  const getBudgetLogic = () => {
-    if (
-      rental_budget &&
-      food_budget &&
-      gym_budget &&
-      transportation_budget &&
-      other_budget
-    ) {
-      const calculatedTotal =
-        parseFloat(rental_budget?.toString()) +
-        parseFloat(food_budget?.toString()) +
-        parseFloat(gym_budget?.toString()) +
-        parseFloat(transportation_budget?.toString()) +
-        parseFloat(other_budget?.toString());
+  // const getBudgetLogic = () => {
+  //   if (
+  //     rental_budget &&
+  //     food_budget &&
+  //     gym_budget &&
+  //     transportation_budget &&
+  //     other_budget
+  //   ) {
+  //     const calculatedTotal =
+  //       parseFloat(rental_budget?.toString()) +
+  //       parseFloat(food_budget?.toString()) +
+  //       parseFloat(gym_budget?.toString()) +
+  //       parseFloat(transportation_budget?.toString()) +
+  //       parseFloat(other_budget?.toString());
 
-      if (calculatedTotal > budget_global) {
-        return (
-          <Text size="h4" align="center">
-            {" "}
-            You are over budget by:{" "}
-            <Text size="h4" align="center" color="error">
-              ${calculatedTotal - budget_global}
-            </Text>
-          </Text>
-        );
-      } else if (calculatedTotal < budget_global) {
-        return (
-          <Text size="h4" align="center">
-            {" "}
-            You are under budget by:{" "}
-            <Text size="h4" align="center" color="success">
-              ${budget_global - calculatedTotal}
-            </Text>
-          </Text>
-        );
-      }
-      return (
-        <Text size="h4" align="center" color="success">
-          {" "}
-          You are on budget!{" "}
-        </Text>
-      );
-    }
-  };
+  //     if (calculatedTotal > budget_global) {
+  //       return (
+  //         <Text size="h4" align="center">
+  //           {" "}
+  //           You are over budget by:{" "}
+  //           <Text size="h4" align="center" color="error">
+  //             ${calculatedTotal - budget_global}
+  //           </Text>
+  //         </Text>
+  //       );
+  //     } else if (calculatedTotal < budget_global) {
+  //       return (
+  //         <Text size="h4" align="center">
+  //           {" "}
+  //           You are under budget by:{" "}
+  //           <Text size="h4" align="center" color="success">
+  //             ${budget_global - calculatedTotal}
+  //           </Text>
+  //         </Text>
+  //       );
+  //     }
+  //     return (
+  //       <Text size="h4" align="center" color="success">
+  //         {" "}
+  //         You are on budget!{" "}
+  //       </Text>
+  //     );
+  //   }
+  // };
 
   if (!isAuthenticated) {
     return <Redirect to="/signin" />;
@@ -228,7 +228,6 @@ const Profile: React.FC<IProfile> = ({
             You've indicated your budget is:
             {` $${budget_global}`}
           </Text>
-          {getBudgetLogic()}
           <PieWrapper>
             <ResponsivePie
               data={pieData}

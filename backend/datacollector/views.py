@@ -30,11 +30,16 @@ class StandardResultsSetPagination(pagination.PageNumberPagination):
     
 @method_decorator(csrf_protect, name='dispatch')
 class RentalSearchView(generics.ListAPIView):
+    permission_classes = (permissions.AllowAny, )
     serializer_class = RentalSerializer
-    queryset = Rental.objects.all()
-    pagination_class = pagination.PageNumberPagination
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['property_type', 'name', 'airbnb_neighborhood']
+    
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            queryset = Rental.objects.all()
+            pagination_class = pagination.PageNumberPagination
+            filter_backends = [filters.SearchFilter]
+            search_fields = ['name', 'airbnb_neighborhood', 'property_type']
+            return queryset
     
 @method_decorator(csrf_protect, name='dispatch')
 class RentalStats(APIView):

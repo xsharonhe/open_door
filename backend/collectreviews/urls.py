@@ -7,7 +7,7 @@ urlpatterns = [
     path('reviews',
          views.ReviewView.as_view()),
     
-    path('reviews_search',
+    path('reviews_search/',
         views.ReviewSearchView.as_view()),
     
     path('reviews_stats/<pk>',

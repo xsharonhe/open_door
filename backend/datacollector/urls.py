@@ -8,7 +8,7 @@ urlpatterns = [
     path('rentals',
          views.RentalView.as_view()),
     
-    path('rentals_search',
+    path('rentals_search/',
          views.RentalSearchView.as_view()),
     
     path('rentals_stats/<pk>',

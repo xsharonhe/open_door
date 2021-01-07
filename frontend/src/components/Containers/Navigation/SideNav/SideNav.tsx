@@ -75,7 +75,7 @@ const SMenu = styled.div<SMenuProps>`
       justify-content: center;
       box-shadow: ${theme.boxShadow.shallow};
       margin-top: 3rem;
-      height: 200px;
+      height: 240px;
       background-color: ${theme.colors.secondary};
     `}
 
