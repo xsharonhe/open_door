@@ -10,6 +10,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { PageLayout } from '../components/hoc/PageLayout';
 import { Heading, Text } from "../components";
 import { ReviewProps, RadarData, media, BarDataReview } from "../utils";
+import Loader from "../components/UI/Loader";
 
 type TParams = { id: string};
 
@@ -332,9 +333,7 @@ export const Review = ({
             </BarWrapper>
         </Wrapper>
         ) : (
-          <SText>
-            Content cannot be found.
-          </SText>
+          <Loader />
         )}  
       </PageLayout>
   );

@@ -10,6 +10,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { PageLayout } from '../components/hoc/PageLayout';
 import { Heading, Text } from "../components";
 import { RentalProps, RadarData, media, BarData } from "../utils";
+import Loader from "../components/UI/Loader";
 
 type TParams = { id: string};
 
@@ -335,9 +336,7 @@ export const Rental = ({
             </BarWrapper>
         </Wrapper>
         ) : (
-          <SText>
-            Content cannot be found.
-          </SText>
+          <Loader />
         )}  
       </PageLayout>
   );

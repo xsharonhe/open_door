@@ -10,6 +10,8 @@ import { ReviewProps, RentalProps, media } from "../utils";
 import GoogleMapReact from "google-map-react";
 import { Marker } from "../components/Containers/Marker";
 
+import Loader from "../components/UI/Loader";
+
 const options = [
   { value: "food reviews", label: "Food reviews" },
   { value: "rentals", label: "Rentals" },
@@ -116,54 +118,60 @@ const Discover = () => {
 
   return (
     <PageLayout>
-      <Container>
-        <HeadingWrapper>
-          <SHeading> Discover</SHeading>
-          <StyledSelect
-            onChange={(e: any) => {
-              setSelectedValue(e.label);
-            }}
-            placeholder={options[FIRST_VALUE].label}
-            options={options}
-            menuPortalTarget={document.body}
-          />
-        </HeadingWrapper>
-        <Wrapper>
-          {selectedValue === "Food reviews" ? (
-            <CardWrapper>
-              {reviewResults.length >= 3 && loadCards}
-              {maxRange <= reviewResults.length && (
-                <SButton onClick={loadMore} isInverted={false}>
-                  Load More
-                </SButton>
-              )}
-            </CardWrapper>
-          ) : (
-            <CardWrapper>
-              {rentalResults.length >= 3 && loadRentals}
-              {maxRangeRentals <= rentalResults.length && (
-                <SButton onClick={loadMoreRentals} isInverted={false}>
-                  Load More
-                </SButton>
-              )}
-            </CardWrapper>
-          )}
-          <MapWrapper>
-            <MapSubWrapper>
-              <GoogleMapReact
-                resetBoundsOnResize={true}
-                bootstrapURLKeys={{ key: `${process.env.REACT_APP_MAPS_API}` }}
-                defaultCenter={center}
-                defaultZoom={zoom}
-              >
-                {selectedValue === "Food reviews"
-                  ? reviewMarkers
-                  : rentalMarkers}
-              </GoogleMapReact>
-            </MapSubWrapper>
-          </MapWrapper>
-        </Wrapper>
-      </Container>
+      {reviewResults && rentalResults ? (
+        <Container>
+          <HeadingWrapper>
+            <SHeading> Discover</SHeading>
+            <StyledSelect
+              onChange={(e: any) => {
+                setSelectedValue(e.label);
+              }}
+              placeholder={options[FIRST_VALUE].label}
+              options={options}
+              menuPortalTarget={document.body}
+            />
+          </HeadingWrapper>
+          <Wrapper>
+            {selectedValue === "Food reviews" ? (
+              <CardWrapper>
+                {reviewResults.length >= 3 && loadCards}
+                {maxRange <= reviewResults.length && (
+                  <SButton onClick={loadMore} isInverted={false}>
+                    Load More
+                  </SButton>
+                )}
+              </CardWrapper>
+            ) : (
+              <CardWrapper>
+                {rentalResults.length >= 3 && loadRentals}
+                {maxRangeRentals <= rentalResults.length && (
+                  <SButton onClick={loadMoreRentals} isInverted={false}>
+                    Load More
+                  </SButton>
+                )}
+              </CardWrapper>
+            )}
+            <MapWrapper>
+              <MapSubWrapper>
+                <GoogleMapReact
+                  resetBoundsOnResize={true}
+                  bootstrapURLKeys={{
+                    key: `${process.env.REACT_APP_MAPS_API}`,
+                  }}
+                  defaultCenter={center}
+                  defaultZoom={zoom}
+                >
+                  {selectedValue === "Food reviews"
+                    ? reviewMarkers
+                    : rentalMarkers}
+                </GoogleMapReact>
+              </MapSubWrapper>
+            </MapWrapper>
+          </Wrapper>
+        </Container>
+      ) : (
+        <Loader />
+      )}
     </PageLayout>
   );
 };
