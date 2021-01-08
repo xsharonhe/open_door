@@ -12,7 +12,10 @@ urlpatterns = [
          views.RentalSearchView.as_view()),
     
     path('rentals_stats/<pk>',
-         views.RentalStats.as_view())
+         views.RentalStats.as_view()),
+    
+    path('rentals_rec',
+         views.RentalRecommendations.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

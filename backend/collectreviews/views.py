@@ -39,11 +39,11 @@ class ReviewRecommendation(APIView):
         try:
             params = request.query_params
             price = params["price"]
-            if(int(price) <= 600):
+            if(float(price) <= 300):
                 price = 1
-            elif (int(price) > 600 and int(price) <= 1000): 
+            elif (float(price) > 300 and float(price) <= 600): 
                 price = 2
-            elif (int(price) > 1000 and int(price) < 1400):
+            elif (float(price) > 600 and float(price) < 900):
                 price = 3
             else:
                 price = 4

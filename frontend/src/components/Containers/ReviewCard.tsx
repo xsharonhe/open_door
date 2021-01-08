@@ -88,12 +88,6 @@ const SReviewCard = styled.div`
     ${media(
         "tablet",
         `
-        width: 50%;
-        `
-    )}
-    ${media(
-        "mobile",
-        `
         width: 80%;
         `
     )}
