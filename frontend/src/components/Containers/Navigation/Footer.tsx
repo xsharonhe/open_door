@@ -27,7 +27,7 @@ export const Footer: React.FC<FooterProps> = ({ children, ...props }) => {
           <StyledSpan onClick={() => history.push("/faq")} >
             <Text color="secondary">FAQ</Text>
           </StyledSpan>
-          <a target="_blank" href="https://www.google.ca/"> 
+          <a target="_blank" href="https://github.com/xsharonhe/open_door"> 
             <Text color="secondary">Git Repo</Text>
           </a>
         </div>
