@@ -11,5 +11,8 @@ urlpatterns = [
         views.ReviewSearchView.as_view()),
     
     path('reviews_stats/<pk>',
-         views.ReviewStats.as_view())
+         views.ReviewStats.as_view()),
+    
+    path('reviews_rec',
+         views.ReviewRecommendation.as_view())
 ]

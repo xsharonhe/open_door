@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import { Key } from "@styled-icons/boxicons-solid/Key";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import Cookies from "js-cookie";
 import { ResponsivePie } from "@nivo/pie";
 import { PageLayout } from "../components/hoc/PageLayout";
 import { Text, Heading } from "../components/Texts";
 import { Input } from "../components/Inputs";
-import { Button, SModal } from "../components/Containers";
+import { Button, SModal, ResultCard, ReviewCard } from "../components/Containers";
 import { Container, IconDiv, Icon, Form } from "../components/Containers/Form";
 import { deleteAccount } from "../store/actions/authActions";
-import { media, PieData } from "../utils";
+import { media, PieData, ReviewProps, RentalProps } from "../utils";
 import { updateProfile } from "../store/actions/profileActions";
 
 interface IProfile {
@@ -65,6 +66,12 @@ const Profile: React.FC<IProfile> = ({
   } = formData;
 
   const [pieData, setPieData] = useState<PieData[]>([]);
+  const [rentalsRec, setRentalsRec] = useState<RentalProps[]>([]);
+  const [reviewsRec, setReviewsRec] = useState<ReviewProps[]>([]);
+  const [error, setError] = useState(true);
+  const [error2, setError2] = useState(true);
+
+  let history = useHistory();
 
   useEffect(() => {
     setFormData({
@@ -111,6 +118,36 @@ const Profile: React.FC<IProfile> = ({
         color: "hsl(297, 70%, 50%)",
       },
     ]);
+    if(food_budget_global >= 0) {
+        axios
+        .get(`${process.env.REACT_APP_API_URL}/api/v1/reviews_rec?price=${food_budget_global}`)
+        .then(res => {
+            setError(false);
+            const data = res.data;
+            setReviewsRec(data);
+        })
+        .catch(err => {
+            setError(true);
+        });
+    } else {
+      setReviewsRec([]);
+      setError(true);
+    }
+    if(rental_budget_global >= 1100) {
+        axios
+        .get(`${process.env.REACT_APP_API_URL}/api/v1/rentals_rec?price=${rental_budget_global}`)
+        .then(res => {
+            setError2(false);
+            const data = res.data;
+            setRentalsRec(data);
+        })
+        .catch(err => {
+            setError2(true);
+        });
+    } else {
+      setRentalsRec([]);
+      setError2(true);
+    }
   }, [
     budget_global,
     rental_budget_global,
@@ -162,51 +199,6 @@ const Profile: React.FC<IProfile> = ({
     }
     return 0;
   };
-
-  // const getBudgetLogic = () => {
-  //   if (
-  //     rental_budget &&
-  //     food_budget &&
-  //     gym_budget &&
-  //     transportation_budget &&
-  //     other_budget
-  //   ) {
-  //     const calculatedTotal =
-  //       parseFloat(rental_budget?.toString()) +
-  //       parseFloat(food_budget?.toString()) +
-  //       parseFloat(gym_budget?.toString()) +
-  //       parseFloat(transportation_budget?.toString()) +
-  //       parseFloat(other_budget?.toString());
-
-  //     if (calculatedTotal > budget_global) {
-  //       return (
-  //         <Text size="h4" align="center">
-  //           {" "}
-  //           You are over budget by:{" "}
-  //           <Text size="h4" align="center" color="error">
-  //             ${calculatedTotal - budget_global}
-  //           </Text>
-  //         </Text>
-  //       );
-  //     } else if (calculatedTotal < budget_global) {
-  //       return (
-  //         <Text size="h4" align="center">
-  //           {" "}
-  //           You are under budget by:{" "}
-  //           <Text size="h4" align="center" color="success">
-  //             ${budget_global - calculatedTotal}
-  //           </Text>
-  //         </Text>
-  //       );
-  //     }
-  //     return (
-  //       <Text size="h4" align="center" color="success">
-  //         {" "}
-  //         You are on budget!{" "}
-  //       </Text>
-  //     );
-  //   }
-  // };
 
   if (!isAuthenticated) {
     return <Redirect to="/signin" />;
@@ -448,11 +440,69 @@ const Profile: React.FC<IProfile> = ({
               Delete Account
             </SModal>
           </DeleteContainer>
+            <div style={{ paddingTop: '50px' }}>
+                <Text size="h3" color="primary" align="center">
+                  Based on your budget we recommend:
+                </Text>
+                <Text size="h4" color="primary" align="center">
+                    For food:
+                </Text>
+            </div>
+            <CardWrapper>
+              {!!error ? (
+                <Text size="h4" color="primary" align="center" bold>
+                  No food recommendations based on your budget
+                </Text>
+              ) : reviewsRec.map((review => (
+                  <SReviewCard
+                    onClick={() => history.push(`/discover/reviews/${review.id}`)}
+                    key={review.name}
+                    name={review.name}
+                    status={review.status}
+                    address={review.address}
+                    dollarSigns={review.price}
+                    score={review.score}
+                  />
+                )))}
+                <Text size="h4" color="primary" align="center">
+                    For rentals:
+                </Text>
+                {!!error2 ? (
+                  <Text size="h4" color="primary" align="center" bold>
+                    No rental recommendations based on your budget
+                  </Text>
+                  ) : rentalsRec.map((rental) => (
+                      <SResultCard
+                        onClick={() => history.push(`/discover/rentals/${rental.id}`)}
+                        key={rental.name}
+                        price={rental.night_price}
+                        city={rental.airbnb_neighborhood}
+                        name={rental.name}
+                        bedrooms={rental.num_of_rooms}
+                        people={rental.capacity_of_people}
+                        bathrooms={rental.num_of_baths}
+                    />
+                ))}
+          </CardWrapper>
         </Container>
       </PageLayout>
     );
   }
 };
+
+const CardWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 50px;
+`;
+const SReviewCard = styled(ReviewCard)`
+  margin: 20px;
+`;
+const SResultCard = styled(ResultCard)`
+  margin: 20px;
+`;
 
 const ModalContainer = styled.div`
   text-align: center;

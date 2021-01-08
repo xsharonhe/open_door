@@ -40,6 +40,24 @@ class RentalSearchView(generics.ListAPIView):
             filter_backends = [filters.SearchFilter]
             search_fields = ['name', 'airbnb_neighborhood', 'property_type']
             return queryset
+        
+@method_decorator(csrf_protect, name='dispatch')
+class RentalRecommendations(APIView):
+    permission_classes = (permissions.AllowAny, )
+    
+    def get(self, request, format=None):
+        try:
+            params = request.query_params
+            price = params["price"]
+            price = float(float(price) / 20)
+            review = Rental.objects.filter(night_price__lte=price).order_by('-night_price')
+            length = len(review)
+            if(length > 3):
+                review = review[:3]
+            serializer = RentalSerializer(review, many=True)
+            return Response(serializer.data)
+        except Rental.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
     
 @method_decorator(csrf_protect, name='dispatch')
 class RentalStats(APIView):

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
 import axios from 'axios';
 import { Input } from '../components/Inputs/';
@@ -7,6 +9,20 @@ import { PageLayout } from '../components/hoc/PageLayout';
 import lgImg from "../assets/bg-houses.svg";
 import smImg from "../assets/bg-houses-mobile.svg";
 import { media, ReviewProps, RentalProps } from "../utils";
+
+const CustomToastWithLink = () => (
+    <div>
+      For more information about all our features, 
+      feel free to visit our <SLink to="/faq">faq page</SLink>!
+    </div>
+);
+const SLink = styled(Link)`
+    ${({ theme }) => `
+        color: ${theme.colors.secondary};
+        text-decoration: underline;
+        font-weight: 700;
+    `};
+`;
 
 const Home: React.FC = ({
     ...props
@@ -42,6 +58,10 @@ const Home: React.FC = ({
                 });
         }
     }, [searchInput]);
+
+    useEffect(() => {
+        notify();
+    },[]);
     
     let history = useHistory();
 
@@ -63,8 +83,13 @@ const Home: React.FC = ({
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
+    const notify = () => {
+        toast(CustomToastWithLink);
+    };
+
     return (
-    <PageLayout lgImg={lgImg} smImg={smImg} {...props}>
+    <PageLayout lgImg={lgImg} smImg={smImg}>
+        <SToastContainer autoClose={8000}/>
         <Container>
             <SInput 
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -95,6 +120,17 @@ const Home: React.FC = ({
     )
 };
 
+const SToastContainer = styled(ToastContainer)`
+    ${({ theme }) => `
+        .Toastify__toast {
+            border-radius: ${theme.radius.border};
+            padding: 20px;
+            font-family: ${theme.font.body};
+            color: ${theme.colors.background};
+            background-color: ${theme.colors.primary};
+        }
+    `};
+`;
 const Container = styled.div`
     display: flex;
     flex-direction: column;
