@@ -29,6 +29,32 @@ class ReviewView(APIView):
             return Response(serializer.data)
         except Review.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+        
+@method_decorator(csrf_protect, name='dispatch')
+class ReviewRecommendation(APIView):
+    permission_classes = (permissions.AllowAny, )
+    pagination_class = pagination.PageNumberPagination
+    
+    def get(self, request, format=None):
+        try:
+            params = request.query_params
+            price = params["price"]
+            if(int(price) <= 600):
+                price = 1
+            elif (int(price) > 600 and int(price) <= 1000): 
+                price = 2
+            elif (int(price) > 1000 and int(price) < 1400):
+                price = 3
+            else:
+                price = 4
+            review = Review.objects.filter(price=price).order_by('-score')
+            length = len(review)
+            if(length > 3):
+                review = review[:3]
+            serializer = ReviewSerializer(review, many=True)
+            return Response(serializer.data)
+        except Review.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
     
 @method_decorator(csrf_protect, name='dispatch')
 class ReviewSearchView(generics.ListAPIView):
@@ -38,7 +64,7 @@ class ReviewSearchView(generics.ListAPIView):
     def get_queryset(self):
         if self.request.method == 'GET':
             queryset = Review.objects.all()
-            pagionation_class = pagination.PageNumberPagination
+            pagination_class = pagination.PageNumberPagination
             filter_backends = [filters.SearchFilter]
             search_fields = ['name', 'summary', 'address']
             return queryset
@@ -88,4 +114,3 @@ class ReviewStats(APIView):
             
         except Review.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-    
