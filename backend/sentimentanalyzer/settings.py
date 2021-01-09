@@ -30,7 +30,9 @@ DB_PASSWORD = str(os.getenv('DB_PASSWORD'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'open-door-dev.us-east-1.elasticbeanstalk.com'
+]
 
 
 # Application definition

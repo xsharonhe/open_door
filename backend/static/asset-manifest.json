@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.js": "/static/js/main.17d97842.chunk.js",
+    "main.js.map": "/static/js/main.17d97842.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.87eaf94b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.87eaf94b.js.map",
+    "static/css/2.ccc6f86f.chunk.css": "/static/css/2.ccc6f86f.chunk.css",
+    "static/js/2.9ec9eb48.chunk.js": "/static/js/2.9ec9eb48.chunk.js",
+    "static/js/2.9ec9eb48.chunk.js.map": "/static/js/2.9ec9eb48.chunk.js.map",
+    "static/js/3.cb044495.chunk.js": "/static/js/3.cb044495.chunk.js",
+    "static/js/3.cb044495.chunk.js.map": "/static/js/3.cb044495.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.ccc6f86f.chunk.css.map": "/static/css/2.ccc6f86f.chunk.css.map",
+    "static/js/2.9ec9eb48.chunk.js.LICENSE.txt": "/static/js/2.9ec9eb48.chunk.js.LICENSE.txt",
+    "static/media/analytics.57d7459f.png": "/static/media/analytics.57d7459f.png",
+    "static/media/bg-houses-mobile.8f637f5b.svg": "/static/media/bg-houses-mobile.8f637f5b.svg",
+    "static/media/bg-houses.ad6604b7.svg": "/static/media/bg-houses.ad6604b7.svg",
+    "static/media/budget.02b6cb1a.png": "/static/media/budget.02b6cb1a.png",
+    "static/media/discover.b3fc8214.png": "/static/media/discover.b3fc8214.png",
+    "static/media/recommendation.e1f10aca.png": "/static/media/recommendation.e1f10aca.png",
+    "static/media/search.a9f8697e.png": "/static/media/search.a9f8697e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.87eaf94b.js",
+    "static/css/2.ccc6f86f.chunk.css",
+    "static/js/2.9ec9eb48.chunk.js",
+    "static/js/main.17d97842.chunk.js"
+  ]
+}
