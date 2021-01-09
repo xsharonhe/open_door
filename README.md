@@ -5,7 +5,7 @@
  
   We used Mashvisor's and Yelp's APIs to provide us with the necessary data to build this application. The data
   that we retrieved from Yelp was then also passed through a sentiment analyzer through the VADER library
-  and used NLTK to provide a summary sentiment from the Yelp reviews based on a frequency dictionary. \n
+  and used NLTK to provide a summary sentiment from the Yelp reviews based on a frequency dictionary.
 
 ## Features
 ![Search-page](https://github.com/xsharonhe/open_door/blob/main/frontend/src/scenes/assets/search.png)
@@ -36,6 +36,7 @@
               lot about teamwork and communication throughout this project.
               
  ## What's next for Open Door:
-  * Incorporating data from other aspects of a student's budget (e.g. gyms etc.) </li>
-  * Expand database and enable users to star their favourite locations </li>
-  * More accurate sentiment summarizer </li>
+  * Incorporating data from other aspects of a student's budget (e.g. gyms etc.) 
+  * Expand database and enable users to star their favourite locations 
+  * More accurate sentiment summarizer
+  * Deploying on ElasticBeanstalk
